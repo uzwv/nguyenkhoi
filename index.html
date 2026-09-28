@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <title>NGUYEN MINH KHOI — Support</title>
 <meta name="theme-color" content="#050505">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   /* ================= RESET ================= */
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -20,8 +23,9 @@
     --glass: rgba(255, 255, 255, 0.035);
     --glass-hi: rgba(255, 255, 255, 0.07);
     --glow: rgba(150, 180, 255, 0.22);
-    --font: "Inter", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
-    --mono: "SF Mono", "JetBrains Mono", "Fira Code", ui-monospace, Menlo, Consolas, monospace;
+    --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+    --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
     --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -40,7 +44,6 @@
     font-weight: 400;
     letter-spacing: -0.011em;
     position: relative;
-    font-feature-settings: "cv11", "ss01";
   }
 
   /* Ambient glow + grain */
@@ -122,9 +125,10 @@
   @keyframes captchaPop { to { transform: scale(1); opacity: 1; } }
 
   .captcha-card h2 {
-    font-size: 1.15rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
     margin-bottom: 8px;
     color: var(--text);
     text-transform: uppercase;
@@ -214,7 +218,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 80px 24px 60px;
+    padding: 90px 24px 70px;
     position: relative;
     transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
   }
@@ -225,48 +229,77 @@
     pointer-events: none;
   }
 
-  .hero-name {
-    font-size: clamp(2rem, 8vw, 3.4rem);
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    line-height: 1.1;
+  /* Elegant serif title */
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(3.4rem, 15vw, 7rem);
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -0.02em;
+    line-height: 1;
     color: var(--text);
     margin-bottom: 30px;
+    background: linear-gradient(180deg, #ffffff 30%, #9fa9bd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     opacity: 0;
-    animation: riseIn 1s var(--ease) 0.1s forwards;
-    text-transform: uppercase;
+    animation: riseIn 1.1s var(--ease) 0.1s forwards;
+    position: relative;
+    padding: 0 4px;
   }
 
-  .hero-tagline {
-    font-size: clamp(1rem, 3vw, 1.2rem);
-    font-weight: 400;
-    color: var(--text-soft);
-    line-height: 1.9;
-    margin-bottom: 42px;
-    max-width: 560px;
-    opacity: 0;
-    animation: riseIn 1s var(--ease) 0.25s forwards;
-    letter-spacing: -0.005em;
+  .hero-title::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -14px;
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200, 215, 245, 0.5), transparent);
+    transform: translateX(-50%);
+    animation: lineGrow 1.4s var(--ease) 0.9s forwards;
   }
 
-  .hero-tagline span { display: block; }
+  @keyframes lineGrow { to { width: 120px; } }
 
-  .hero-desc {
-    font-size: clamp(0.88rem, 2.2vw, 0.95rem);
+  .hero-name {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.5em;
     color: var(--text-mute);
-    line-height: 1.85;
-    max-width: 620px;
-    margin-bottom: 48px;
+    text-transform: uppercase;
+    margin-bottom: 44px;
     opacity: 0;
     animation: riseIn 1s var(--ease) 0.4s forwards;
-    letter-spacing: 0.002em;
   }
 
-  .hero-desc span { display: block; margin-bottom: 2px; }
+  /* Elegant paragraph — staggered word reveal */
+  .hero-desc {
+    font-family: var(--serif);
+    font-size: clamp(1.05rem, 2.6vw, 1.28rem);
+    font-weight: 400;
+    color: var(--text-soft);
+    line-height: 1.95;
+    max-width: 640px;
+    margin-bottom: 52px;
+    letter-spacing: 0.005em;
+    opacity: 0;
+    animation: riseIn 1.2s var(--ease) 0.7s forwards;
+  }
+
+  .hero-desc p { margin-bottom: 18px; }
+  .hero-desc p:last-child {
+    color: var(--text);
+    font-weight: 500;
+    font-style: italic;
+    margin-top: 8px;
+    margin-bottom: 0;
+  }
 
   .hero-actions {
     opacity: 0;
-    animation: riseIn 1s var(--ease) 0.55s forwards;
+    animation: riseIn 1s var(--ease) 1s forwards;
   }
 
   @keyframes riseIn {
@@ -281,11 +314,11 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding: 16px 40px;
+    padding: 16px 42px;
     font-family: var(--font);
-    font-size: 0.88rem;
+    font-size: 0.86rem;
     font-weight: 500;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.14em;
     color: var(--text);
     cursor: pointer;
     border-radius: 100px;
@@ -300,6 +333,7 @@
     -webkit-tap-highlight-color: transparent;
     user-select: none;
     white-space: nowrap;
+    text-transform: uppercase;
   }
 
   .btn::before {
@@ -327,7 +361,6 @@
   }
 
   .btn:hover::before { opacity: 1; }
-
   .btn:active { transform: translateY(0) scale(0.97); }
 
   .btn-primary {
@@ -339,6 +372,7 @@
   .btn-primary .arrow {
     display: inline-block;
     transition: transform 0.4s var(--ease);
+    font-size: 0.9rem;
   }
   .btn-primary:hover .arrow { transform: translateY(3px); }
 
@@ -347,7 +381,7 @@
     border-color: var(--line);
     color: var(--text-soft);
     padding: 13px 28px;
-    font-size: 0.82rem;
+    font-size: 0.76rem;
   }
   .btn-ghost:hover { color: var(--text); }
 
@@ -396,9 +430,9 @@
     gap: 8px;
     padding: 9px 20px;
     font-family: var(--font);
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     font-weight: 500;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.14em;
     color: var(--text-soft);
     background: var(--glass);
     border: 1px solid var(--line);
@@ -409,6 +443,7 @@
     transition: all 0.35s var(--ease);
     position: relative;
     overflow: hidden;
+    text-transform: uppercase;
   }
 
   .back-btn:hover {
@@ -426,20 +461,27 @@
   }
 
   .donate-head h2 {
-    font-size: clamp(1.7rem, 5.5vw, 2.4rem);
-    font-weight: 600;
-    letter-spacing: 0.02em;
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 6.5vw, 3.2rem);
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -0.015em;
     margin-bottom: 14px;
     color: var(--text);
-    text-transform: uppercase;
+    background: linear-gradient(180deg, #ffffff 30%, #98a5bd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .donate-head p {
     color: var(--text-mute);
-    font-size: 0.92rem;
+    font-size: 0.86rem;
     max-width: 520px;
     margin: 0 auto;
-    letter-spacing: 0.005em;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
   }
 
   /* ================= PANELS GRID ================= */
@@ -454,7 +496,7 @@
 
   .panel {
     position: relative;
-    padding: 30px 28px 30px;
+    padding: 32px 30px;
     border-radius: 24px;
     background: linear-gradient(180deg, rgba(20, 22, 28, 0.55), rgba(10, 11, 14, 0.75));
     border: 1px solid var(--line);
@@ -507,108 +549,114 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: 16px;
-    margin-bottom: 22px;
+    margin-bottom: 24px;
     flex-wrap: wrap;
   }
 
   .panel-label {
-    font-size: 0.68rem;
+    font-size: 0.66rem;
     font-weight: 600;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.28em;
     color: var(--text-mute);
     text-transform: uppercase;
     margin-bottom: 6px;
   }
 
   .panel-name {
-    font-size: 1.15rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: 0.005em;
     color: var(--text);
-    text-transform: uppercase;
+    line-height: 1.1;
   }
 
   .panel-owner {
-    font-size: 0.76rem;
+    font-size: 0.7rem;
     color: var(--text-mute);
-    letter-spacing: 0.1em;
-    margin-top: 4px;
+    letter-spacing: 0.24em;
+    margin-top: 6px;
     text-transform: uppercase;
     font-weight: 500;
   }
 
-  /* Panel body split: info + qr */
+  /* Panel body: info + qr */
   .panel-body {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 22px;
+    gap: 26px;
     align-items: center;
   }
 
-  @media (min-width: 480px) {
-    .panel-body { grid-template-columns: 1fr auto; gap: 24px; }
+  @media (min-width: 520px) {
+    .panel-body { grid-template-columns: 1fr auto; gap: 28px; }
   }
 
   .panel-info {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 16px;
     min-width: 0;
   }
 
   .info-block {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
   }
 
   .info-label {
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     font-weight: 600;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.28em;
     color: var(--text-mute);
     text-transform: uppercase;
   }
 
   .info-value {
     font-family: var(--mono);
-    font-size: 0.94rem;
+    font-size: 1.05rem;
     color: var(--text);
-    letter-spacing: 0.02em;
+    letter-spacing: 0.05em;
     line-height: 1.5;
     word-break: break-word;
     font-weight: 500;
   }
 
-  .info-value.small { font-size: 0.82rem; }
+  .info-value.small { font-size: 0.84rem; letter-spacing: 0.02em; }
 
-  /* QR block */
+  /* QR block — LARGER now */
   .qr-block {
     position: relative;
-    width: 140px;
-    height: 140px;
-    flex-shrink: 0;
-    border-radius: 18px;
+    width: 100%;
+    max-width: 220px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    border-radius: 20px;
     overflow: hidden;
     background: #04060a;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.09);
     cursor: pointer;
     transition: transform 0.45s var(--ease), border-color 0.4s var(--ease),
                 box-shadow 0.45s var(--ease);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
   }
 
-  @media (min-width: 480px) {
-    .qr-block { margin: 0; width: 152px; height: 152px; }
+  @media (min-width: 520px) {
+    .qr-block { width: 220px; max-width: none; margin: 0; }
+  }
+
+  @media (min-width: 900px) {
+    .qr-block { width: 240px; }
   }
 
   .qr-block:hover {
-    transform: scale(1.04);
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 40px -8px rgba(160, 190, 255, 0.35);
+    transform: scale(1.03);
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow: 0 0 55px -10px rgba(160, 190, 255, 0.4);
   }
 
   .qr-block img {
@@ -616,34 +664,42 @@
     height: 100%;
     object-fit: contain;
     display: block;
-    padding: 8px;
+    padding: 12px;
     transition: transform 0.5s var(--ease);
   }
 
-  .qr-block:hover img { transform: scale(1.05); }
+  .qr-block:hover img { transform: scale(1.04); }
 
-  .qr-block::after {
-    content: "";
+  /* Zoom hint badge */
+  .qr-hint {
     position: absolute;
-    bottom: 8px;
-    right: 8px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    opacity: 0;
-    transition: opacity 0.3s var(--ease);
-    background-image: linear-gradient(45deg, transparent 42%, #fff 42%, #fff 58%, transparent 58%),
-                      linear-gradient(-45deg, transparent 42%, #fff 42%, #fff 58%, transparent 58%);
-    background-size: 9px 9px, 9px 9px;
-    background-position: center;
-    background-repeat: no-repeat;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 12px;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+    background: rgba(8, 10, 14, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 60px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    white-space: nowrap;
+    pointer-events: none;
+    transition: all 0.35s var(--ease);
+    opacity: 0.85;
   }
 
-  .qr-block:hover::after { opacity: 1; }
+  .qr-block:hover .qr-hint {
+    color: #fff;
+    background: rgba(20, 24, 32, 0.9);
+    border-color: rgba(255, 255, 255, 0.24);
+    box-shadow: 0 0 20px -4px rgba(160, 190, 255, 0.5);
+    opacity: 1;
+  }
 
   /* Copy button */
   .copy-btn {
@@ -652,9 +708,9 @@
     gap: 8px;
     padding: 10px 18px;
     font-family: var(--font);
-    font-size: 0.76rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
     color: var(--text-soft);
     background: var(--glass);
     border: 1px solid var(--line);
@@ -683,7 +739,7 @@
     background: rgba(140, 224, 176, 0.08);
   }
 
-  /* USDT panel — full width, distinct */
+  /* USDT panel */
   .panel.usdt {
     background: linear-gradient(180deg, rgba(28, 22, 42, 0.55), rgba(12, 10, 18, 0.78));
   }
@@ -698,24 +754,25 @@
   .usdt-body {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 22px;
+    gap: 26px;
     align-items: center;
   }
 
   @media (min-width: 800px) {
-    .usdt-body { grid-template-columns: 1fr auto; gap: 32px; }
+    .usdt-body { grid-template-columns: 1fr auto; gap: 36px; }
   }
 
   .usdt-info { min-width: 0; }
   .usdt-info .info-value {
     font-size: 0.82rem;
-    line-height: 1.55;
-    letter-spacing: 0.01em;
-    padding: 14px 16px;
+    line-height: 1.6;
+    letter-spacing: 0.03em;
+    padding: 16px 18px;
     background: rgba(0, 0, 0, 0.35);
     border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 12px;
-    margin-bottom: 14px;
+    border-radius: 14px;
+    margin-bottom: 16px;
+    word-break: break-all;
   }
 
   /* ================= MODAL ================= */
@@ -744,8 +801,8 @@
 
   .modal-box {
     width: 100%;
-    max-width: 460px;
-    padding: 30px 26px 28px;
+    max-width: 480px;
+    padding: 30px 28px 28px;
     border-radius: 28px;
     background: linear-gradient(180deg, rgba(22, 24, 30, 0.94), rgba(12, 13, 17, 0.96));
     border: 1px solid var(--line-hi);
@@ -768,29 +825,31 @@
   .modal-head {
     width: 100%;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
   }
 
   .modal-name {
-    font-size: 1.05rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: 0.01em;
     color: var(--text);
-    text-transform: uppercase;
   }
 
   .modal-sub {
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
+    font-size: 0.66rem;
+    letter-spacing: 0.28em;
     color: var(--text-mute);
     text-transform: uppercase;
-    margin-top: 4px;
+    margin-top: 6px;
+    font-weight: 600;
   }
 
   .modal-img-wrap {
     width: 100%;
     aspect-ratio: 1 / 1;
-    max-height: 58vh;
+    max-height: 62vh;
     border-radius: 20px;
     overflow: hidden;
     background: #04060a;
@@ -798,7 +857,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
   }
 
   .modal-img-wrap img {
@@ -806,16 +865,16 @@
     height: 100%;
     object-fit: contain;
     display: block;
-    padding: 10px;
+    padding: 14px;
   }
 
   .modal-owner {
-    font-size: 0.78rem;
-    letter-spacing: 0.18em;
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
     color: var(--text-soft);
     text-transform: uppercase;
     margin-bottom: 22px;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .modal-actions {
@@ -829,10 +888,9 @@
   .modal-actions .btn {
     flex: 1 1 auto;
     min-width: 130px;
-    padding: 13px 24px;
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    padding: 13px 22px;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
   }
 
   .modal-close {
@@ -870,15 +928,15 @@
     bottom: 30px;
     left: 50%;
     transform: translate(-50%, 40px);
-    padding: 12px 22px;
+    padding: 12px 24px;
     border-radius: 60px;
     background: rgba(20, 22, 28, 0.9);
     border: 1px solid rgba(140, 224, 176, 0.35);
     color: #8ce0b0;
     font-family: var(--font);
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.9),
@@ -901,26 +959,31 @@
     text-align: center;
     padding: 40px 24px 40px;
     color: var(--text-mute);
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
+    font-size: 0.68rem;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
     position: relative;
     z-index: 1;
+    font-weight: 500;
   }
 
   /* ================= RESPONSIVE ================= */
   @media (max-width: 480px) {
     .captcha-card { padding: 34px 22px 30px; border-radius: 24px; }
-    .hero { padding: 90px 20px 60px; }
-    .hero-name { letter-spacing: 0.1em; }
-    .hero-actions .btn { padding: 15px 32px; font-size: 0.84rem; }
+    .captcha-card h2 { font-size: 1.25rem; letter-spacing: 0.22em; }
+    .hero { padding: 100px 22px 70px; }
+    .hero-name { letter-spacing: 0.4em; font-size: 0.66rem; margin-bottom: 34px; }
+    .hero-actions .btn { padding: 15px 34px; font-size: 0.78rem; }
     .donate { padding: 90px 20px 80px; }
-    .panel { padding: 26px 22px 26px; border-radius: 20px; }
+    .panel { padding: 26px 22px; border-radius: 20px; }
+    .panel-name { font-size: 1.3rem; }
+    .qr-block { max-width: 200px; }
+    .info-value { font-size: 0.98rem; }
     .modal-box { padding: 26px 18px 24px; border-radius: 24px; }
     .modal-close { width: 34px; height: 34px; top: 10px; right: 10px; font-size: 0.9rem; }
-    .modal-actions .btn { padding: 12px 18px; font-size: 0.74rem; min-width: 110px; }
-    .qr-block { width: 148px; height: 148px; }
-    .toast { font-size: 0.72rem; padding: 10px 18px; bottom: 20px; }
+    .modal-actions .btn { padding: 12px 16px; font-size: 0.68rem; min-width: 110px; }
+    .toast { font-size: 0.66rem; padding: 10px 18px; bottom: 20px; letter-spacing: 0.12em; }
+    .footer { font-size: 0.62rem; letter-spacing: 0.26em; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -965,20 +1028,13 @@
 
   <!-- HERO -->
   <section class="hero" id="hero">
-    <h1 class="hero-name" id="heroName">NGUYEN MINH KHOI</h1>
-    <p class="hero-tagline" id="heroTagline">
-      <span>Một chút yêu quý,</span>
-      <span>một chút ủng hộ,</span>
-      <span>là rất nhiều động lực.</span>
-    </p>
-    <p class="hero-desc" id="heroDesc">
-      <span>Nếu bạn yêu quý mình và những gì mình đang làm,</span>
-      <span>bạn có thể gửi một chút ủng hộ qua các phương thức bên dưới.</span>
-      <span>Mỗi sự ủng hộ đều là một lời động viên đáng quý đối với mình.</span>
-      <span>Không quan trọng nhiều hay ít, điều mình trân trọng nhất</span>
-      <span>vẫn là tình cảm và sự yêu quý mà bạn dành cho mình.</span>
-      <span style="margin-top:10px; color:var(--text-soft);">Cảm ơn bạn đã luôn yêu quý và ủng hộ NGUYENKHOI. ❤️</span>
-    </p>
+    <h1 class="hero-title" id="heroTitle">Donate</h1>
+    <div class="hero-name" id="heroName">NGUYEN MINH KHOI</div>
+    <div class="hero-desc" id="heroDesc">
+      <p>Nếu bạn yêu quý mình và những gì mình đang làm, bạn có thể gửi một chút ủng hộ.</p>
+      <p>Dù nhiều hay ít, mỗi sự ủng hộ đều là một lời động viên rất đáng quý đối với mình.</p>
+      <p>Cảm ơn bạn đã luôn yêu quý và ủng hộ mình. ❤️</p>
+    </div>
     <div class="hero-actions">
       <button class="btn btn-primary" id="viewDonateBtn" type="button">
         <span id="viewDonateLabel">View Donate</span>
@@ -1040,7 +1096,6 @@
   'use strict';
 
   /* ========== CONFIG ========== */
-  // 👇 THAY SITE KEY CLOUDFLARE TURNSTILE
   const TURNSTILE_SITE_KEY = "0x4AAAAAAFGgEMGzD4teYa7L";
 
   /* ========== DATA ========== */
@@ -1087,15 +1142,12 @@
   /* ========== I18N ========== */
   const I18N = {
     vi: {
+      heroTitle: "Donate",
       heroName: "NGUYEN MINH KHOI",
-      tagline: ["Một chút yêu quý,", "một chút ủng hộ,", "là rất nhiều động lực."],
       desc: [
-        "Nếu bạn yêu quý mình và những gì mình đang làm,",
-        "bạn có thể gửi một chút ủng hộ qua các phương thức bên dưới.",
-        "Mỗi sự ủng hộ đều là một lời động viên đáng quý đối với mình.",
-        "Không quan trọng nhiều hay ít, điều mình trân trọng nhất",
-        "vẫn là tình cảm và sự yêu quý mà bạn dành cho mình.",
-        "Cảm ơn bạn đã luôn yêu quý và ủng hộ NGUYENKHOI. ❤️"
+        "Nếu bạn yêu quý mình và những gì mình đang làm, bạn có thể gửi một chút ủng hộ.",
+        "Dù nhiều hay ít, mỗi sự ủng hộ đều là một lời động viên rất đáng quý đối với mình.",
+        "Cảm ơn bạn đã luôn yêu quý và ủng hộ mình. ❤️"
       ],
       viewDonate: "View Donate",
       back: "Back",
@@ -1103,15 +1155,13 @@
       donateSub: "Choose a method to support NGUYEN MINH KHOI",
       copyAccount: "Copy Account Number",
       copyAddress: "Copy Address",
-      copy: "Copy",
       copied: "Copied",
-      viewQr: "View QR",
       saveQr: "Save QR",
       close: "Close",
       account: "Account Number",
       address: "Wallet Address",
-      network: "Network",
       qrCode: "QR Code",
+      tapZoom: "Tap to zoom",
       toast: "Copied successfully",
       captchaMsg: "Vui lòng xác minh để tiếp tục",
       captchaWait: "Đang chờ xác minh…",
@@ -1121,15 +1171,12 @@
       footer: "© 2026 NGUYEN MINH KHOI"
     },
     en: {
+      heroTitle: "Donate",
       heroName: "NGUYEN MINH KHOI",
-      tagline: ["A little kindness,", "a little support,", "means so much motivation."],
       desc: [
-        "If you appreciate me and what I'm doing,",
-        "you can send a little support through the methods below.",
-        "Every bit of support is a precious encouragement to me.",
-        "It doesn't matter how much you give — what I treasure most",
-        "is the kindness and appreciation you show me.",
-        "Thank you for always supporting and appreciating NGUYENKHOI. ❤️"
+        "If you appreciate me and what I do, you can send a little support.",
+        "Whether big or small, every bit of support is a precious encouragement to me.",
+        "Thank you for always supporting and appreciating me. ❤️"
       ],
       viewDonate: "View Donate",
       back: "Back",
@@ -1137,15 +1184,13 @@
       donateSub: "Choose a method to support NGUYEN MINH KHOI",
       copyAccount: "Copy Account Number",
       copyAddress: "Copy Address",
-      copy: "Copy",
       copied: "Copied",
-      viewQr: "View QR",
       saveQr: "Save QR",
       close: "Close",
       account: "Account Number",
       address: "Wallet Address",
-      network: "Network",
       qrCode: "QR Code",
+      tapZoom: "Tap to zoom",
       toast: "Copied successfully",
       captchaMsg: "Please verify to continue",
       captchaWait: "Waiting for verification…",
@@ -1163,8 +1208,8 @@
   /* ========== DOM ========== */
   const $ = (id) => document.getElementById(id);
   const page           = $('page');
+  const heroTitle      = $('heroTitle');
   const heroName       = $('heroName');
-  const heroTagline    = $('heroTagline');
   const heroDesc       = $('heroDesc');
   const viewDonateBtn  = $('viewDonateBtn');
   const viewDonateLbl  = $('viewDonateLabel');
@@ -1203,10 +1248,11 @@
     toast.textContent = msg;
     toast.classList.add('show');
     clearTimeout(toast._t);
-    toast._t = setTimeout(() => toast.classList.remove('show'), 1600);
+    toast._t = setTimeout(() => toast.classList.remove('show'), 1700);
   }
 
   function attachRipple(btn) {
+    if (!btn) return;
     btn.addEventListener('click', function (e) {
       const rect = this.getBoundingClientRect();
       const size = Math.max(rect.width, rect.height);
@@ -1220,6 +1266,17 @@
       this.appendChild(r);
       setTimeout(() => r.remove(), 750);
     });
+  }
+
+  function fallbackCopy(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    ta.remove();
   }
 
   function copyToClipboard(text, btn) {
@@ -1238,23 +1295,10 @@
       showToast(I18N[currentLang].toast);
     };
     if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(text).then(done).catch(() => {
-        fallbackCopy(text); done();
-      });
+      navigator.clipboard.writeText(text).then(done).catch(() => { fallbackCopy(text); done(); });
     } else {
       fallbackCopy(text); done();
     }
-  }
-
-  function fallbackCopy(text) {
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.position = 'fixed';
-    ta.style.opacity = '0';
-    document.body.appendChild(ta);
-    ta.select();
-    try { document.execCommand('copy'); } catch (e) {}
-    ta.remove();
   }
 
   /* ========== I18N APPLY ========== */
@@ -1263,12 +1307,11 @@
     localStorage.setItem('ngk_lang', lang);
     const t = I18N[lang];
 
-    // Hero
+    setText(heroTitle, t.heroTitle);
     setText(heroName, t.heroName);
-    heroTagline.innerHTML = t.tagline.map(x => `<span>${x}</span>`).join('');
     heroDesc.innerHTML = t.desc.map((x, i) => {
       const isLast = i === t.desc.length - 1;
-      return `<span${isLast ? ' style="margin-top:10px; color:var(--text-soft);"' : ''}>${x}</span>`;
+      return `<p${isLast ? ' style="font-style:italic;font-weight:500;color:var(--text);"' : ''}>${x}</p>`;
     }).join('');
 
     setText(viewDonateLbl, t.viewDonate);
@@ -1278,18 +1321,14 @@
     setText(footer, t.footer);
     setText(captchaMsgEl, t.captchaMsg);
 
-    // Modal
     setText(saveQrBtn, t.saveQr);
     setText(closeModalBtn, t.close);
 
-    // Lang buttons state
     langViBtn.classList.toggle('active', lang === 'vi');
     langEnBtn.classList.toggle('active', lang === 'en');
 
-    // Captcha status (nếu chưa xác minh)
     if (!captchaVerified) setText(captchaStatus, t.captchaWait);
 
-    // Re-render panels to update copy labels
     renderPanels();
   }
 
@@ -1298,7 +1337,6 @@
     const t = I18N[currentLang];
     panels.innerHTML = '';
 
-    // Bank panels
     ['techcombank', 'momo', 'vietcombank'].forEach(key => {
       const d = DATA[key];
       const el = document.createElement('div');
@@ -1335,7 +1373,12 @@
         cbtn.addEventListener('click', () => copyToClipboard(d.copyValue, cbtn));
         info.appendChild(cbtn);
       } else {
-        info.innerHTML = `<div class="info-block"><div class="info-label">${t.qrCode}</div><div class="info-value" style="font-size:0.85rem;color:var(--text-soft);">Scan to support</div></div>`;
+        info.innerHTML = `
+          <div class="info-block">
+            <div class="info-label">${t.qrCode}</div>
+            <div class="info-value" style="font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--text-soft);letter-spacing:0.005em;">Scan QR to support</div>
+          </div>
+        `;
       }
 
       const qrBlock = document.createElement('div');
@@ -1349,6 +1392,10 @@
         qrBlock.innerHTML = `<span style="color:var(--text-mute);font-size:0.7rem;">${d.name}</span>`;
       };
       qrBlock.appendChild(img);
+      const hint = document.createElement('div');
+      hint.className = 'qr-hint';
+      hint.textContent = t.tapZoom;
+      qrBlock.appendChild(hint);
       qrBlock.addEventListener('click', () => openModal(d));
 
       body.appendChild(info);
@@ -1359,7 +1406,7 @@
       observePanel(el);
     });
 
-    // USDT panel (full width)
+    // USDT
     const usdt = DATA.usdt;
     const elU = document.createElement('div');
     elU.className = 'panel usdt';
@@ -1405,6 +1452,10 @@
       qrBlockU.innerHTML = `<span style="color:var(--text-mute);font-size:0.7rem;">USDT</span>`;
     };
     qrBlockU.appendChild(imgU);
+    const hintU = document.createElement('div');
+    hintU.className = 'qr-hint';
+    hintU.textContent = t.tapZoom;
+    qrBlockU.appendChild(hintU);
     qrBlockU.addEventListener('click', () => openModal(usdt));
 
     bodyU.appendChild(infoU);
