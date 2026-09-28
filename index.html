@@ -7,14 +7,12 @@
 <meta name="theme-color" content="#050505">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  /* ================= RESET ================= */
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
     --bg: #050505;
-    --bg-2: #08080a;
     --text: #f2f4f8;
     --text-soft: #a8b0bd;
     --text-mute: #6a7280;
@@ -22,12 +20,17 @@
     --line-hi: rgba(255, 255, 255, 0.16);
     --glass: rgba(255, 255, 255, 0.035);
     --glass-hi: rgba(255, 255, 255, 0.07);
-    --glow: rgba(150, 180, 255, 0.22);
     --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
     --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
     --mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
     --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Soft pastel accents */
+    --c-tech: #ff9a9a;   /* soft red */
+    --c-momo: #ffa9d0;   /* soft pink */
+    --c-vcb:  #9ab8ff;   /* soft blue */
+    --c-usdt: #9fe0b5;   /* soft green */
   }
 
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
@@ -41,12 +44,10 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-weight: 400;
     letter-spacing: -0.011em;
     position: relative;
   }
 
-  /* Ambient glow + grain */
   body::before {
     content: "";
     position: fixed;
@@ -138,7 +139,6 @@
     font-size: 0.85rem;
     color: var(--text-soft);
     margin-bottom: 26px;
-    letter-spacing: 0.005em;
   }
 
   .captcha-status {
@@ -146,7 +146,6 @@
     font-size: 0.78rem;
     color: var(--text-mute);
     min-height: 18px;
-    letter-spacing: 0.01em;
     transition: color 0.3s;
   }
   .captcha-status.success { color: #8ce0b0; }
@@ -165,7 +164,7 @@
     user-select: none;
   }
 
-  /* ================= LANG SWITCHER ================= */
+  /* ================= LANG ================= */
   .lang {
     position: fixed;
     top: 22px;
@@ -220,7 +219,7 @@
     text-align: center;
     padding: 90px 24px 70px;
     position: relative;
-    transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+    transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
   }
 
   .hero.fade-out {
@@ -229,7 +228,8 @@
     pointer-events: none;
   }
 
-  /* Elegant serif title */
+  .hero.hidden-hero { display: none; }
+
   .hero-title {
     font-family: var(--serif);
     font-size: clamp(3.4rem, 15vw, 7rem);
@@ -237,7 +237,6 @@
     font-style: italic;
     letter-spacing: -0.02em;
     line-height: 1;
-    color: var(--text);
     margin-bottom: 30px;
     background: linear-gradient(180deg, #ffffff 30%, #9fa9bd 100%);
     -webkit-background-clip: text;
@@ -274,7 +273,6 @@
     animation: riseIn 1s var(--ease) 0.4s forwards;
   }
 
-  /* Elegant paragraph — staggered word reveal */
   .hero-desc {
     font-family: var(--serif);
     font-size: clamp(1.05rem, 2.6vw, 1.28rem);
@@ -329,7 +327,6 @@
     transition: transform 0.4s var(--ease), background 0.4s var(--ease),
                 border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
     overflow: hidden;
-    text-decoration: none;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
     white-space: nowrap;
@@ -385,7 +382,6 @@
   }
   .btn-ghost:hover { color: var(--text); }
 
-  /* Ripple */
   .ripple {
     position: absolute;
     border-radius: 50%;
@@ -428,10 +424,10 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 9px 20px;
+    padding: 10px 22px;
     font-family: var(--font);
     font-size: 0.76rem;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.14em;
     color: var(--text-soft);
     background: var(--glass);
@@ -451,6 +447,7 @@
     background: var(--glass-hi);
     border-color: var(--line-hi);
     transform: translateX(-3px);
+    box-shadow: 0 0 30px -10px rgba(160, 190, 255, 0.35);
   }
 
   .donate-head {
@@ -467,7 +464,6 @@
     font-style: italic;
     letter-spacing: -0.015em;
     margin-bottom: 14px;
-    color: var(--text);
     background: linear-gradient(180deg, #ffffff 30%, #98a5bd 100%);
     -webkit-background-clip: text;
     background-clip: text;
@@ -476,15 +472,15 @@
 
   .donate-head p {
     color: var(--text-mute);
-    font-size: 0.86rem;
+    font-size: 0.78rem;
     max-width: 520px;
     margin: 0 auto;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     font-weight: 500;
   }
 
-  /* ================= PANELS GRID ================= */
+  /* ================= PANELS ================= */
   .panels {
     display: grid;
     grid-template-columns: 1fr;
@@ -492,11 +488,10 @@
   }
 
   @media (min-width: 800px)  { .panels { grid-template-columns: repeat(2, 1fr); gap: 24px; } }
-  @media (min-width: 1100px) { .panels { grid-template-columns: repeat(2, 1fr); gap: 28px; } }
 
   .panel {
     position: relative;
-    padding: 32px 30px;
+    padding: 30px 28px;
     border-radius: 24px;
     background: linear-gradient(180deg, rgba(20, 22, 28, 0.55), rgba(10, 11, 14, 0.75));
     border: 1px solid var(--line);
@@ -519,120 +514,174 @@
                 border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
   }
 
+  /* Accent colors */
+  .panel.techcombank { --accent: var(--c-tech); }
+  .panel.momo        { --accent: var(--c-momo); }
+  .panel.vietcombank { --accent: var(--c-vcb); }
+  .panel.usdt        { --accent: var(--c-usdt); }
+
+  /* Soft pastel radial glow in corner */
+  .panel::after {
+    content: "";
+    position: absolute;
+    top: -45%;
+    right: -45%;
+    width: 90%;
+    height: 90%;
+    background: radial-gradient(circle, var(--accent), transparent 65%);
+    opacity: 0.14;
+    filter: blur(50px);
+    pointer-events: none;
+    transition: opacity 0.5s var(--ease);
+    z-index: 0;
+  }
+
   .panel::before {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(140deg, rgba(160, 190, 255, 0.4), transparent 35%, transparent 65%, rgba(200, 170, 255, 0.3));
+    background: linear-gradient(140deg, var(--accent), transparent 42%, transparent 58%, var(--accent));
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
             mask-composite: exclude;
     opacity: 0;
     transition: opacity 0.5s var(--ease);
     pointer-events: none;
+    z-index: 2;
   }
 
   .panel:hover {
     transform: translateY(-6px);
     box-shadow:
       0 50px 90px -40px rgba(0, 0, 0, 0.95),
-      0 0 60px -25px rgba(160, 190, 255, 0.25);
+      0 0 70px -25px var(--accent);
   }
 
-  .panel:hover::before { opacity: 1; }
+  .panel:hover::before { opacity: 0.7; }
+  .panel:hover::after  { opacity: 0.28; }
 
-  /* Panel header */
+  /* ===== NEW: Simple card structure (name, owner, account+copy, QR) ===== */
   .panel-head {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 22px;
   }
 
   .panel-label {
-    font-size: 0.66rem;
-    font-weight: 600;
-    letter-spacing: 0.28em;
-    color: var(--text-mute);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: var(--accent);
     text-transform: uppercase;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    opacity: 0.95;
   }
 
   .panel-name {
     font-family: var(--serif);
-    font-size: 1.5rem;
+    font-size: 1.55rem;
     font-weight: 500;
     font-style: italic;
     letter-spacing: 0.005em;
     color: var(--text);
-    line-height: 1.1;
+    line-height: 1.15;
   }
 
   .panel-owner {
-    font-size: 0.7rem;
-    color: var(--text-mute);
-    letter-spacing: 0.24em;
-    margin-top: 6px;
+    font-size: 0.72rem;
+    color: var(--text-soft);
+    letter-spacing: 0.18em;
+    margin-top: 8px;
     text-transform: uppercase;
     font-weight: 500;
   }
 
-  /* Panel body: info + qr */
   .panel-body {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 26px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  /* Account row with copy inside */
+  .account-row {
+    display: flex;
     align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    background: rgba(0, 0, 0, 0.32);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    flex-wrap: wrap;
+    transition: border-color 0.35s var(--ease), background 0.35s var(--ease);
   }
 
-  @media (min-width: 520px) {
-    .panel-body { grid-template-columns: 1fr auto; gap: 28px; }
+  .account-row:hover {
+    border-color: rgba(255, 255, 255, 0.14);
+    background: rgba(0, 0, 0, 0.42);
   }
 
-  .panel-info {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    min-width: 0;
-  }
-
-  .info-block {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .info-label {
-    font-size: 0.62rem;
-    font-weight: 600;
-    letter-spacing: 0.28em;
-    color: var(--text-mute);
-    text-transform: uppercase;
-  }
-
-  .info-value {
+  .account-value {
     font-family: var(--mono);
-    font-size: 1.05rem;
-    color: var(--text);
+    font-size: 0.98rem;
     letter-spacing: 0.05em;
-    line-height: 1.5;
-    word-break: break-word;
+    color: var(--text);
     font-weight: 500;
+    flex: 1 1 auto;
+    min-width: 0;
+    word-break: break-all;
   }
 
-  .info-value.small { font-size: 0.84rem; letter-spacing: 0.02em; }
+  .account-value.small { font-size: 0.78rem; letter-spacing: 0.01em; line-height: 1.5; }
 
-  /* QR block — LARGER now */
+  .copy-icon-btn {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 14px;
+    font-family: var(--font);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--line);
+    border-radius: 60px;
+    cursor: pointer;
+    transition: all 0.3s var(--ease);
+    position: relative;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+    white-space: nowrap;
+  }
+
+  .copy-icon-btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--accent);
+    box-shadow: 0 0 22px -6px var(--accent);
+  }
+
+  .copy-icon-btn.copied {
+    color: #8ce0b0;
+    border-color: rgba(140, 224, 176, 0.55);
+    background: rgba(140, 224, 176, 0.1);
+    box-shadow: 0 0 26px -6px rgba(140, 224, 176, 0.6);
+  }
+
+  /* QR block centered under info */
   .qr-block {
     position: relative;
     width: 100%;
-    max-width: 220px;
+    max-width: 260px;
     aspect-ratio: 1 / 1;
-    margin: 0 auto;
+    margin: 4px auto 0;
     border-radius: 20px;
     overflow: hidden;
     background: #04060a;
@@ -645,18 +694,14 @@
     justify-content: center;
   }
 
-  @media (min-width: 520px) {
-    .qr-block { width: 220px; max-width: none; margin: 0; }
-  }
-
   @media (min-width: 900px) {
-    .qr-block { width: 240px; }
+    .qr-block { max-width: 280px; }
   }
 
   .qr-block:hover {
-    transform: scale(1.03);
-    border-color: rgba(255, 255, 255, 0.22);
-    box-shadow: 0 0 55px -10px rgba(160, 190, 255, 0.4);
+    transform: scale(1.025);
+    border-color: var(--accent);
+    box-shadow: 0 0 60px -12px var(--accent);
   }
 
   .qr-block img {
@@ -670,19 +715,18 @@
 
   .qr-block:hover img { transform: scale(1.04); }
 
-  /* Zoom hint badge */
   .qr-hint {
     position: absolute;
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
     padding: 5px 12px;
-    font-size: 0.6rem;
-    font-weight: 600;
+    font-size: 0.58rem;
+    font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.75);
-    background: rgba(8, 10, 14, 0.75);
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(8, 10, 14, 0.78);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 60px;
     backdrop-filter: blur(10px);
@@ -695,85 +739,15 @@
 
   .qr-block:hover .qr-hint {
     color: #fff;
-    background: rgba(20, 24, 32, 0.9);
-    border-color: rgba(255, 255, 255, 0.24);
-    box-shadow: 0 0 20px -4px rgba(160, 190, 255, 0.5);
+    background: rgba(20, 24, 32, 0.92);
+    border-color: var(--accent);
+    box-shadow: 0 0 20px -4px var(--accent);
     opacity: 1;
   }
 
-  /* Copy button */
-  .copy-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 18px;
-    font-family: var(--font);
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    color: var(--text-soft);
-    background: var(--glass);
-    border: 1px solid var(--line);
-    border-radius: 60px;
-    cursor: pointer;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    transition: all 0.35s var(--ease);
-    position: relative;
-    overflow: hidden;
-    -webkit-tap-highlight-color: transparent;
-    align-self: flex-start;
-    text-transform: uppercase;
-  }
-
-  .copy-btn:hover {
-    color: var(--text);
-    background: var(--glass-hi);
-    border-color: var(--line-hi);
-    box-shadow: 0 0 30px -10px rgba(160, 190, 255, 0.35);
-  }
-
-  .copy-btn.copied {
-    color: #8ce0b0;
-    border-color: rgba(140, 224, 176, 0.4);
-    background: rgba(140, 224, 176, 0.08);
-  }
-
-  /* USDT panel */
-  .panel.usdt {
-    background: linear-gradient(180deg, rgba(28, 22, 42, 0.55), rgba(12, 10, 18, 0.78));
-  }
-
-  .panel.usdt .panel-name {
-    background: linear-gradient(135deg, #e0d0ff 0%, #a0b8ff 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .usdt-body {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 26px;
-    align-items: center;
-  }
-
-  @media (min-width: 800px) {
-    .usdt-body { grid-template-columns: 1fr auto; gap: 36px; }
-  }
-
-  .usdt-info { min-width: 0; }
-  .usdt-info .info-value {
-    font-size: 0.82rem;
-    line-height: 1.6;
-    letter-spacing: 0.03em;
-    padding: 16px 18px;
-    background: rgba(0, 0, 0, 0.35);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 14px;
-    margin-bottom: 16px;
-    word-break: break-all;
-  }
+  /* USDT panel — full width */
+  .panel.usdt { grid-column: 1 / -1; }
+  .panel.usdt .qr-block { max-width: 300px; }
 
   /* ================= MODAL ================= */
   .modal {
@@ -838,12 +812,12 @@
   }
 
   .modal-sub {
-    font-size: 0.66rem;
-    letter-spacing: 0.28em;
+    font-size: 0.64rem;
+    letter-spacing: 0.3em;
     color: var(--text-mute);
     text-transform: uppercase;
     margin-top: 6px;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .modal-img-wrap {
@@ -869,8 +843,8 @@
   }
 
   .modal-owner {
-    font-size: 0.7rem;
-    letter-spacing: 0.28em;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
     color: var(--text-soft);
     text-transform: uppercase;
     margin-bottom: 22px;
@@ -889,8 +863,8 @@
     flex: 1 1 auto;
     min-width: 130px;
     padding: 13px 22px;
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
   }
 
   .modal-close {
@@ -934,8 +908,8 @@
     border: 1px solid rgba(140, 224, 176, 0.35);
     color: #8ce0b0;
     font-family: var(--font);
-    font-size: 0.72rem;
-    font-weight: 600;
+    font-size: 0.7rem;
+    font-weight: 700;
     letter-spacing: 0.16em;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -959,7 +933,7 @@
     text-align: center;
     padding: 40px 24px 40px;
     color: var(--text-mute);
-    font-size: 0.68rem;
+    font-size: 0.66rem;
     letter-spacing: 0.32em;
     text-transform: uppercase;
     position: relative;
@@ -975,15 +949,15 @@
     .hero-name { letter-spacing: 0.4em; font-size: 0.66rem; margin-bottom: 34px; }
     .hero-actions .btn { padding: 15px 34px; font-size: 0.78rem; }
     .donate { padding: 90px 20px 80px; }
-    .panel { padding: 26px 22px; border-radius: 20px; }
-    .panel-name { font-size: 1.3rem; }
-    .qr-block { max-width: 200px; }
-    .info-value { font-size: 0.98rem; }
+    .panel { padding: 24px 20px; border-radius: 20px; }
+    .panel-name { font-size: 1.35rem; }
+    .qr-block { max-width: 240px; }
+    .account-value { font-size: 0.9rem; }
+    .account-value.small { font-size: 0.72rem; }
     .modal-box { padding: 26px 18px 24px; border-radius: 24px; }
     .modal-close { width: 34px; height: 34px; top: 10px; right: 10px; font-size: 0.9rem; }
-    .modal-actions .btn { padding: 12px 16px; font-size: 0.68rem; min-width: 110px; }
-    .toast { font-size: 0.66rem; padding: 10px 18px; bottom: 20px; letter-spacing: 0.12em; }
-    .footer { font-size: 0.62rem; letter-spacing: 0.26em; }
+    .modal-actions .btn { padding: 12px 16px; font-size: 0.66rem; min-width: 110px; }
+    .toast { font-size: 0.62rem; padding: 10px 18px; bottom: 20px; letter-spacing: 0.12em; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -1017,7 +991,7 @@
   </div>
 </div>
 
-<!-- ================= LANG SWITCHER ================= -->
+<!-- ================= LANG ================= -->
 <div class="lang" role="tablist" aria-label="Language">
   <button type="button" data-lang="vi" class="active" id="langVi">VN</button>
   <button type="button" data-lang="en" id="langEn">EN</button>
@@ -1060,9 +1034,7 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer" id="footer">
-    © 2026 NGUYEN MINH KHOI
-  </footer>
+  <footer class="footer" id="footer">© 2026 NGUYEN MINH KHOI</footer>
 </div>
 
 <!-- ================= MODAL ================= -->
@@ -1095,12 +1067,12 @@
 (function () {
   'use strict';
 
-  /* ========== CONFIG ========== */
   const TURNSTILE_SITE_KEY = "0x4AAAAAAFGgEMGzD4teYa7L";
 
   /* ========== DATA ========== */
   const DATA = {
     techcombank: {
+      key: "techcombank",
       label: "TECHCOMBANK",
       name: "Techcombank",
       owner: "NGUYEN MINH KHOI",
@@ -1110,6 +1082,7 @@
       type: "bank"
     },
     momo: {
+      key: "momo",
       label: "MOMO",
       name: "Momo",
       owner: "NGUYEN MINH KHOI",
@@ -1119,6 +1092,7 @@
       type: "bank"
     },
     vietcombank: {
+      key: "vietcombank",
       label: "VIETCOMBANK",
       name: "Vietcombank",
       owner: "NGUYEN MINH KHOI",
@@ -1128,9 +1102,10 @@
       type: "bank"
     },
     usdt: {
+      key: "usdt",
       label: "USDT",
       name: "USDT",
-      owner: "NGUYEN MINH KHOI",
+      owner: null,
       account: "0x33104be5b04fDbB4D87466eefdb89Dc840C32CFE",
       copyValue: "0x33104be5b04fDbB4D87466eefdb89Dc840C32CFE",
       qr: "assets/IMG_3507.png",
@@ -1153,15 +1128,14 @@
       back: "Back",
       donateTitle: "Support Me",
       donateSub: "Choose a method to support NGUYEN MINH KHOI",
-      copyAccount: "Copy Account Number",
-      copyAddress: "Copy Address",
+      copy: "Copy",
       copied: "Copied",
       saveQr: "Save QR",
       close: "Close",
-      account: "Account Number",
-      address: "Wallet Address",
+      account: "Số tài khoản",
+      address: "Địa chỉ ví",
       qrCode: "QR Code",
-      tapZoom: "Tap to zoom",
+      tapZoom: "Bấm để xem",
       toast: "Copied successfully",
       captchaMsg: "Vui lòng xác minh để tiếp tục",
       captchaWait: "Đang chờ xác minh…",
@@ -1182,8 +1156,7 @@
       back: "Back",
       donateTitle: "Support Me",
       donateSub: "Choose a method to support NGUYEN MINH KHOI",
-      copyAccount: "Copy Account Number",
-      copyAddress: "Copy Address",
+      copy: "Copy",
       copied: "Copied",
       saveQr: "Save QR",
       close: "Close",
@@ -1225,7 +1198,6 @@
   const captchaOverlay = $('captchaOverlay');
   const captchaStatus  = $('captchaStatus');
   const captchaMsgEl   = $('captchaMsg');
-  const captchaBrand   = $('captchaBrand');
   const turnstileWidget= $('turnstileWidget');
 
   const modal          = $('modal');
@@ -1337,133 +1309,135 @@
     const t = I18N[currentLang];
     panels.innerHTML = '';
 
+    // Render banks
     ['techcombank', 'momo', 'vietcombank'].forEach(key => {
       const d = DATA[key];
-      const el = document.createElement('div');
-      el.className = 'panel';
-
-      const head = document.createElement('div');
-      head.className = 'panel-head';
-      head.innerHTML = `
-        <div>
-          <div class="panel-label">${d.label}</div>
-          <div class="panel-name">${d.name}</div>
-          <div class="panel-owner">${d.owner}</div>
-        </div>
-      `;
-
-      const body = document.createElement('div');
-      body.className = 'panel-body';
-
-      const info = document.createElement('div');
-      info.className = 'panel-info';
-
-      if (d.account) {
-        info.innerHTML = `
-          <div class="info-block">
-            <div class="info-label">${t.account}</div>
-            <div class="info-value">${d.account}</div>
-          </div>
-        `;
-        const cbtn = document.createElement('button');
-        cbtn.type = 'button';
-        cbtn.className = 'copy-btn';
-        cbtn.innerHTML = `<span class="copy-label">${t.copyAccount}</span>`;
-        attachRipple(cbtn);
-        cbtn.addEventListener('click', () => copyToClipboard(d.copyValue, cbtn));
-        info.appendChild(cbtn);
-      } else {
-        info.innerHTML = `
-          <div class="info-block">
-            <div class="info-label">${t.qrCode}</div>
-            <div class="info-value" style="font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--text-soft);letter-spacing:0.005em;">Scan QR to support</div>
-          </div>
-        `;
-      }
-
-      const qrBlock = document.createElement('div');
-      qrBlock.className = 'qr-block';
-      const img = document.createElement('img');
-      img.src = d.qr;
-      img.alt = d.name + ' QR';
-      img.loading = 'lazy';
-      img.onerror = function () {
-        this.style.display = 'none';
-        qrBlock.innerHTML = `<span style="color:var(--text-mute);font-size:0.7rem;">${d.name}</span>`;
-      };
-      qrBlock.appendChild(img);
-      const hint = document.createElement('div');
-      hint.className = 'qr-hint';
-      hint.textContent = t.tapZoom;
-      qrBlock.appendChild(hint);
-      qrBlock.addEventListener('click', () => openModal(d));
-
-      body.appendChild(info);
-      body.appendChild(qrBlock);
-      el.appendChild(head);
-      el.appendChild(body);
-      panels.appendChild(el);
-      observePanel(el);
+      panels.appendChild(buildBankPanel(d, t));
     });
 
-    // USDT
-    const usdt = DATA.usdt;
-    const elU = document.createElement('div');
-    elU.className = 'panel usdt';
-    elU.style.gridColumn = '1 / -1';
+    // USDT (full width)
+    panels.appendChild(buildUsdtPanel(DATA.usdt, t));
+  }
 
-    const headU = document.createElement('div');
-    headU.className = 'panel-head';
-    headU.innerHTML = `
-      <div>
-        <div class="panel-label">${usdt.label}</div>
-        <div class="panel-name">${usdt.name}</div>
-        <div class="panel-owner">${usdt.network}</div>
-      </div>
+  function buildBankPanel(d, t) {
+    const el = document.createElement('div');
+    el.className = 'panel ' + d.key;
+
+    // Head: name + owner
+    const head = document.createElement('div');
+    head.className = 'panel-head';
+    head.innerHTML = `
+      <div class="panel-label">${d.label}</div>
+      <div class="panel-name">${d.name}</div>
+      ${d.owner ? `<div class="panel-owner">${d.owner}</div>` : ''}
     `;
 
-    const bodyU = document.createElement('div');
-    bodyU.className = 'usdt-body';
+    // Body
+    const body = document.createElement('div');
+    body.className = 'panel-body';
 
-    const infoU = document.createElement('div');
-    infoU.className = 'usdt-info';
-    infoU.innerHTML = `
-      <div class="info-block">
-        <div class="info-label">${t.address}</div>
-        <div class="info-value small">${usdt.account}</div>
-      </div>
+    // Account row (only if account exists)
+    if (d.account) {
+      const accRow = document.createElement('div');
+      accRow.className = 'account-row';
+
+      const val = document.createElement('div');
+      val.className = 'account-value';
+      val.textContent = d.account;
+
+      const cbtn = document.createElement('button');
+      cbtn.type = 'button';
+      cbtn.className = 'copy-icon-btn';
+      cbtn.innerHTML = `<span class="copy-label">${t.copy}</span>`;
+      attachRipple(cbtn);
+      cbtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        copyToClipboard(d.copyValue, cbtn);
+      });
+
+      accRow.appendChild(val);
+      accRow.appendChild(cbtn);
+      body.appendChild(accRow);
+    }
+
+    // QR block
+    body.appendChild(buildQrBlock(d, t));
+
+    el.appendChild(head);
+    el.appendChild(body);
+    observePanel(el);
+    return el;
+  }
+
+  function buildUsdtPanel(d, t) {
+    const el = document.createElement('div');
+    el.className = 'panel usdt';
+
+    const head = document.createElement('div');
+    head.className = 'panel-head';
+    head.innerHTML = `
+      <div class="panel-label">${d.label}</div>
+      <div class="panel-name">${d.name}</div>
+      ${d.network ? `<div class="panel-owner">${d.network}</div>` : ''}
     `;
-    const cbtnU = document.createElement('button');
-    cbtnU.type = 'button';
-    cbtnU.className = 'copy-btn';
-    cbtnU.innerHTML = `<span class="copy-label">${t.copyAddress}</span>`;
-    attachRipple(cbtnU);
-    cbtnU.addEventListener('click', () => copyToClipboard(usdt.copyValue, cbtnU));
-    infoU.appendChild(cbtnU);
 
-    const qrBlockU = document.createElement('div');
-    qrBlockU.className = 'qr-block';
-    const imgU = document.createElement('img');
-    imgU.src = usdt.qr;
-    imgU.alt = 'USDT QR';
-    imgU.loading = 'lazy';
-    imgU.onerror = function () {
+    const body = document.createElement('div');
+    body.className = 'panel-body';
+
+    const accRow = document.createElement('div');
+    accRow.className = 'account-row';
+
+    const val = document.createElement('div');
+    val.className = 'account-value small';
+    val.textContent = d.account;
+
+    const cbtn = document.createElement('button');
+    cbtn.type = 'button';
+    cbtn.className = 'copy-icon-btn';
+    cbtn.innerHTML = `<span class="copy-label">${t.copy}</span>`;
+    attachRipple(cbtn);
+    cbtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      copyToClipboard(d.copyValue, cbtn);
+    });
+
+    accRow.appendChild(val);
+    accRow.appendChild(cbtn);
+    body.appendChild(accRow);
+
+    // QR
+    body.appendChild(buildQrBlock(d, t));
+
+    el.appendChild(head);
+    el.appendChild(body);
+    observePanel(el);
+    return el;
+  }
+
+  function buildQrBlock(d, t) {
+    const qrBlock = document.createElement('div');
+    qrBlock.className = 'qr-block';
+    const img = document.createElement('img');
+    img.src = d.qr;
+    img.alt = d.name + ' QR';
+    img.loading = 'lazy';
+    img.onerror = function () {
       this.style.display = 'none';
-      qrBlockU.innerHTML = `<span style="color:var(--text-mute);font-size:0.7rem;">USDT</span>`;
+      const fb = document.createElement('span');
+      fb.style.color = 'var(--text-mute)';
+      fb.style.fontSize = '0.7rem';
+      fb.textContent = d.name;
+      qrBlock.appendChild(fb);
     };
-    qrBlockU.appendChild(imgU);
-    const hintU = document.createElement('div');
-    hintU.className = 'qr-hint';
-    hintU.textContent = t.tapZoom;
-    qrBlockU.appendChild(hintU);
-    qrBlockU.addEventListener('click', () => openModal(usdt));
+    qrBlock.appendChild(img);
 
-    bodyU.appendChild(infoU);
-    bodyU.appendChild(qrBlockU);
-    elU.appendChild(headU);
-    elU.appendChild(bodyU);
-    panels.appendChild(elU);
-    observePanel(elU);
+    const hint = document.createElement('div');
+    hint.className = 'qr-hint';
+    hint.textContent = t.tapZoom;
+    qrBlock.appendChild(hint);
+
+    qrBlock.addEventListener('click', () => openModal(d));
+    return qrBlock;
   }
 
   /* ========== PANEL OBSERVER ========== */
@@ -1477,7 +1451,7 @@
             panelObserver.unobserve(e.target);
           }
         });
-      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     }
     panelObserver.observe(el);
   }
@@ -1560,18 +1534,23 @@
   viewDonateBtn.addEventListener('click', () => {
     hero.classList.add('fade-out');
     setTimeout(() => {
-      hero.style.display = 'none';
+      hero.classList.add('hidden-hero');
+      hero.classList.remove('fade-out');
       donateSection.classList.add('visible', 'reveal');
       window.scrollTo({ top: 0, behavior: 'auto' });
       renderPanels();
-    }, 400);
+    }, 450);
   });
 
   backBtn.addEventListener('click', () => {
     donateSection.classList.remove('visible', 'reveal');
-    hero.style.display = '';
-    hero.classList.remove('fade-out');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    hero.classList.remove('hidden-hero');
+    // Force reflow so hero animations replay
+    void hero.offsetWidth;
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   });
 
   langViBtn.addEventListener('click', () => applyLang('vi'));
