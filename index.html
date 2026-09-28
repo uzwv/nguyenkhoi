@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-<title>NGUYEN MINH KHOI</title>
+<title>NGUYEN MINH KHOI — Support</title>
 <meta name="theme-color" content="#050505">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -98,11 +98,7 @@
     transition: opacity 0.6s var(--ease), visibility 0.6s var(--ease);
   }
 
-  .captcha-overlay.hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-  }
+  .captcha-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
   .captcha-card {
     width: 100%;
@@ -112,9 +108,7 @@
     border-radius: 28px;
     background: linear-gradient(180deg, rgba(22, 24, 30, 0.85), rgba(12, 13, 17, 0.92));
     border: 1px solid var(--line);
-    box-shadow:
-      0 40px 90px -30px rgba(0, 0, 0, 0.95),
-      inset 0 1px 0 rgba(255, 255, 255, 0.055);
+    box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.055);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
     transform: scale(0.95);
@@ -134,11 +128,7 @@
     text-transform: uppercase;
   }
 
-  .captcha-card p {
-    font-size: 0.85rem;
-    color: var(--text-soft);
-    margin-bottom: 26px;
-  }
+  .captcha-card p { font-size: 0.85rem; color: var(--text-soft); margin-bottom: 26px; }
 
   .captcha-status {
     margin-top: 16px;
@@ -156,12 +146,7 @@
     z-index: 1;
     transition: filter 0.8s var(--ease), opacity 0.8s var(--ease);
   }
-  .page.locked {
-    filter: blur(20px) brightness(0.5);
-    opacity: 0.6;
-    pointer-events: none;
-    user-select: none;
-  }
+  .page.locked { filter: blur(20px) brightness(0.5); opacity: 0.6; pointer-events: none; user-select: none; }
 
   /* ================= LANG ================= */
   .lang {
@@ -228,9 +213,7 @@
   .hero.animate-in .hero-title,
   .hero.animate-in .hero-name,
   .hero.animate-in .hero-desc,
-  .hero.animate-in .hero-actions {
-    animation: riseIn 1s var(--ease) forwards;
-  }
+  .hero.animate-in .hero-actions { animation: riseIn 1s var(--ease) forwards; }
 
   .hero.animate-in .hero-title   { animation-delay: 0.05s; }
   .hero.animate-in .hero-name    { animation-delay: 0.25s; }
@@ -265,9 +248,7 @@
     transform: translateX(-50%);
   }
 
-  .hero.animate-in .hero-title::after {
-    animation: lineGrow 1.4s var(--ease) 0.9s forwards;
-  }
+  .hero.animate-in .hero-title::after { animation: lineGrow 1.4s var(--ease) 0.9s forwards; }
 
   @keyframes lineGrow { to { width: 120px; } }
 
@@ -328,8 +309,8 @@
     background: var(--glass);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    transition: transform 0.4s var(--ease), background 0.4s var(--ease),
-                border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+    transition: transform 0.35s var(--ease), background 0.35s var(--ease),
+                border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
     overflow: hidden;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
@@ -348,7 +329,7 @@
     -webkit-mask-composite: xor;
             mask-composite: exclude;
     opacity: 0;
-    transition: opacity 0.4s var(--ease);
+    transition: opacity 0.35s var(--ease);
     pointer-events: none;
   }
 
@@ -356,9 +337,7 @@
     transform: translateY(-2px);
     background: var(--glass-hi);
     border-color: transparent;
-    box-shadow:
-      0 24px 55px -22px rgba(160, 190, 255, 0.5),
-      0 0 50px -15px rgba(160, 190, 255, 0.22);
+    box-shadow: 0 24px 55px -22px rgba(160, 190, 255, 0.5), 0 0 50px -15px rgba(160, 190, 255, 0.22);
   }
 
   .btn:hover::before { opacity: 1; }
@@ -370,11 +349,7 @@
     font-weight: 600;
   }
 
-  .btn-primary .arrow {
-    display: inline-block;
-    transition: transform 0.4s var(--ease);
-    font-size: 0.9rem;
-  }
+  .btn-primary .arrow { display: inline-block; transition: transform 0.35s var(--ease); font-size: 0.9rem; }
   .btn-primary:hover .arrow { transform: translateY(3px); }
 
   .btn-ghost {
@@ -386,21 +361,6 @@
   }
   .btn-ghost:hover { color: var(--text); }
 
-  /* ===== Ripple — follows exact click point ===== */
-  .ripple {
-    position: absolute;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.15) 45%, transparent 70%);
-    transform: scale(0);
-    animation: rippleAnim 0.75s cubic-bezier(0.2, 0.9, 0.3, 1);
-    pointer-events: none;
-    z-index: 0;
-  }
-  @keyframes rippleAnim {
-    0%   { transform: scale(0); opacity: 0.9; }
-    100% { transform: scale(4); opacity: 0; }
-  }
-
   /* ================= DONATE ================= */
   .donate {
     padding: 120px 24px 100px;
@@ -410,16 +370,11 @@
   }
 
   .donate.animate-in .back-wrap,
-  .donate.animate-in .donate-head {
-    animation: riseIn 0.8s var(--ease) forwards;
-  }
+  .donate.animate-in .donate-head { animation: riseIn 0.8s var(--ease) forwards; }
   .donate.animate-in .back-wrap   { animation-delay: 0.05s; }
   .donate.animate-in .donate-head { animation-delay: 0.2s; }
 
-  .back-wrap {
-    margin-bottom: 56px;
-    opacity: 0;
-  }
+  .back-wrap { margin-bottom: 56px; opacity: 0; }
 
   .back-btn {
     display: inline-flex;
@@ -437,7 +392,7 @@
     cursor: pointer;
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    transition: all 0.35s var(--ease);
+    transition: all 0.3s var(--ease);
     position: relative;
     overflow: hidden;
     text-transform: uppercase;
@@ -452,11 +407,7 @@
     box-shadow: 0 0 30px -10px rgba(160, 190, 255, 0.35);
   }
 
-  .donate-head {
-    text-align: center;
-    margin-bottom: 64px;
-    opacity: 0;
-  }
+  .donate-head { text-align: center; margin-bottom: 64px; opacity: 0; }
 
   .donate-head h2 {
     font-family: var(--serif);
@@ -482,11 +433,7 @@
   }
 
   /* ================= PANELS ================= */
-  .panels {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 22px;
-  }
+  .panels { display: grid; grid-template-columns: 1fr; gap: 22px; }
 
   @media (min-width: 800px)  { .panels { grid-template-columns: repeat(2, 1fr); gap: 24px; } }
 
@@ -496,17 +443,14 @@
     border-radius: 24px;
     background: linear-gradient(180deg, rgba(20, 22, 28, 0.55), rgba(10, 11, 14, 0.75));
     border: 1px solid var(--line);
-    box-shadow:
-      0 30px 70px -35px rgba(0, 0, 0, 0.9),
-      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    box-shadow: 0 30px 70px -35px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
-    transition: transform 0.5s var(--ease), border-color 0.5s var(--ease),
-                box-shadow 0.5s var(--ease);
+    transition: transform 0.4s var(--ease), border-color 0.4s var(--ease),
+                box-shadow 0.4s var(--ease);
     overflow: hidden;
     opacity: 0;
     transform: translateY(30px);
-    cursor: pointer;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -514,7 +458,7 @@
     opacity: 1;
     transform: translateY(0);
     transition: opacity 0.85s var(--ease), transform 0.85s var(--ease),
-                border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+                border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
   }
 
   .panel.techcombank { --accent: var(--c-tech); }
@@ -522,7 +466,7 @@
   .panel.vietcombank { --accent: var(--c-vcb); }
   .panel.usdt        { --accent: var(--c-usdt); }
 
-  /* Soft pastel radial glow in corner */
+  /* Static pastel glow in corner */
   .panel::after {
     content: "";
     position: absolute;
@@ -534,7 +478,7 @@
     opacity: 0.14;
     filter: blur(50px);
     pointer-events: none;
-    transition: opacity 0.5s var(--ease);
+    transition: opacity 0.35s var(--ease);
     z-index: 0;
   }
 
@@ -550,81 +494,73 @@
     -webkit-mask-composite: xor;
             mask-composite: exclude;
     opacity: 0;
-    transition: opacity 0.5s var(--ease);
+    transition: opacity 0.4s var(--ease);
     pointer-events: none;
     z-index: 2;
   }
 
   .panel:hover {
     transform: translateY(-6px);
-    box-shadow:
-      0 50px 90px -40px rgba(0, 0, 0, 0.95),
-      0 0 70px -25px var(--accent);
+    box-shadow: 0 50px 90px -40px rgba(0, 0, 0, 0.95), 0 0 70px -25px var(--accent);
   }
-
   .panel:hover::before { opacity: 0.7; }
   .panel:hover::after  { opacity: 0.28; }
 
-  /* ===== Panel click glow — bright like copied state ===== */
+  /* ===== CLICK — instant glow at exact click point ===== */
+  /* A single fixed-position radial light that appears right where you tap */
   .panel.clicked {
-    transform: translateY(-4px) scale(1.008);
+    transform: translateY(-5px);
     box-shadow:
       0 50px 100px -35px rgba(0, 0, 0, 0.95),
-      0 0 90px -15px var(--accent),
-      0 0 40px -5px var(--accent);
-    transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+      0 0 90px -18px var(--accent),
+      0 0 45px -8px var(--accent);
+    border-color: var(--accent);
   }
   .panel.clicked::before { opacity: 1; }
-  .panel.clicked::after  { opacity: 0.5; }
+  .panel.clicked::after  { opacity: 0.55; }
 
-  /* ===== Click pulse ring following click point ===== */
-  .click-ring {
+  /* Local glow — instant, follows exact click point */
+  .click-glow {
     position: absolute;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 2px solid var(--accent, rgba(180, 200, 255, 0.9));
-    pointer-events: none;
-    transform: translate(-50%, -50%) scale(0.4);
-    opacity: 1;
-    animation: ringPulse 0.75s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
-    z-index: 4;
-    box-shadow: 0 0 20px 4px var(--accent, rgba(180, 200, 255, 0.55));
-  }
-  @keyframes ringPulse {
-    0%   { transform: translate(-50%, -50%) scale(0.4); opacity: 1; }
-    100% { transform: translate(-50%, -50%) scale(18); opacity: 0; }
-  }
-
-  /* ===== Click spotlight — radial light at exact click point ===== */
-  .click-spot {
-    position: absolute;
-    width: 340px;
-    height: 340px;
+    width: 240px;
+    height: 240px;
     border-radius: 50%;
     background: radial-gradient(circle,
-      color-mix(in srgb, var(--accent, #a0b8ff) 65%, transparent) 0%,
-      color-mix(in srgb, var(--accent, #a0b8ff) 25%, transparent) 35%,
-      transparent 70%);
+      var(--accent, #a0b8ff) 0%,
+      color-mix(in srgb, var(--accent, #a0b8ff) 45%, transparent) 30%,
+      transparent 65%);
     pointer-events: none;
-    transform: translate(-50%, -50%) scale(0.4);
-    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(0.7);
+    opacity: 1;
     mix-blend-mode: screen;
-    animation: spotFade 0.9s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
     z-index: 3;
-    filter: blur(6px);
+    animation: glowPop 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    will-change: transform, opacity;
+    filter: blur(4px);
   }
-  @keyframes spotFade {
-    0%   { transform: translate(-50%, -50%) scale(0.4); opacity: 0.9; }
-    55%  { opacity: 0.55; }
-    100% { transform: translate(-50%, -50%) scale(1.15); opacity: 0; }
+  @keyframes glowPop {
+    0%   { transform: translate(-50%, -50%) scale(0.35); opacity: 1; }
+    60%  { opacity: 0.85; }
+    100% { transform: translate(-50%, -50%) scale(1.35); opacity: 0; }
   }
 
-  .panel-head {
-    position: relative;
-    z-index: 1;
-    margin-bottom: 22px;
+  /* Instant border flash — no delay */
+  .click-border {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1.5px solid var(--accent, #a0b8ff);
+    pointer-events: none;
+    z-index: 4;
+    animation: borderFlash 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    box-shadow: 0 0 30px -4px var(--accent, #a0b8ff), inset 0 0 30px -8px var(--accent, #a0b8ff);
   }
+  @keyframes borderFlash {
+    0%   { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  .panel-head { position: relative; z-index: 1; margin-bottom: 22px; }
 
   .panel-label {
     font-size: 0.62rem;
@@ -672,7 +608,7 @@
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 14px;
     flex-wrap: wrap;
-    transition: border-color 0.35s var(--ease), background 0.35s var(--ease);
+    transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
   }
 
   .account-row:hover {
@@ -710,7 +646,7 @@
     border: 1px solid var(--line);
     border-radius: 60px;
     cursor: pointer;
-    transition: all 0.3s var(--ease);
+    transition: all 0.28s var(--ease);
     position: relative;
     overflow: hidden;
     -webkit-tap-highlight-color: transparent;
@@ -743,23 +679,17 @@
     background: #04060a;
     border: 1px solid rgba(255, 255, 255, 0.09);
     cursor: pointer;
-    transition: transform 0.4s var(--ease), border-color 0.35s var(--ease),
-                box-shadow 0.4s var(--ease);
+    transition: transform 0.35s var(--ease), border-color 0.3s var(--ease),
+                box-shadow 0.35s var(--ease);
     display: flex;
     align-items: center;
     justify-content: center;
-    /* smooth rendering for zoom */
-    will-change: transform;
-    transform: translateZ(0);
-    backface-visibility: hidden;
   }
 
-  @media (min-width: 900px) {
-    .qr-block { max-width: 280px; }
-  }
+  @media (min-width: 900px) { .qr-block { max-width: 280px; } }
 
   .qr-block:hover {
-    transform: scale(1.025) translateZ(0);
+    transform: scale(1.02);
     border-color: var(--accent);
     box-shadow: 0 0 60px -12px var(--accent);
   }
@@ -770,13 +700,10 @@
     object-fit: contain;
     display: block;
     padding: 12px;
-    /* smoother transition */
-    transition: transform 0.4s var(--ease);
-    transform: translateZ(0);
-    backface-visibility: hidden;
+    transition: transform 0.35s var(--ease);
   }
 
-  .qr-block:hover img { transform: scale(1.04) translateZ(0); }
+  .qr-block:hover img { transform: scale(1.03); }
 
   .qr-hint {
     position: absolute;
@@ -796,7 +723,7 @@
     -webkit-backdrop-filter: blur(10px);
     white-space: nowrap;
     pointer-events: none;
-    transition: all 0.35s var(--ease);
+    transition: all 0.3s var(--ease);
     opacity: 0.85;
   }
 
@@ -811,7 +738,7 @@
   .panel.usdt { grid-column: 1 / -1; }
   .panel.usdt .qr-block { max-width: 300px; }
 
-  /* ================= MODAL — smoother & lag-free ================= */
+  /* ================= MODAL — smooth, no lag ================= */
   .modal {
     position: fixed;
     inset: 0;
@@ -820,26 +747,16 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background: rgba(2, 2, 4, 0);
-    backdrop-filter: blur(0px);
-    -webkit-backdrop-filter: blur(0px);
+    background: rgba(2, 2, 4, 0.86);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.35s var(--ease-soft),
-                visibility 0.35s var(--ease-soft),
-                background-color 0.35s var(--ease-soft),
-                backdrop-filter 0.35s var(--ease-soft);
+    transition: opacity 0.28s ease-out, visibility 0.28s ease-out;
   }
 
-  .modal.active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    background: rgba(2, 2, 4, 0.86);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-  }
+  .modal.active { opacity: 1; visibility: visible; pointer-events: auto; }
 
   .modal-box {
     width: 100%;
@@ -852,29 +769,18 @@
       0 60px 130px -40px rgba(0, 0, 0, 0.98),
       0 0 80px -30px rgba(160, 190, 255, 0.25),
       inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(34px);
-    -webkit-backdrop-filter: blur(34px);
-    transform: scale(0.9);
+    transform: scale(0.94);
     opacity: 0;
-    transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1),
-                opacity 0.32s var(--ease-soft);
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease-out;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    will-change: transform, opacity;
   }
 
-  .modal.active .modal-box {
-    transform: scale(1);
-    opacity: 1;
-  }
+  .modal.active .modal-box { transform: scale(1); opacity: 1; }
 
-  .modal-head {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 22px;
-  }
+  .modal-head { width: 100%; text-align: center; margin-bottom: 22px; }
 
   .modal-name {
     font-family: var(--serif);
@@ -906,9 +812,6 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
-    /* force GPU layer for smoothness */
-    transform: translateZ(0);
-    backface-visibility: hidden;
   }
 
   .modal-img-wrap img {
@@ -917,8 +820,6 @@
     object-fit: contain;
     display: block;
     padding: 14px;
-    transform: translateZ(0);
-    backface-visibility: hidden;
   }
 
   .modal-owner {
@@ -930,13 +831,7 @@
     font-weight: 600;
   }
 
-  .modal-actions {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: center;
-  }
+  .modal-actions { display: flex; gap: 12px; flex-wrap: wrap; width: 100%; justify-content: center; }
 
   .modal-actions .btn {
     flex: 1 1 auto;
@@ -962,7 +857,7 @@
     font-size: 1rem;
     line-height: 1;
     cursor: pointer;
-    transition: all 0.35s var(--ease);
+    transition: all 0.3s var(--ease);
     font-family: inherit;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -993,20 +888,16 @@
     letter-spacing: 0.16em;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.9),
-                0 0 40px -10px rgba(140, 224, 176, 0.35);
+    box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.9), 0 0 40px -10px rgba(140, 224, 176, 0.35);
     opacity: 0;
-    transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
     pointer-events: none;
     z-index: 6000;
     white-space: nowrap;
     text-transform: uppercase;
   }
 
-  .toast.show {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
   /* ================= FOOTER ================= */
   .footer {
@@ -1150,67 +1041,46 @@
 
   const DATA = {
     techcombank: {
-      key: "techcombank",
-      label: "TECHCOMBANK",
-      name: "Techcombank",
+      key: "techcombank", label: "TECHCOMBANK", name: "Techcombank",
       owner: "NGUYEN MINH KHOI",
-      account: "8888 8888 8882 75",
-      copyValue: "8888888888275",
-      qr: "assets/IMG_4758.jpeg",
-      type: "bank"
+      account: "8888 8888 8882 75", copyValue: "8888888888275",
+      qr: "assets/IMG_4758.jpeg", type: "bank"
     },
     momo: {
-      key: "momo",
-      label: "MOMO",
-      name: "Momo",
+      key: "momo", label: "MOMO", name: "Momo",
       owner: "NGUYEN MINH KHOI",
-      account: null,
-      copyValue: null,
-      qr: "assets/IMG_4759.jpeg",
-      type: "bank"
+      account: null, copyValue: null,
+      qr: "assets/IMG_4759.jpeg", type: "bank"
     },
     vietcombank: {
-      key: "vietcombank",
-      label: "VIETCOMBANK",
-      name: "Vietcombank",
+      key: "vietcombank", label: "VIETCOMBANK", name: "Vietcombank",
       owner: "NGUYEN MINH KHOI",
-      account: "888890895666",
-      copyValue: "888890895666",
-      qr: "assets/IMG_4760.jpeg",
-      type: "bank"
+      account: "888890895666", copyValue: "888890895666",
+      qr: "assets/IMG_4760.jpeg", type: "bank"
     },
     usdt: {
-      key: "usdt",
-      label: "USDT",
-      name: "USDT",
+      key: "usdt", label: "USDT", name: "USDT",
       owner: null,
       account: "0x33104be5b04fDbB4D87466eefdb89Dc840C32CFE",
       copyValue: "0x33104be5b04fDbB4D87466eefdb89Dc840C32CFE",
-      qr: "assets/IMG_3507.png",
-      type: "crypto",
-      network: "BNB SMART CHAIN"
+      qr: "assets/IMG_3507.png", type: "crypto", network: "BNB SMART CHAIN"
     }
   };
 
   const I18N = {
     vi: {
-      heroTitle: "Donate",
-      heroName: "NGUYEN MINH KHOI",
+      heroTitle: "Donate", heroName: "NGUYEN MINH KHOI",
       desc: [
         "Nếu bạn yêu quý mình và những gì mình đang làm, bạn có thể gửi một chút ủng hộ.",
         "Dù nhiều hay ít, mỗi sự ủng hộ đều là một lời động viên rất đáng quý đối với mình.",
         "Cảm ơn bạn đã luôn yêu quý và ủng hộ mình. ❤️"
       ],
-      viewDonate: "View Donate",
-      back: "Back",
+      viewDonate: "View Donate", back: "Back",
       donateTitle: "Support Me",
       donateSub: "Choose a method to support NGUYEN MINH KHOI",
-      copy: "Copy",
-      copied: "Copied",
-      saveQr: "Save QR",
-      close: "Close",
-      qrCode: "QR Code",
-      tapZoom: "Bấm để xem",
+      copy: "Copy", copied: "Copied",
+      saveQr: "Save QR", close: "Close",
+      qrCode: "QR Code", tapZoom: "Bấm để xem",
       toast: "Copied successfully",
       captchaMsg: "Vui lòng xác minh để tiếp tục",
       captchaWait: "Đang chờ xác minh…",
@@ -1220,23 +1090,18 @@
       footer: "© 2026 NGUYEN MINH KHOI"
     },
     en: {
-      heroTitle: "Donate",
-      heroName: "NGUYEN MINH KHOI",
+      heroTitle: "Donate", heroName: "NGUYEN MINH KHOI",
       desc: [
         "If you appreciate me and what I do, you can send a little support.",
         "Whether big or small, every bit of support is a precious encouragement to me.",
         "Thank you for always supporting and appreciating me. ❤️"
       ],
-      viewDonate: "View Donate",
-      back: "Back",
+      viewDonate: "View Donate", back: "Back",
       donateTitle: "Support Me",
       donateSub: "Choose a method to support NGUYEN MINH KHOI",
-      copy: "Copy",
-      copied: "Copied",
-      saveQr: "Save QR",
-      close: "Close",
-      qrCode: "QR Code",
-      tapZoom: "Tap to zoom",
+      copy: "Copy", copied: "Copied",
+      saveQr: "Save QR", close: "Close",
+      qrCode: "QR Code", tapZoom: "Tap to zoom",
       toast: "Copied successfully",
       captchaMsg: "Please verify to continue",
       captchaWait: "Waiting for verification…",
@@ -1252,39 +1117,35 @@
   let currentQr = null;
 
   const $ = (id) => document.getElementById(id);
-  const page           = $('page');
-  const heroView       = $('heroView');
-  const donateView     = $('donateView');
-  const heroTitle      = $('heroTitle');
-  const heroName       = $('heroName');
-  const heroDesc       = $('heroDesc');
-  const viewDonateBtn  = $('viewDonateBtn');
-  const viewDonateLbl  = $('viewDonateLabel');
-  const backBtn        = $('backBtn');
-  const backLabel      = $('backLabel');
-  const donateTitle    = $('donateTitle');
-  const donateSub      = $('donateSub');
-  const panels         = $('panels');
-  const footer         = $('footer');
-
+  const page = $('page');
+  const heroView = $('heroView');
+  const donateView = $('donateView');
+  const heroTitle = $('heroTitle');
+  const heroName = $('heroName');
+  const heroDesc = $('heroDesc');
+  const viewDonateBtn = $('viewDonateBtn');
+  const viewDonateLbl = $('viewDonateLabel');
+  const backBtn = $('backBtn');
+  const backLabel = $('backLabel');
+  const donateTitle = $('donateTitle');
+  const donateSub = $('donateSub');
+  const panels = $('panels');
+  const footer = $('footer');
   const captchaOverlay = $('captchaOverlay');
-  const captchaStatus  = $('captchaStatus');
-  const captchaMsgEl   = $('captchaMsg');
-  const turnstileWidget= $('turnstileWidget');
-
-  const modal          = $('modal');
-  const modalName      = $('modalName');
-  const modalSub       = $('modalSub');
-  const modalImg       = $('modalImg');
-  const modalClose     = $('modalClose');
-  const closeModalBtn  = $('closeModalBtn');
-  const saveQrBtn      = $('saveQrBtn');
-
-  const toast          = $('toast');
+  const captchaStatus = $('captchaStatus');
+  const captchaMsgEl = $('captchaMsg');
+  const turnstileWidget = $('turnstileWidget');
+  const modal = $('modal');
+  const modalName = $('modalName');
+  const modalSub = $('modalSub');
+  const modalImg = $('modalImg');
+  const modalClose = $('modalClose');
+  const closeModalBtn = $('closeModalBtn');
+  const saveQrBtn = $('saveQrBtn');
+  const toast = $('toast');
   const langViBtn = $('langVi');
   const langEnBtn = $('langEn');
 
-  /* ========== UTILS ========== */
   function setText(el, txt) { if (el) el.textContent = txt; }
 
   function showToast(msg) {
@@ -1292,57 +1153,6 @@
     toast.classList.add('show');
     clearTimeout(toast._t);
     toast._t = setTimeout(() => toast.classList.remove('show'), 1700);
-  }
-
-  // Ripple at exact click point (used on .btn)
-  function attachRipple(btn) {
-    if (!btn) return;
-    btn.addEventListener('click', function (e) {
-      const rect = this.getBoundingClientRect();
-      const size = Math.max(rect.width, rect.height) * 1.1;
-      const x = (e.clientX || rect.left + rect.width / 2) - rect.left - size / 2;
-      const y = (e.clientY || rect.top + rect.height / 2) - rect.top - size / 2;
-      const r = document.createElement('span');
-      r.className = 'ripple';
-      r.style.width = r.style.height = size + 'px';
-      r.style.left = x + 'px';
-      r.style.top = y + 'px';
-      this.appendChild(r);
-      setTimeout(() => r.remove(), 800);
-    });
-  }
-
-  // Panel click effect: glow + ring + spotlight at exact click point
-  function attachPanelClickEffect(panel) {
-    panel.addEventListener('pointerdown', function (e) {
-      // Ignore clicks originating from copy button (has its own ripple)
-      if (e.target.closest('.copy-icon-btn')) return;
-
-      const rect = this.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      // Ring
-      const ring = document.createElement('span');
-      ring.className = 'click-ring';
-      ring.style.left = x + 'px';
-      ring.style.top = y + 'px';
-      this.appendChild(ring);
-      setTimeout(() => ring.remove(), 800);
-
-      // Spotlight
-      const spot = document.createElement('span');
-      spot.className = 'click-spot';
-      spot.style.left = x + 'px';
-      spot.style.top = y + 'px';
-      this.appendChild(spot);
-      setTimeout(() => spot.remove(), 950);
-
-      // Glow state
-      this.classList.add('clicked');
-      clearTimeout(this._clickTimer);
-      this._clickTimer = setTimeout(() => this.classList.remove('clicked'), 700);
-    });
   }
 
   function fallbackCopy(text) {
@@ -1378,7 +1188,37 @@
     }
   }
 
-  /* ========== I18N APPLY ========== */
+  /* ===== Panel click effect — INSTANT, at exact click point ===== */
+  function attachPanelClickEffect(panel) {
+    panel.addEventListener('pointerdown', function (e) {
+      // Skip if clicking copy button
+      if (e.target.closest('.copy-icon-btn')) return;
+
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Instant glow at click point
+      const glow = document.createElement('span');
+      glow.className = 'click-glow';
+      glow.style.left = x + 'px';
+      glow.style.top = y + 'px';
+      this.appendChild(glow);
+      setTimeout(() => glow.remove(), 600);
+
+      // Instant border flash
+      const border = document.createElement('span');
+      border.className = 'click-border';
+      this.appendChild(border);
+      setTimeout(() => border.remove(), 600);
+
+      // Panel glow state
+      this.classList.add('clicked');
+      clearTimeout(this._clickTimer);
+      this._clickTimer = setTimeout(() => this.classList.remove('clicked'), 550);
+    });
+  }
+
   function applyLang(lang) {
     currentLang = lang;
     localStorage.setItem('ngk_lang', lang);
@@ -1397,7 +1237,6 @@
     setText(donateSub, t.donateSub);
     setText(footer, t.footer);
     setText(captchaMsgEl, t.captchaMsg);
-
     setText(saveQrBtn, t.saveQr);
     setText(closeModalBtn, t.close);
 
@@ -1405,15 +1244,12 @@
     langEnBtn.classList.toggle('active', lang === 'en');
 
     if (!captchaVerified) setText(captchaStatus, t.captchaWait);
-
     renderPanels();
   }
 
-  /* ========== RENDER PANELS ========== */
   function renderPanels() {
     const t = I18N[currentLang];
     panels.innerHTML = '';
-
     ['techcombank', 'momo', 'vietcombank'].forEach(key => {
       panels.appendChild(buildBankPanel(DATA[key], t));
     });
@@ -1447,7 +1283,6 @@
       cbtn.type = 'button';
       cbtn.className = 'copy-icon-btn';
       cbtn.innerHTML = `<span class="copy-label">${t.copy}</span>`;
-      attachRipple(cbtn);
       cbtn.addEventListener('click', (e) => {
         e.stopPropagation();
         copyToClipboard(d.copyValue, cbtn);
@@ -1459,7 +1294,6 @@
     }
 
     body.appendChild(buildQrBlock(d, t));
-
     el.appendChild(head);
     el.appendChild(body);
     observePanel(el);
@@ -1493,7 +1327,6 @@
     cbtn.type = 'button';
     cbtn.className = 'copy-icon-btn';
     cbtn.innerHTML = `<span class="copy-label">${t.copy}</span>`;
-    attachRipple(cbtn);
     cbtn.addEventListener('click', (e) => {
       e.stopPropagation();
       copyToClipboard(d.copyValue, cbtn);
@@ -1502,7 +1335,6 @@
     accRow.appendChild(val);
     accRow.appendChild(cbtn);
     body.appendChild(accRow);
-
     body.appendChild(buildQrBlock(d, t));
 
     el.appendChild(head);
@@ -1542,7 +1374,6 @@
     return qrBlock;
   }
 
-  /* ========== PANEL OBSERVER ========== */
   let panelObserver;
   function observePanel(el) {
     if (!panelObserver) {
@@ -1558,7 +1389,6 @@
     panelObserver.observe(el);
   }
 
-  /* ========== VIEW SWITCHING ========== */
   function showHero() {
     donateView.classList.remove('active', 'animate-in');
     heroView.classList.add('active');
@@ -1578,66 +1408,32 @@
     renderPanels();
   }
 
-  /* ========== MODAL — optimized for smoothness ========== */
-  let savedScrollY = 0;
-
+  /* ===== Modal — preload image, then open ===== */
   function openModal(d) {
     currentQr = d;
 
-    // Preload image first, then open modal — avoids jank
+    // Preload image; show modal once ready (or on error)
     const preload = new Image();
     preload.decoding = 'async';
-    preload.onload = () => {
+
+    const showModal = () => {
       modalImg.src = d.qr;
       modalImg.alt = d.name + ' QR';
       modalName.textContent = d.name;
       modalSub.textContent = d.type === 'crypto' ? d.network : I18N[currentLang].qrCode;
-
-      // Lock body scroll without jumping
-      savedScrollY = window.scrollY;
-      document.body.style.position = 'fixed';
-      document.body.style.top = '-' + savedScrollY + 'px';
-      document.body.style.left = '0';
-      document.body.style.right = '0';
-      document.body.style.width = '100%';
-
-      // Force reflow then activate for a smooth transition
-      requestAnimationFrame(() => {
-        modal.classList.add('active');
-      });
+      modal.classList.add('active');
     };
-    preload.onerror = () => {
-      modalImg.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%236a7280" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>';
-      modalName.textContent = d.name;
-      modalSub.textContent = d.type === 'crypto' ? d.network : I18N[currentLang].qrCode;
 
-      savedScrollY = window.scrollY;
-      document.body.style.position = 'fixed';
-      document.body.style.top = '-' + savedScrollY + 'px';
-      document.body.style.left = '0';
-      document.body.style.right = '0';
-      document.body.style.width = '100%';
-
-      requestAnimationFrame(() => {
-        modal.classList.add('active');
-      });
-    };
+    preload.onload = showModal;
+    preload.onerror = showModal;
     preload.src = d.qr;
   }
 
   function closeModal() {
     modal.classList.remove('active');
-    // Restore scroll position
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.left = '';
-    document.body.style.right = '';
-    document.body.style.width = '';
-    window.scrollTo({ top: savedScrollY, behavior: 'auto' });
-    // Clear image after fade
     setTimeout(() => {
       if (!modal.classList.contains('active')) modalImg.removeAttribute('src');
-    }, 400);
+    }, 350);
     currentQr = null;
   }
 
@@ -1695,7 +1491,6 @@
   /* ========== EVENTS ========== */
   viewDonateBtn.addEventListener('click', showDonate);
   backBtn.addEventListener('click', showHero);
-
   langViBtn.addEventListener('click', () => applyLang('vi'));
   langEnBtn.addEventListener('click', () => applyLang('en'));
 
@@ -1707,13 +1502,6 @@
   });
   saveQrBtn.addEventListener('click', saveQr);
 
-  attachRipple(viewDonateBtn);
-  attachRipple(backBtn);
-  attachRipple(modalClose);
-  attachRipple(closeModalBtn);
-  attachRipple(saveQrBtn);
-
-  /* ========== INIT ========== */
   function init() {
     applyLang(currentLang);
   }
