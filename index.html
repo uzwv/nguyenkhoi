@@ -85,106 +85,71 @@
 
   /* ================= CAPTCHA ================= */
   .captcha-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
     padding: 20px;
     background: rgba(3, 3, 5, 0.78);
     backdrop-filter: blur(22px);
     -webkit-backdrop-filter: blur(22px);
     transition: opacity 0.6s var(--ease), visibility 0.6s var(--ease);
   }
-
   .captcha-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
   .captcha-card {
-    width: 100%;
-    max-width: 400px;
-    padding: 40px 32px 34px;
-    text-align: center;
+    width: 100%; max-width: 400px;
+    padding: 40px 32px 34px; text-align: center;
     border-radius: 28px;
     background: linear-gradient(180deg, rgba(22, 24, 30, 0.85), rgba(12, 13, 17, 0.92));
     border: 1px solid var(--line);
     box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.055);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
-    transform: scale(0.95);
-    opacity: 0;
+    transform: scale(0.95); opacity: 0;
     animation: captchaPop 0.75s var(--ease) forwards;
   }
-
   @keyframes captchaPop { to { transform: scale(1); opacity: 1; } }
 
   .captcha-card h2 {
-    font-family: var(--serif);
-    font-size: 1.5rem;
-    font-weight: 500;
-    letter-spacing: 0.28em;
-    margin-bottom: 8px;
-    color: var(--text);
+    font-family: var(--serif); font-size: 1.5rem; font-weight: 500;
+    letter-spacing: 0.28em; margin-bottom: 8px; color: var(--text);
     text-transform: uppercase;
   }
-
   .captcha-card p { font-size: 0.85rem; color: var(--text-soft); margin-bottom: 26px; }
 
   .captcha-status {
-    margin-top: 16px;
-    font-size: 0.78rem;
-    color: var(--text-mute);
-    min-height: 18px;
-    transition: color 0.3s;
+    margin-top: 16px; font-size: 0.78rem; color: var(--text-mute);
+    min-height: 18px; transition: color 0.3s;
   }
   .captcha-status.success { color: #8ce0b0; }
   .captcha-status.error   { color: #ff9a9a; }
 
   /* ================= PAGE ================= */
   .page {
-    position: relative;
-    z-index: 1;
+    position: relative; z-index: 1;
     transition: filter 0.8s var(--ease), opacity 0.8s var(--ease);
   }
   .page.locked { filter: blur(20px) brightness(0.5); opacity: 0.6; pointer-events: none; user-select: none; }
 
   /* ================= LANG ================= */
   .lang {
-    position: fixed;
-    top: 22px;
-    left: 22px;
-    z-index: 500;
-    display: inline-flex;
-    padding: 4px;
-    border-radius: 60px;
-    background: rgba(15, 17, 22, 0.65);
-    border: 1px solid var(--line);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    position: fixed; top: 22px; left: 22px; z-index: 500;
+    display: inline-flex; padding: 4px; border-radius: 60px;
+    background: rgba(15, 17, 22, 0.65); border: 1px solid var(--line);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.04);
   }
-
   .lang button {
-    font-family: var(--font);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    padding: 7px 14px;
-    border-radius: 60px;
-    border: none;
-    background: transparent;
-    color: var(--text-mute);
-    cursor: pointer;
-    transition: all 0.35s var(--ease);
+    font-family: var(--font); font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.14em; padding: 7px 14px; border-radius: 60px;
+    border: none; background: transparent; color: var(--text-mute);
+    cursor: pointer; transition: all 0.35s var(--ease);
     -webkit-tap-highlight-color: transparent;
   }
-
   .lang button.active {
     color: #fff;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
     box-shadow: 0 0 20px -4px rgba(180, 200, 255, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
   }
-
   .lang button:not(.active):hover { color: var(--text-soft); }
 
   @media (max-width: 480px) {
@@ -198,23 +163,16 @@
 
   /* ================= HERO ================= */
   .hero {
-    min-height: 100vh;
-    min-height: 100dvh;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 90px 24px 70px;
-    position: relative;
+    min-height: 100vh; min-height: 100dvh;
+    flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 90px 24px 70px; position: relative;
   }
-
   .hero.active { display: flex; }
 
   .hero.animate-in .hero-title,
   .hero.animate-in .hero-name,
   .hero.animate-in .hero-desc,
   .hero.animate-in .hero-actions { animation: riseIn 1s var(--ease) forwards; }
-
   .hero.animate-in .hero-title   { animation-delay: 0.05s; }
   .hero.animate-in .hero-name    { animation-delay: 0.25s; }
   .hero.animate-in .hero-desc    { animation-delay: 0.45s; }
@@ -223,66 +181,39 @@
   .hero-title {
     font-family: var(--serif);
     font-size: clamp(3.4rem, 15vw, 7rem);
-    font-weight: 400;
-    font-style: italic;
-    letter-spacing: -0.02em;
-    line-height: 1;
-    margin-bottom: 30px;
+    font-weight: 400; font-style: italic;
+    letter-spacing: -0.02em; line-height: 1; margin-bottom: 30px;
     background: linear-gradient(180deg, #ffffff 30%, #9fa9bd 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
+    -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent;
-    opacity: 0;
-    position: relative;
-    padding: 0 4px;
+    opacity: 0; position: relative; padding: 0 4px;
   }
-
   .hero-title::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: -14px;
-    width: 0;
-    height: 1px;
+    content: ""; position: absolute; left: 50%; bottom: -14px;
+    width: 0; height: 1px;
     background: linear-gradient(90deg, transparent, rgba(200, 215, 245, 0.5), transparent);
     transform: translateX(-50%);
   }
-
   .hero.animate-in .hero-title::after { animation: lineGrow 1.4s var(--ease) 0.9s forwards; }
-
   @keyframes lineGrow { to { width: 120px; } }
 
   .hero-name {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.5em;
-    color: var(--text-mute);
-    text-transform: uppercase;
-    margin-bottom: 44px;
-    opacity: 0;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.5em;
+    color: var(--text-mute); text-transform: uppercase;
+    margin-bottom: 44px; opacity: 0;
   }
 
   .hero-desc {
     font-family: var(--serif);
-    font-size: clamp(1.05rem, 2.6vw, 1.28rem);
-    font-weight: 400;
-    color: var(--text-soft);
-    line-height: 1.95;
-    max-width: 640px;
-    margin-bottom: 52px;
-    letter-spacing: 0.005em;
-    opacity: 0;
+    font-size: clamp(1.05rem, 2.6vw, 1.28rem); font-weight: 400;
+    color: var(--text-soft); line-height: 1.95; max-width: 640px;
+    margin-bottom: 52px; letter-spacing: 0.005em; opacity: 0;
   }
-
   .hero-desc p { margin-bottom: 18px; }
   .hero-desc p:last-child {
-    color: var(--text);
-    font-weight: 500;
-    font-style: italic;
-    margin-top: 8px;
-    margin-bottom: 0;
+    color: var(--text); font-weight: 500; font-style: italic;
+    margin-top: 8px; margin-bottom: 0;
   }
-
   .hero-actions { opacity: 0; }
 
   @keyframes riseIn {
@@ -290,84 +221,89 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
+  /* ================= TILT BASE ================= */
+  /* Applied to interactive cards/buttons for 3D tilt */
+  .tilt {
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
   /* ================= BUTTONS ================= */
   .btn {
     position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
     padding: 16px 42px;
-    font-family: var(--font);
-    font-size: 0.86rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    color: var(--text);
-    cursor: pointer;
-    border-radius: 100px;
-    border: 1px solid var(--line-hi);
-    background: var(--glass);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    transition: transform 0.35s var(--ease), background 0.35s var(--ease),
-                border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
+    font-family: var(--font); font-size: 0.86rem; font-weight: 500;
+    letter-spacing: 0.14em; color: var(--text);
+    cursor: pointer; border-radius: 100px;
+    border: 1px solid var(--line-hi); background: var(--glass);
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    transition: transform 0.4s var(--ease), background 0.35s var(--ease),
+                border-color 0.35s var(--ease), box-shadow 0.4s var(--ease);
     overflow: hidden;
     -webkit-tap-highlight-color: transparent;
-    user-select: none;
-    white-space: nowrap;
-    text-transform: uppercase;
+    user-select: none; white-space: nowrap; text-transform: uppercase;
+    transform-style: preserve-3d;
+    will-change: transform;
   }
 
-  .btn::before {
+  /* Moving highlight that follows cursor */
+  .btn::after {
     content: "";
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(120deg, rgba(160, 190, 255, 0.6), rgba(200, 170, 255, 0.15) 40%, transparent 60%, rgba(160, 200, 255, 0.4));
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
+    background: radial-gradient(
+      140px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(255, 255, 255, 0.18),
+      transparent 60%
+    );
     opacity: 0;
     transition: opacity 0.35s var(--ease);
     pointer-events: none;
+    z-index: 1;
+  }
+  .btn:hover::after { opacity: 1; }
+
+  .btn::before {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
+    background: linear-gradient(120deg, rgba(160, 190, 255, 0.6), rgba(200, 170, 255, 0.15) 40%, transparent 60%, rgba(160, 200, 255, 0.4));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    opacity: 0; transition: opacity 0.35s var(--ease);
+    pointer-events: none; z-index: 2;
   }
 
   .btn:hover {
-    transform: translateY(-2px);
     background: var(--glass-hi);
     border-color: transparent;
-    box-shadow: 0 24px 55px -22px rgba(160, 190, 255, 0.5), 0 0 50px -15px rgba(160, 190, 255, 0.22);
+    box-shadow: 0 24px 55px -22px rgba(160, 190, 255, 0.5),
+                0 0 50px -15px rgba(160, 190, 255, 0.22);
   }
-
   .btn:hover::before { opacity: 1; }
-  .btn:active { transform: translateY(0) scale(0.97); }
+
+  /* Press effect for buttons — scale only (tilt handled by JS) */
+  .btn.pressing {
+    transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
+    box-shadow: 0 4px 12px -6px rgba(0, 0, 0, 0.8);
+    filter: brightness(0.92);
+  }
 
   .btn-primary {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.04));
     border-color: rgba(255, 255, 255, 0.2);
     font-weight: 600;
   }
-
   .btn-primary .arrow { display: inline-block; transition: transform 0.35s var(--ease); font-size: 0.9rem; }
   .btn-primary:hover .arrow { transform: translateY(3px); }
 
   .btn-ghost {
-    background: transparent;
-    border-color: var(--line);
-    color: var(--text-soft);
-    padding: 13px 28px;
-    font-size: 0.76rem;
+    background: transparent; border-color: var(--line); color: var(--text-soft);
+    padding: 13px 28px; font-size: 0.76rem;
   }
   .btn-ghost:hover { color: var(--text); }
 
   /* ================= DONATE ================= */
-  .donate {
-    padding: 120px 24px 100px;
-    max-width: 1140px;
-    margin: 0 auto;
-    position: relative;
-  }
+  .donate { padding: 120px 24px 100px; max-width: 1140px; margin: 0 auto; position: relative; }
 
   .donate.animate-in .back-wrap,
   .donate.animate-in .donate-head { animation: riseIn 0.8s var(--ease) forwards; }
@@ -377,64 +313,48 @@
   .back-wrap { margin-bottom: 56px; opacity: 0; }
 
   .back-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+    display: inline-flex; align-items: center; gap: 8px;
     padding: 10px 22px;
-    font-family: var(--font);
-    font-size: 0.76rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    color: var(--text-soft);
-    background: var(--glass);
-    border: 1px solid var(--line);
-    border-radius: 60px;
-    cursor: pointer;
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    font-family: var(--font); font-size: 0.76rem; font-weight: 600;
+    letter-spacing: 0.14em; color: var(--text-soft);
+    background: var(--glass); border: 1px solid var(--line);
+    border-radius: 60px; cursor: pointer;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
     transition: all 0.3s var(--ease);
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
     text-transform: uppercase;
     -webkit-tap-highlight-color: transparent;
+    transform-style: preserve-3d;
+    will-change: transform;
   }
-
   .back-btn:hover {
-    color: var(--text);
-    background: var(--glass-hi);
+    color: var(--text); background: var(--glass-hi);
     border-color: var(--line-hi);
-    transform: translateX(-3px);
     box-shadow: 0 0 30px -10px rgba(160, 190, 255, 0.35);
+  }
+  .back-btn.pressing {
+    transition: transform 0.08s ease-out;
+    filter: brightness(0.92);
   }
 
   .donate-head { text-align: center; margin-bottom: 64px; opacity: 0; }
-
   .donate-head h2 {
     font-family: var(--serif);
     font-size: clamp(2.2rem, 6.5vw, 3.2rem);
-    font-weight: 400;
-    font-style: italic;
-    letter-spacing: -0.015em;
-    margin-bottom: 14px;
+    font-weight: 400; font-style: italic;
+    letter-spacing: -0.015em; margin-bottom: 14px;
     background: linear-gradient(180deg, #ffffff 30%, #98a5bd 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
+    -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-
   .donate-head p {
-    color: var(--text-mute);
-    font-size: 0.78rem;
-    max-width: 520px;
-    margin: 0 auto;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    font-weight: 500;
+    color: var(--text-mute); font-size: 0.78rem; max-width: 520px;
+    margin: 0 auto; letter-spacing: 0.18em;
+    text-transform: uppercase; font-weight: 500;
   }
 
   /* ================= PANELS ================= */
   .panels { display: grid; grid-template-columns: 1fr; gap: 22px; }
-
   @media (min-width: 800px)  { .panels { grid-template-columns: repeat(2, 1fr); gap: 24px; } }
 
   .panel {
@@ -443,22 +363,25 @@
     border-radius: 24px;
     background: linear-gradient(180deg, rgba(20, 22, 28, 0.55), rgba(10, 11, 14, 0.75));
     border: 1px solid var(--line);
-    box-shadow: 0 30px 70px -35px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
-    transition: transform 0.4s var(--ease), border-color 0.4s var(--ease),
-                box-shadow 0.4s var(--ease);
+    box-shadow: 0 30px 70px -35px rgba(0, 0, 0, 0.9),
+                inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+    transition: transform 0.5s var(--ease),
+                border-color 0.4s var(--ease),
+                box-shadow 0.5s var(--ease);
     overflow: hidden;
     opacity: 0;
     transform: translateY(30px);
     -webkit-tap-highlight-color: transparent;
+    transform-style: preserve-3d;
+    will-change: transform;
   }
 
   .panel.in-view {
     opacity: 1;
     transform: translateY(0);
     transition: opacity 0.85s var(--ease), transform 0.85s var(--ease),
-                border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
+                border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
   }
 
   .panel.techcombank { --accent: var(--c-tech); }
@@ -466,71 +389,67 @@
   .panel.vietcombank { --accent: var(--c-vcb); }
   .panel.usdt        { --accent: var(--c-usdt); }
 
-  /* Static pastel glow in corner */
+  /* Corner pastel glow */
   .panel::after {
-    content: "";
-    position: absolute;
-    top: -45%;
-    right: -45%;
-    width: 90%;
-    height: 90%;
+    content: ""; position: absolute; top: -45%; right: -45%;
+    width: 90%; height: 90%;
     background: radial-gradient(circle, var(--accent), transparent 65%);
-    opacity: 0.14;
-    filter: blur(50px);
-    pointer-events: none;
-    transition: opacity 0.35s var(--ease);
-    z-index: 0;
+    opacity: 0.14; filter: blur(50px); pointer-events: none;
+    transition: opacity 0.4s var(--ease); z-index: 0;
   }
 
   /* Gradient border */
   .panel::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
+    content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
     background: linear-gradient(140deg, var(--accent), transparent 42%, transparent 58%, var(--accent));
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.4s var(--ease);
-    pointer-events: none;
-    z-index: 2;
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    opacity: 0; transition: opacity 0.4s var(--ease);
+    pointer-events: none; z-index: 2;
   }
 
   .panel:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 50px 90px -40px rgba(0, 0, 0, 0.95), 0 0 70px -25px var(--accent);
+    border-color: transparent;
+    box-shadow: 0 50px 90px -40px rgba(0, 0, 0, 0.95),
+                0 0 70px -25px var(--accent);
   }
   .panel:hover::before { opacity: 0.7; }
   .panel:hover::after  { opacity: 0.28; }
 
-  /* ===== CLICK — instant glow at exact click point ===== */
-  /* A single fixed-position radial light that appears right where you tap */
-  .panel.clicked {
-    transform: translateY(-5px);
-    box-shadow:
-      0 50px 100px -35px rgba(0, 0, 0, 0.95),
-      0 0 90px -18px var(--accent),
-      0 0 45px -8px var(--accent);
-    border-color: var(--accent);
+  /* Cursor-follow highlight inside panel */
+  .panel > .cursor-highlight {
+    content: "";
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      220px circle at var(--mx, 50%) var(--my, 50%),
+      color-mix(in srgb, var(--accent) 22%, transparent),
+      transparent 65%
+    );
+    opacity: 0;
+    transition: opacity 0.35s var(--ease);
+    pointer-events: none;
+    z-index: 1;
   }
-  .panel.clicked::before { opacity: 1; }
-  .panel.clicked::after  { opacity: 0.55; }
+  .panel:hover > .cursor-highlight { opacity: 1; }
 
-  /* Local glow — instant, follows exact click point */
+  /* Press state */
+  .panel.pressing {
+    transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+    filter: brightness(0.94);
+  }
+
+  /* Click glow at exact click point */
   .click-glow {
     position: absolute;
-    width: 240px;
-    height: 240px;
+    width: 240px; height: 240px;
     border-radius: 50%;
     background: radial-gradient(circle,
       var(--accent, #a0b8ff) 0%,
       color-mix(in srgb, var(--accent, #a0b8ff) 45%, transparent) 30%,
       transparent 65%);
     pointer-events: none;
-    transform: translate(-50%, -50%) scale(0.7);
+    transform: translate(-50%, -50%) scale(0.6);
     opacity: 1;
     mix-blend-mode: screen;
     z-index: 3;
@@ -541,68 +460,49 @@
   @keyframes glowPop {
     0%   { transform: translate(-50%, -50%) scale(0.35); opacity: 1; }
     60%  { opacity: 0.85; }
-    100% { transform: translate(-50%, -50%) scale(1.35); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(1.4); opacity: 0; }
   }
 
-  /* Instant border flash — no delay */
   .click-border {
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     border-radius: inherit;
     border: 1.5px solid var(--accent, #a0b8ff);
     pointer-events: none;
     z-index: 4;
     animation: borderFlash 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    box-shadow: 0 0 30px -4px var(--accent, #a0b8ff), inset 0 0 30px -8px var(--accent, #a0b8ff);
+    box-shadow: 0 0 30px -4px var(--accent, #a0b8ff),
+                inset 0 0 30px -8px var(--accent, #a0b8ff);
   }
   @keyframes borderFlash {
-    0%   { opacity: 1; }
+    0% { opacity: 1; }
     100% { opacity: 0; }
   }
 
-  .panel-head { position: relative; z-index: 1; margin-bottom: 22px; }
+  .panel-head { position: relative; z-index: 3; margin-bottom: 22px; }
 
   .panel-label {
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    color: var(--accent);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-    opacity: 0.95;
+    font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.3em; color: var(--accent);
+    text-transform: uppercase; margin-bottom: 8px; opacity: 0.95;
   }
-
   .panel-name {
     font-family: var(--serif);
-    font-size: 1.55rem;
-    font-weight: 500;
-    font-style: italic;
-    letter-spacing: 0.005em;
-    color: var(--text);
-    line-height: 1.15;
+    font-size: 1.55rem; font-weight: 500; font-style: italic;
+    letter-spacing: 0.005em; color: var(--text); line-height: 1.15;
   }
-
   .panel-owner {
-    font-size: 0.72rem;
-    color: var(--text-soft);
-    letter-spacing: 0.18em;
-    margin-top: 8px;
-    text-transform: uppercase;
-    font-weight: 500;
+    font-size: 0.72rem; color: var(--text-soft);
+    letter-spacing: 0.18em; margin-top: 8px;
+    text-transform: uppercase; font-weight: 500;
   }
 
   .panel-body {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
+    position: relative; z-index: 3;
+    display: flex; flex-direction: column; gap: 22px;
   }
 
   .account-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    display: flex; align-items: center; gap: 10px;
     padding: 14px 16px;
     background: rgba(0, 0, 0, 0.32);
     border: 1px solid rgba(255, 255, 255, 0.06);
@@ -610,7 +510,6 @@
     flex-wrap: wrap;
     transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
   }
-
   .account-row:hover {
     border-color: rgba(255, 255, 255, 0.14);
     background: rgba(0, 0, 0, 0.42);
@@ -618,74 +517,60 @@
 
   .account-value {
     font-family: var(--mono);
-    font-size: 0.98rem;
-    letter-spacing: 0.05em;
-    color: var(--text);
-    font-weight: 500;
-    flex: 1 1 auto;
-    min-width: 0;
-    word-break: break-all;
+    font-size: 0.98rem; letter-spacing: 0.05em;
+    color: var(--text); font-weight: 500;
+    flex: 1 1 auto; min-width: 0; word-break: break-all;
   }
-
   .account-value.small { font-size: 0.78rem; letter-spacing: 0.01em; line-height: 1.5; }
 
   .copy-icon-btn {
     flex: 0 0 auto;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
     padding: 8px 14px;
-    font-family: var(--font);
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    font-family: var(--font); font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--text-soft);
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--line);
-    border-radius: 60px;
-    cursor: pointer;
+    border-radius: 60px; cursor: pointer;
     transition: all 0.28s var(--ease);
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
     -webkit-tap-highlight-color: transparent;
-    white-space: nowrap;
-    z-index: 5;
+    white-space: nowrap; z-index: 5;
+    transform-style: preserve-3d;
   }
-
   .copy-icon-btn:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.12);
+    color: #fff; background: rgba(255, 255, 255, 0.12);
     border-color: var(--accent);
     box-shadow: 0 0 22px -6px var(--accent);
   }
-
   .copy-icon-btn.copied {
     color: #8ce0b0;
     border-color: rgba(140, 224, 176, 0.55);
     background: rgba(140, 224, 176, 0.1);
     box-shadow: 0 0 26px -6px rgba(140, 224, 176, 0.6);
   }
+  .copy-icon-btn.pressing {
+    transition: transform 0.08s ease-out;
+    filter: brightness(0.9);
+  }
 
   .qr-block {
     position: relative;
-    width: 100%;
-    max-width: 260px;
+    width: 100%; max-width: 260px;
     aspect-ratio: 1 / 1;
     margin: 4px auto 0;
-    border-radius: 20px;
-    overflow: hidden;
+    border-radius: 20px; overflow: hidden;
     background: #04060a;
     border: 1px solid rgba(255, 255, 255, 0.09);
     cursor: pointer;
-    transition: transform 0.35s var(--ease), border-color 0.3s var(--ease),
+    transition: transform 0.35s var(--ease),
+                border-color 0.3s var(--ease),
                 box-shadow 0.35s var(--ease);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
+    transform-style: preserve-3d;
+    will-change: transform;
   }
-
   @media (min-width: 900px) { .qr-block { max-width: 280px; } }
 
   .qr-block:hover {
@@ -695,38 +580,27 @@
   }
 
   .qr-block img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-    padding: 12px;
+    width: 100%; height: 100%;
+    object-fit: contain; display: block; padding: 12px;
     transition: transform 0.35s var(--ease);
   }
-
   .qr-block:hover img { transform: scale(1.03); }
 
   .qr-hint {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
+    position: absolute; bottom: 10px; left: 50%;
     transform: translateX(-50%);
     padding: 5px 12px;
-    font-size: 0.58rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
+    font-size: 0.58rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
     color: rgba(255, 255, 255, 0.8);
     background: rgba(8, 10, 14, 0.78);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 60px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    white-space: nowrap;
-    pointer-events: none;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    white-space: nowrap; pointer-events: none;
     transition: all 0.3s var(--ease);
     opacity: 0.85;
   }
-
   .qr-block:hover .qr-hint {
     color: #fff;
     background: rgba(20, 24, 32, 0.92);
@@ -738,178 +612,116 @@
   .panel.usdt { grid-column: 1 / -1; }
   .panel.usdt .qr-block { max-width: 300px; }
 
-  /* ================= MODAL — smooth, no lag ================= */
+  /* ================= MODAL ================= */
   .modal {
-    position: fixed;
-    inset: 0;
-    z-index: 5000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: fixed; inset: 0; z-index: 5000;
+    display: flex; align-items: center; justify-content: center;
     padding: 20px;
     background: rgba(2, 2, 4, 0.86);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    opacity: 0; visibility: hidden; pointer-events: none;
     transition: opacity 0.28s ease-out, visibility 0.28s ease-out;
   }
-
   .modal.active { opacity: 1; visibility: visible; pointer-events: auto; }
 
   .modal-box {
-    width: 100%;
-    max-width: 480px;
+    width: 100%; max-width: 480px;
     padding: 30px 28px 28px;
     border-radius: 28px;
     background: linear-gradient(180deg, rgba(22, 24, 30, 0.94), rgba(12, 13, 17, 0.96));
     border: 1px solid var(--line-hi);
-    box-shadow:
-      0 60px 130px -40px rgba(0, 0, 0, 0.98),
-      0 0 80px -30px rgba(160, 190, 255, 0.25),
-      inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    transform: scale(0.94);
-    opacity: 0;
+    box-shadow: 0 60px 130px -40px rgba(0, 0, 0, 0.98),
+                0 0 80px -30px rgba(160, 190, 255, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transform: scale(0.94); opacity: 0;
     transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease-out;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: flex; flex-direction: column; align-items: center;
   }
-
   .modal.active .modal-box { transform: scale(1); opacity: 1; }
 
   .modal-head { width: 100%; text-align: center; margin-bottom: 22px; }
-
   .modal-name {
-    font-family: var(--serif);
-    font-size: 1.5rem;
-    font-weight: 500;
-    font-style: italic;
-    letter-spacing: 0.01em;
-    color: var(--text);
+    font-family: var(--serif); font-size: 1.5rem; font-weight: 500; font-style: italic;
+    letter-spacing: 0.01em; color: var(--text);
   }
-
   .modal-sub {
-    font-size: 0.64rem;
-    letter-spacing: 0.3em;
-    color: var(--text-mute);
-    text-transform: uppercase;
-    margin-top: 6px;
-    font-weight: 700;
+    font-size: 0.64rem; letter-spacing: 0.3em; color: var(--text-mute);
+    text-transform: uppercase; margin-top: 6px; font-weight: 700;
   }
 
   .modal-img-wrap {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    max-height: 62vh;
-    border-radius: 20px;
-    overflow: hidden;
+    width: 100%; aspect-ratio: 1 / 1; max-height: 62vh;
+    border-radius: 20px; overflow: hidden;
     background: #04060a;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     margin-bottom: 20px;
   }
-
   .modal-img-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-    padding: 14px;
+    width: 100%; height: 100%;
+    object-fit: contain; display: block; padding: 14px;
   }
 
   .modal-owner {
-    font-size: 0.68rem;
-    letter-spacing: 0.3em;
-    color: var(--text-soft);
-    text-transform: uppercase;
-    margin-bottom: 22px;
-    font-weight: 600;
+    font-size: 0.68rem; letter-spacing: 0.3em; color: var(--text-soft);
+    text-transform: uppercase; margin-bottom: 22px; font-weight: 600;
   }
 
-  .modal-actions { display: flex; gap: 12px; flex-wrap: wrap; width: 100%; justify-content: center; }
-
+  .modal-actions {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    width: 100%; justify-content: center;
+  }
   .modal-actions .btn {
-    flex: 1 1 auto;
-    min-width: 130px;
-    padding: 13px 22px;
-    font-size: 0.7rem;
-    letter-spacing: 0.16em;
+    flex: 1 1 auto; min-width: 130px;
+    padding: 13px 22px; font-size: 0.7rem; letter-spacing: 0.16em;
   }
 
   .modal-close {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: absolute; top: 14px; right: 14px;
+    width: 38px; height: 38px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
     background: rgba(255, 255, 255, 0.055);
     border: 1px solid var(--line);
-    color: var(--text-soft);
-    font-size: 1rem;
-    line-height: 1;
-    cursor: pointer;
-    transition: all 0.3s var(--ease);
+    color: var(--text-soft); font-size: 1rem; line-height: 1;
+    cursor: pointer; transition: all 0.3s var(--ease);
     font-family: inherit;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
     -webkit-tap-highlight-color: transparent;
     z-index: 3;
   }
-
   .modal-close:hover {
     background: rgba(255, 255, 255, 0.14);
-    color: #fff;
-    transform: rotate(90deg);
+    color: #fff; transform: rotate(90deg);
   }
+  .modal-close.pressing { transform: scale(0.92) rotate(0deg); }
 
   /* ================= TOAST ================= */
   .toast {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
+    position: fixed; bottom: 30px; left: 50%;
     transform: translate(-50%, 40px);
-    padding: 12px 24px;
-    border-radius: 60px;
+    padding: 12px 24px; border-radius: 60px;
     background: rgba(20, 22, 28, 0.9);
     border: 1px solid rgba(140, 224, 176, 0.35);
     color: #8ce0b0;
-    font-family: var(--font);
-    font-size: 0.7rem;
-    font-weight: 700;
+    font-family: var(--font); font-size: 0.7rem; font-weight: 700;
     letter-spacing: 0.16em;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.9), 0 0 40px -10px rgba(140, 224, 176, 0.35);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.9),
+                0 0 40px -10px rgba(140, 224, 176, 0.35);
     opacity: 0;
     transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
-    pointer-events: none;
-    z-index: 6000;
-    white-space: nowrap;
-    text-transform: uppercase;
+    pointer-events: none; z-index: 6000;
+    white-space: nowrap; text-transform: uppercase;
   }
-
   .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
   /* ================= FOOTER ================= */
   .footer {
-    text-align: center;
-    padding: 40px 24px 40px;
-    color: var(--text-mute);
-    font-size: 0.66rem;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 1;
-    font-weight: 500;
+    text-align: center; padding: 40px 24px 40px;
+    color: var(--text-mute); font-size: 0.66rem;
+    letter-spacing: 0.32em; text-transform: uppercase;
+    position: relative; z-index: 1; font-weight: 500;
   }
 
   /* ================= RESPONSIVE ================= */
@@ -931,6 +743,7 @@
     .toast { font-size: 0.62rem; padding: 10px 18px; bottom: 20px; letter-spacing: 0.12em; }
   }
 
+  /* Reduced motion: disable tilt and heavy transforms */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
@@ -938,6 +751,7 @@
       transition-duration: 0.01ms !important;
     }
     html { scroll-behavior: auto; }
+    .tilt { transform: none !important; }
   }
 
   img, svg { max-width: 100%; display: block; }
@@ -971,7 +785,6 @@
 <!-- ================= PAGE ================= -->
 <div class="page locked" id="page">
 
-  <!-- HERO -->
   <section class="view hero active animate-in" id="heroView">
     <h1 class="hero-title" id="heroTitle">Donate</h1>
     <div class="hero-name" id="heroName">NGUYEN MINH KHOI</div>
@@ -981,17 +794,16 @@
       <p>Cảm ơn bạn đã luôn yêu quý và ủng hộ mình. ❤️</p>
     </div>
     <div class="hero-actions">
-      <button class="btn btn-primary" id="viewDonateBtn" type="button">
+      <button class="btn btn-primary tilt" id="viewDonateBtn" type="button">
         <span id="viewDonateLabel">View Donate</span>
         <span class="arrow">↓</span>
       </button>
     </div>
   </section>
 
-  <!-- DONATE -->
   <section class="view donate" id="donateView">
     <div class="back-wrap">
-      <button class="back-btn" id="backBtn" type="button">
+      <button class="back-btn tilt" id="backBtn" type="button">
         <span>←</span><span id="backLabel">Back</span>
       </button>
     </div>
@@ -1020,25 +832,27 @@
     </div>
     <div class="modal-owner">NGUYEN MINH KHOI</div>
     <div class="modal-actions">
-      <button class="btn btn-primary" id="saveQrBtn" type="button">Save QR</button>
-      <button class="btn btn-ghost" id="closeModalBtn" type="button">Close</button>
+      <button class="btn btn-primary tilt" id="saveQrBtn" type="button">Save QR</button>
+      <button class="btn btn-ghost tilt" id="closeModalBtn" type="button">Close</button>
     </div>
   </div>
 </div>
 
-<!-- ================= TOAST ================= -->
 <div class="toast" id="toast">Copied successfully</div>
 
-<!-- ================= TURNSTILE ================= -->
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
-<!-- ================= MAIN SCRIPT ================= -->
 <script>
 (function () {
   'use strict';
 
   const TURNSTILE_SITE_KEY = "0x4AAAAAAFGgEMGzD4teYa7L";
 
+  /* ===== Detect capability ===== */
+  const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const HAS_HOVER = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  /* ========== DATA ========== */
   const DATA = {
     techcombank: {
       key: "techcombank", label: "TECHCOMBANK", name: "Techcombank",
@@ -1188,17 +1002,324 @@
     }
   }
 
-  /* ===== Panel click effect — INSTANT, at exact click point ===== */
+  /* ================= 3D TILT ENGINE ================= */
+  // Max tilt in degrees
+  const MAX_TILT = 6;
+
+  function attachTilt(el, opts) {
+    if (REDUCED || !HAS_HOVER) return; // skip on reduced motion or touch-only
+    const options = opts || {};
+    const max = options.max || MAX_TILT;
+    const scale = options.scale !== undefined ? options.scale : 1.0;
+
+    let rafId = null;
+    let targetRX = 0, targetRY = 0, targetScale = 1;
+    let curRX = 0, curRY = 0, curScale = 1;
+    let hovering = false;
+    let animating = false;
+
+    el.classList.add('tilt');
+
+    function tick() {
+      // lerp for smooth return
+      curRX += (targetRX - curRX) * 0.15;
+      curRY += (targetRY - curRY) * 0.15;
+      curScale += (targetScale - curScale) * 0.15;
+
+      el.style.transform = `perspective(900px) rotateX(${curRX.toFixed(2)}deg) rotateY(${curRY.toFixed(2)}deg) scale(${curScale.toFixed(3)})`;
+
+      const stillMoving =
+        Math.abs(targetRX - curRX) > 0.02 ||
+        Math.abs(targetRY - curRY) > 0.02 ||
+        Math.abs(targetScale - curScale) > 0.002;
+
+      if (stillMoving || hovering) {
+        rafId = requestAnimationFrame(tick);
+      } else {
+        // snap and stop
+        curRX = targetRX; curRY = targetRY; curScale = targetScale;
+        el.style.transform = '';
+        animating = false;
+        rafId = null;
+      }
+    }
+
+    function start() {
+      if (animating) return;
+      animating = true;
+      rafId = requestAnimationFrame(tick);
+    }
+
+    el.addEventListener('pointerenter', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      hovering = true;
+      start();
+    });
+
+    el.addEventListener('pointermove', (e) => {
+      if (e.pointerType !== 'mouse' || !hovering) return;
+      const r = el.getBoundingClientRect();
+      const x = e.clientX - r.left;
+      const y = e.clientY - r.top;
+      const nx = (x / r.width) * 2 - 1;   // -1 .. 1
+      const ny = (y / r.height) * 2 - 1;  // -1 .. 1
+
+      targetRY = nx * max;
+      targetRX = -ny * max;
+      targetScale = scale;
+
+      // Update cursor highlight CSS vars
+      el.style.setProperty('--mx', x + 'px');
+      el.style.setProperty('--my', y + 'px');
+    });
+
+    el.addEventListener('pointerleave', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      hovering = false;
+      targetRX = 0; targetRY = 0; targetScale = 1;
+      // keep rAF alive to return smoothly
+      start();
+    });
+
+    el.addEventListener('pointercancel', () => {
+      hovering = false;
+      targetRX = 0; targetRY = 0; targetScale = 1;
+      start();
+    });
+  }
+
+  /* ================= TACTILE PRESS ENGINE ================= */
+  // Applies scale-down + shadow reduce on press, restores on release.
+  // Combined with tilt via separate class so tilt transform remains untouched.
+  function attachPress(el, opts) {
+    const options = opts || {};
+    const scaleDown = options.scale !== undefined ? options.scale : 0.96;
+
+    // We temporarily override the transform via a wrapper approach:
+    // Save current transform, apply combined transform on press.
+    // Simpler approach: use CSS class + a special transform var.
+
+    // Use a shadow element structure so tilt transform on `el` stays intact.
+    // Instead, we multiply scale into the transform string.
+
+    let pressRaf = null;
+    let targetPressScale = 1;
+    let curPressScale = 1;
+    let pressing = false;
+    let running = false;
+
+    // Cache base transform values set by tilt engine (we read via getComputedStyle).
+    // Simpler: apply a scale on the element's inner children instead.
+    // But we don't always have children. So we use a JS-composed transform string.
+
+    // Save any existing inline transform produced by tilt.
+    // We'll re-apply it on each frame plus our press scale.
+
+    // To avoid conflicts with tilt engine which sets style.transform directly,
+    // we let tilt engine also know about press scale via a shared object.
+    if (el._pressState) return;
+    el._pressState = { scale: 1 };
+
+    function tickPress() {
+      curPressScale += (targetPressScale - curPressScale) * 0.35;
+      el._pressState.scale = curPressScale;
+
+      // If tilt engine not active (touch device), apply transform ourselves
+      if (!el._tiltActive) {
+        el.style.transform = `scale(${curPressScale.toFixed(3)})`;
+      } else {
+        // Tilt engine will read el._pressState.scale next frame.
+        // We just ensure rAF is running.
+        if (!el._tiltRunning) {
+          // Force tilt to re-render
+          el.dispatchEvent(new Event('pointermove'));
+        }
+      }
+
+      const still = Math.abs(targetPressScale - curPressScale) > 0.002;
+      if (still || pressing) {
+        pressRaf = requestAnimationFrame(tickPress);
+      } else {
+        curPressScale = targetPressScale;
+        el._pressState.scale = curPressScale;
+        if (!el._tiltActive) {
+          el.style.transform = '';
+        }
+        running = false;
+      }
+    }
+
+    function startPress() {
+      if (running) return;
+      running = true;
+      pressRaf = requestAnimationFrame(tickPress);
+    }
+
+    el.addEventListener('pointerdown', (e) => {
+      // Ignore on right-click
+      if (e.button !== undefined && e.button !== 0) return;
+      pressing = true;
+      targetPressScale = scaleDown;
+      el.classList.add('pressing');
+      startPress();
+    });
+
+    const release = () => {
+      if (!pressing) return;
+      pressing = false;
+      targetPressScale = 1;
+      el.classList.remove('pressing');
+      startPress();
+    };
+
+    el.addEventListener('pointerup', release);
+    el.addEventListener('pointerleave', release);
+    el.addEventListener('pointercancel', release);
+    el.addEventListener('blur', release);
+  }
+
+  /* ================= COMBINED TILT + PRESS ================= */
+  // We unify them into one transform to avoid conflicts.
+  function attachTiltAndPress(el, tiltOpts, pressOpts) {
+    if (el._tiltBound) return;
+    el._tiltBound = true;
+
+    const MAX = (tiltOpts && tiltOpts.max) || MAX_TILT;
+    const HOVER_SCALE = (tiltOpts && tiltOpts.scale !== undefined) ? tiltOpts.scale : 1.0;
+    const PRESS_SCALE = (pressOpts && pressOpts.scale !== undefined) ? pressOpts.scale : 0.96;
+
+    let targetRX = 0, targetRY = 0, targetHoverScale = 1, targetPressScale = 1;
+    let curRX = 0, curRY = 0, curHoverScale = 1, curPressScale = 1;
+    let hovering = false, pressing = false;
+    let rafId = null;
+    let active = false;
+
+    el._tiltActive = REDUCED || !HAS_HOVER ? false : true;
+    el._tiltRunning = false;
+
+    function compose() {
+      const scale = curHoverScale * curPressScale;
+      const rx = curRX.toFixed(2);
+      const ry = curRY.toFixed(2);
+      const sc = scale.toFixed(3);
+      if (REDUCED) {
+        el.style.transform = '';
+        return;
+      }
+      el.style.transform =
+        `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) scale(${sc})`;
+    }
+
+    function tick() {
+      // lerp
+      curRX += (targetRX - curRX) * 0.16;
+      curRY += (targetRY - curRY) * 0.16;
+      curHoverScale += (targetHoverScale - curHoverScale) * 0.16;
+      curPressScale += (targetPressScale - curPressScale) * 0.28;
+
+      compose();
+
+      const moving =
+        Math.abs(targetRX - curRX) > 0.02 ||
+        Math.abs(targetRY - curRY) > 0.02 ||
+        Math.abs(targetHoverScale - curHoverScale) > 0.002 ||
+        Math.abs(targetPressScale - curPressScale) > 0.002;
+
+      if (moving || hovering || pressing) {
+        rafId = requestAnimationFrame(tick);
+      } else {
+        curRX = targetRX; curRY = targetRY;
+        curHoverScale = targetHoverScale; curPressScale = targetPressScale;
+        compose();
+        rafId = null;
+        el._tiltRunning = false;
+      }
+    }
+
+    function start() {
+      if (rafId === null) {
+        el._tiltRunning = true;
+        rafId = requestAnimationFrame(tick);
+      } else {
+        el._tiltRunning = true;
+      }
+    }
+
+    // Tilt handling only for hover-capable devices
+    if (HAS_HOVER && !REDUCED) {
+      el.addEventListener('pointerenter', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        hovering = true;
+        targetHoverScale = HOVER_SCALE;
+        start();
+      });
+
+      el.addEventListener('pointermove', (e) => {
+        if (e.pointerType !== 'mouse' || !hovering) return;
+        const r = el.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        const nx = (x / r.width) * 2 - 1;
+        const ny = (y / r.height) * 2 - 1;
+
+        targetRY = nx * MAX;
+        targetRX = -ny * MAX;
+        targetHoverScale = HOVER_SCALE;
+
+        el.style.setProperty('--mx', x + 'px');
+        el.style.setProperty('--my', y + 'px');
+        start();
+      });
+
+      el.addEventListener('pointerleave', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        hovering = false;
+        targetRX = 0; targetRY = 0; targetHoverScale = 1;
+        start();
+      });
+    }
+
+    // Press handling for all devices
+    el.addEventListener('pointerdown', (e) => {
+      if (e.button !== undefined && e.button !== 0) return;
+      pressing = true;
+      targetPressScale = PRESS_SCALE;
+      el.classList.add('pressing');
+      if (!el._tiltActive) {
+        // touch device: still animate scale via compose()
+        start();
+      } else {
+        start();
+      }
+    });
+
+    const release = () => {
+      if (!pressing) return;
+      pressing = false;
+      targetPressScale = 1;
+      el.classList.remove('pressing');
+      start();
+    };
+
+    el.addEventListener('pointerup', release);
+    el.addEventListener('pointercancel', release);
+    el.addEventListener('blur', release);
+    el.addEventListener('pointerleave', (e) => {
+      // pointerleave during press on touch → release
+      if (e.pointerType !== 'mouse' && pressing) release();
+    });
+  }
+
+  /* ================= Click glow for panels ================= */
   function attachPanelClickEffect(panel) {
     panel.addEventListener('pointerdown', function (e) {
-      // Skip if clicking copy button
       if (e.target.closest('.copy-icon-btn')) return;
+      if (REDUCED) return;
 
       const rect = this.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
-      // Instant glow at click point
       const glow = document.createElement('span');
       glow.className = 'click-glow';
       glow.style.left = x + 'px';
@@ -1206,16 +1327,10 @@
       this.appendChild(glow);
       setTimeout(() => glow.remove(), 600);
 
-      // Instant border flash
       const border = document.createElement('span');
       border.className = 'click-border';
       this.appendChild(border);
       setTimeout(() => border.remove(), 600);
-
-      // Panel glow state
-      this.classList.add('clicked');
-      clearTimeout(this._clickTimer);
-      this._clickTimer = setTimeout(() => this.classList.remove('clicked'), 550);
     });
   }
 
@@ -1260,6 +1375,11 @@
     const el = document.createElement('div');
     el.className = 'panel ' + d.key;
 
+    // Cursor highlight layer
+    const hl = document.createElement('div');
+    hl.className = 'cursor-highlight';
+    el.appendChild(hl);
+
     const head = document.createElement('div');
     head.className = 'panel-head';
     head.innerHTML = `
@@ -1283,6 +1403,7 @@
       cbtn.type = 'button';
       cbtn.className = 'copy-icon-btn';
       cbtn.innerHTML = `<span class="copy-label">${t.copy}</span>`;
+      attachTiltAndPress(cbtn, { max: 4, scale: 1.0 }, { scale: 0.94 });
       cbtn.addEventListener('click', (e) => {
         e.stopPropagation();
         copyToClipboard(d.copyValue, cbtn);
@@ -1298,12 +1419,17 @@
     el.appendChild(body);
     observePanel(el);
     attachPanelClickEffect(el);
+    attachTiltAndPress(el, { max: 6, scale: 1.005 }, { scale: 0.98 });
     return el;
   }
 
   function buildUsdtPanel(d, t) {
     const el = document.createElement('div');
     el.className = 'panel usdt';
+
+    const hl = document.createElement('div');
+    hl.className = 'cursor-highlight';
+    el.appendChild(hl);
 
     const head = document.createElement('div');
     head.className = 'panel-head';
@@ -1327,6 +1453,7 @@
     cbtn.type = 'button';
     cbtn.className = 'copy-icon-btn';
     cbtn.innerHTML = `<span class="copy-label">${t.copy}</span>`;
+    attachTiltAndPress(cbtn, { max: 4, scale: 1.0 }, { scale: 0.94 });
     cbtn.addEventListener('click', (e) => {
       e.stopPropagation();
       copyToClipboard(d.copyValue, cbtn);
@@ -1341,6 +1468,7 @@
     el.appendChild(body);
     observePanel(el);
     attachPanelClickEffect(el);
+    attachTiltAndPress(el, { max: 6, scale: 1.005 }, { scale: 0.98 });
     return el;
   }
 
@@ -1371,6 +1499,9 @@
       e.stopPropagation();
       openModal(d);
     });
+
+    // subtle tilt on QR (max 4deg) but no press scale (avoid jitter when opening modal)
+    attachTiltAndPress(qrBlock, { max: 4, scale: 1.01 }, { scale: 0.99 });
     return qrBlock;
   }
 
@@ -1396,6 +1527,8 @@
     void heroView.offsetWidth;
     heroView.classList.add('animate-in');
     window.scrollTo({ top: 0, behavior: 'auto' });
+    // rebind tilt/press for hero button (it persists but ensure bound)
+    attachTiltAndPress(viewDonateBtn, { max: 5, scale: 1.02 }, { scale: 0.96 });
   }
 
   function showDonate() {
@@ -1406,16 +1539,15 @@
     donateView.classList.add('animate-in');
     window.scrollTo({ top: 0, behavior: 'auto' });
     renderPanels();
+    // rebind back button
+    attachTiltAndPress(backBtn, { max: 5, scale: 1.02 }, { scale: 0.96 });
   }
 
-  /* ===== Modal — preload image, then open ===== */
+  /* ===== Modal ===== */
   function openModal(d) {
     currentQr = d;
-
-    // Preload image; show modal once ready (or on error)
     const preload = new Image();
     preload.decoding = 'async';
-
     const showModal = () => {
       modalImg.src = d.qr;
       modalImg.alt = d.name + ' QR';
@@ -1423,7 +1555,6 @@
       modalSub.textContent = d.type === 'crypto' ? d.network : I18N[currentLang].qrCode;
       modal.classList.add('active');
     };
-
     preload.onload = showModal;
     preload.onerror = showModal;
     preload.src = d.qr;
@@ -1501,6 +1632,17 @@
     if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
   });
   saveQrBtn.addEventListener('click', saveQr);
+
+  // Bind tilt + press to static interactive elements
+  attachTiltAndPress(viewDonateBtn, { max: 5, scale: 1.02 }, { scale: 0.96 });
+  attachTiltAndPress(backBtn, { max: 5, scale: 1.02 }, { scale: 0.96 });
+  attachTiltAndPress(modalClose, { max: 4, scale: 1.0 }, { scale: 0.92 });
+  attachTiltAndPress(closeModalBtn, { max: 4, scale: 1.0 }, { scale: 0.95 });
+  attachTiltAndPress(saveQrBtn, { max: 4, scale: 1.0 }, { scale: 0.95 });
+
+  // Also give the lang switcher buttons a light press
+  attachTiltAndPress(langViBtn, { max: 3, scale: 1.0 }, { scale: 0.94 });
+  attachTiltAndPress(langEnBtn, { max: 3, scale: 1.0 }, { scale: 0.94 });
 
   function init() {
     applyLang(currentLang);
