@@ -221,11 +221,13 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* ================= TILT BASE ================= */
-  /* Applied to interactive cards/buttons for 3D tilt */
-  .tilt {
+  /* ================= 3D PRESS BASE ================= */
+  /* Applied to all interactive elements that need 3D directional press */
+  .tilt3d {
     transform-style: preserve-3d;
     will-change: transform;
+    /* The transform is set fully by JS — no CSS transitions on transform
+       so the press feels instant; JS lerp handles the smooth return. */
   }
 
   /* ================= BUTTONS ================= */
@@ -238,16 +240,15 @@
     cursor: pointer; border-radius: 100px;
     border: 1px solid var(--line-hi); background: var(--glass);
     backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-    transition: transform 0.4s var(--ease), background 0.35s var(--ease),
-                border-color 0.35s var(--ease), box-shadow 0.4s var(--ease);
+    transition: background 0.35s var(--ease),
+                border-color 0.35s var(--ease),
+                box-shadow 0.35s var(--ease);
     overflow: hidden;
     -webkit-tap-highlight-color: transparent;
     user-select: none; white-space: nowrap; text-transform: uppercase;
-    transform-style: preserve-3d;
-    will-change: transform;
   }
 
-  /* Moving highlight that follows cursor */
+  /* Cursor-follow highlight (only visible on hover) */
   .btn::after {
     content: "";
     position: absolute; inset: 0;
@@ -272,20 +273,13 @@
     opacity: 0; transition: opacity 0.35s var(--ease);
     pointer-events: none; z-index: 2;
   }
+  .btn:hover::before { opacity: 1; }
 
   .btn:hover {
     background: var(--glass-hi);
     border-color: transparent;
     box-shadow: 0 24px 55px -22px rgba(160, 190, 255, 0.5),
                 0 0 50px -15px rgba(160, 190, 255, 0.22);
-  }
-  .btn:hover::before { opacity: 1; }
-
-  /* Press effect for buttons — scale only (tilt handled by JS) */
-  .btn.pressing {
-    transition: transform 0.08s ease-out, box-shadow 0.08s ease-out;
-    box-shadow: 0 4px 12px -6px rgba(0, 0, 0, 0.8);
-    filter: brightness(0.92);
   }
 
   .btn-primary {
@@ -320,21 +314,16 @@
     background: var(--glass); border: 1px solid var(--line);
     border-radius: 60px; cursor: pointer;
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-    transition: all 0.3s var(--ease);
+    transition: color 0.3s var(--ease), background 0.3s var(--ease),
+                border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
     position: relative; overflow: hidden;
     text-transform: uppercase;
     -webkit-tap-highlight-color: transparent;
-    transform-style: preserve-3d;
-    will-change: transform;
   }
   .back-btn:hover {
     color: var(--text); background: var(--glass-hi);
     border-color: var(--line-hi);
     box-shadow: 0 0 30px -10px rgba(160, 190, 255, 0.35);
-  }
-  .back-btn.pressing {
-    transition: transform 0.08s ease-out;
-    filter: brightness(0.92);
   }
 
   .donate-head { text-align: center; margin-bottom: 64px; opacity: 0; }
@@ -366,15 +355,12 @@
     box-shadow: 0 30px 70px -35px rgba(0, 0, 0, 0.9),
                 inset 0 1px 0 rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
-    transition: transform 0.5s var(--ease),
-                border-color 0.4s var(--ease),
-                box-shadow 0.5s var(--ease);
+    transition: border-color 0.4s var(--ease),
+                box-shadow 0.4s var(--ease);
     overflow: hidden;
     opacity: 0;
     transform: translateY(30px);
     -webkit-tap-highlight-color: transparent;
-    transform-style: preserve-3d;
-    will-change: transform;
   }
 
   .panel.in-view {
@@ -389,7 +375,7 @@
   .panel.vietcombank { --accent: var(--c-vcb); }
   .panel.usdt        { --accent: var(--c-usdt); }
 
-  /* Corner pastel glow */
+  /* Corner pastel glow — STATIC (only subtle ambient glow on card) */
   .panel::after {
     content: ""; position: absolute; top: -45%; right: -45%;
     width: 90%; height: 90%;
@@ -398,7 +384,7 @@
     transition: opacity 0.4s var(--ease); z-index: 0;
   }
 
-  /* Gradient border */
+  /* Gradient border — hidden by default, appears on hover/press */
   .panel::before {
     content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
     background: linear-gradient(140deg, var(--accent), transparent 42%, transparent 58%, var(--accent));
@@ -416,9 +402,8 @@
   .panel:hover::before { opacity: 0.7; }
   .panel:hover::after  { opacity: 0.28; }
 
-  /* Cursor-follow highlight inside panel */
+  /* Cursor-follow ambient highlight — ONLY when pressed or hovered */
   .panel > .cursor-highlight {
-    content: "";
     position: absolute; inset: 0;
     border-radius: inherit;
     background: radial-gradient(
@@ -431,51 +416,9 @@
     pointer-events: none;
     z-index: 1;
   }
-  .panel:hover > .cursor-highlight { opacity: 1; }
-
-  /* Press state */
-  .panel.pressing {
-    transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
-    filter: brightness(0.94);
-  }
-
-  /* Click glow at exact click point */
-  .click-glow {
-    position: absolute;
-    width: 240px; height: 240px;
-    border-radius: 50%;
-    background: radial-gradient(circle,
-      var(--accent, #a0b8ff) 0%,
-      color-mix(in srgb, var(--accent, #a0b8ff) 45%, transparent) 30%,
-      transparent 65%);
-    pointer-events: none;
-    transform: translate(-50%, -50%) scale(0.6);
+  .panel:hover > .cursor-highlight,
+  .panel.pressing > .cursor-highlight {
     opacity: 1;
-    mix-blend-mode: screen;
-    z-index: 3;
-    animation: glowPop 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    will-change: transform, opacity;
-    filter: blur(4px);
-  }
-  @keyframes glowPop {
-    0%   { transform: translate(-50%, -50%) scale(0.35); opacity: 1; }
-    60%  { opacity: 0.85; }
-    100% { transform: translate(-50%, -50%) scale(1.4); opacity: 0; }
-  }
-
-  .click-border {
-    position: absolute; inset: 0;
-    border-radius: inherit;
-    border: 1.5px solid var(--accent, #a0b8ff);
-    pointer-events: none;
-    z-index: 4;
-    animation: borderFlash 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    box-shadow: 0 0 30px -4px var(--accent, #a0b8ff),
-                inset 0 0 30px -8px var(--accent, #a0b8ff);
-  }
-  @keyframes borderFlash {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
   }
 
   .panel-head { position: relative; z-index: 3; margin-bottom: 22px; }
@@ -533,11 +476,11 @@
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--line);
     border-radius: 60px; cursor: pointer;
-    transition: all 0.28s var(--ease);
+    transition: color 0.28s var(--ease), background 0.28s var(--ease),
+                border-color 0.28s var(--ease), box-shadow 0.28s var(--ease);
     position: relative; overflow: hidden;
     -webkit-tap-highlight-color: transparent;
     white-space: nowrap; z-index: 5;
-    transform-style: preserve-3d;
   }
   .copy-icon-btn:hover {
     color: #fff; background: rgba(255, 255, 255, 0.12);
@@ -550,10 +493,6 @@
     background: rgba(140, 224, 176, 0.1);
     box-shadow: 0 0 26px -6px rgba(140, 224, 176, 0.6);
   }
-  .copy-icon-btn.pressing {
-    transition: transform 0.08s ease-out;
-    filter: brightness(0.9);
-  }
 
   .qr-block {
     position: relative;
@@ -564,17 +503,13 @@
     background: #04060a;
     border: 1px solid rgba(255, 255, 255, 0.09);
     cursor: pointer;
-    transition: transform 0.35s var(--ease),
-                border-color 0.3s var(--ease),
+    transition: border-color 0.3s var(--ease),
                 box-shadow 0.35s var(--ease);
     display: flex; align-items: center; justify-content: center;
-    transform-style: preserve-3d;
-    will-change: transform;
   }
   @media (min-width: 900px) { .qr-block { max-width: 280px; } }
 
   .qr-block:hover {
-    transform: scale(1.02);
     border-color: var(--accent);
     box-shadow: 0 0 60px -12px var(--accent);
   }
@@ -684,7 +619,9 @@
     background: rgba(255, 255, 255, 0.055);
     border: 1px solid var(--line);
     color: var(--text-soft); font-size: 1rem; line-height: 1;
-    cursor: pointer; transition: all 0.3s var(--ease);
+    cursor: pointer;
+    transition: color 0.3s var(--ease), background 0.3s var(--ease),
+                border-color 0.3s var(--ease);
     font-family: inherit;
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
     -webkit-tap-highlight-color: transparent;
@@ -692,9 +629,8 @@
   }
   .modal-close:hover {
     background: rgba(255, 255, 255, 0.14);
-    color: #fff; transform: rotate(90deg);
+    color: #fff;
   }
-  .modal-close.pressing { transform: scale(0.92) rotate(0deg); }
 
   /* ================= TOAST ================= */
   .toast {
@@ -743,7 +679,6 @@
     .toast { font-size: 0.62rem; padding: 10px 18px; bottom: 20px; letter-spacing: 0.12em; }
   }
 
-  /* Reduced motion: disable tilt and heavy transforms */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
@@ -751,7 +686,6 @@
       transition-duration: 0.01ms !important;
     }
     html { scroll-behavior: auto; }
-    .tilt { transform: none !important; }
   }
 
   img, svg { max-width: 100%; display: block; }
@@ -759,7 +693,6 @@
 </head>
 <body>
 
-<!-- ================= CAPTCHA ================= -->
 <div class="captcha-overlay" id="captchaOverlay">
   <div class="captcha-card">
     <h2 id="captchaBrand">NGUYEN MINH KHOI</h2>
@@ -776,13 +709,11 @@
   </div>
 </div>
 
-<!-- ================= LANG ================= -->
 <div class="lang" role="tablist" aria-label="Language">
   <button type="button" data-lang="vi" class="active" id="langVi">VN</button>
   <button type="button" data-lang="en" id="langEn">EN</button>
 </div>
 
-<!-- ================= PAGE ================= -->
 <div class="page locked" id="page">
 
   <section class="view hero active animate-in" id="heroView">
@@ -794,7 +725,7 @@
       <p>Cảm ơn bạn đã luôn yêu quý và ủng hộ mình. ❤️</p>
     </div>
     <div class="hero-actions">
-      <button class="btn btn-primary tilt" id="viewDonateBtn" type="button">
+      <button class="btn btn-primary tilt3d" id="viewDonateBtn" type="button">
         <span id="viewDonateLabel">View Donate</span>
         <span class="arrow">↓</span>
       </button>
@@ -803,7 +734,7 @@
 
   <section class="view donate" id="donateView">
     <div class="back-wrap">
-      <button class="back-btn tilt" id="backBtn" type="button">
+      <button class="back-btn tilt3d" id="backBtn" type="button">
         <span>←</span><span id="backLabel">Back</span>
       </button>
     </div>
@@ -819,10 +750,9 @@
   <footer class="footer" id="footer">© 2026 NGUYEN MINH KHOI</footer>
 </div>
 
-<!-- ================= MODAL ================= -->
 <div class="modal" id="modal">
   <div class="modal-box">
-    <button class="modal-close" id="modalClose" type="button" aria-label="Close">✕</button>
+    <button class="modal-close tilt3d" id="modalClose" type="button" aria-label="Close">✕</button>
     <div class="modal-head">
       <div class="modal-name" id="modalName">QR</div>
       <div class="modal-sub" id="modalSub">QR Code</div>
@@ -832,8 +762,8 @@
     </div>
     <div class="modal-owner">NGUYEN MINH KHOI</div>
     <div class="modal-actions">
-      <button class="btn btn-primary tilt" id="saveQrBtn" type="button">Save QR</button>
-      <button class="btn btn-ghost tilt" id="closeModalBtn" type="button">Close</button>
+      <button class="btn btn-primary tilt3d" id="saveQrBtn" type="button">Save QR</button>
+      <button class="btn btn-ghost tilt3d" id="closeModalBtn" type="button">Close</button>
     </div>
   </div>
 </div>
@@ -848,7 +778,6 @@
 
   const TURNSTILE_SITE_KEY = "0x4AAAAAAFGgEMGzD4teYa7L";
 
-  /* ===== Detect capability ===== */
   const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const HAS_HOVER = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
@@ -1002,315 +931,175 @@
     }
   }
 
-  /* ================= 3D TILT ENGINE ================= */
-  // Max tilt in degrees
-  const MAX_TILT = 6;
+  /* ==========================================================
+     DIRECTIONAL 3D PRESS ENGINE
+     ----------------------------------------------------------
+     - Hover (desktop only): subtle tilt toward cursor (max 5deg)
+     - Press (all devices): strong directional tilt toward press point
+       based on click location within element.
+     - translateZ negative on press for "pushed down" feel.
+     - Spring-back via lerp on release.
+     - Directional light: radial highlight offset toward click point.
+     ========================================================== */
+  const HOVER_MAX_DEG = 5;    // subtle hover tilt
+  const PRESS_MAX_DEG = 14;   // strong directional press tilt (10-15 range)
+  const PRESS_Z = -14;        // px translateZ on press (pushed down)
+  const HOVER_Z = 6;          // px translateZ on hover (lifted)
 
-  function attachTilt(el, opts) {
-    if (REDUCED || !HAS_HOVER) return; // skip on reduced motion or touch-only
-    const options = opts || {};
-    const max = options.max || MAX_TILT;
-    const scale = options.scale !== undefined ? options.scale : 1.0;
+  function attach3DPress(el, options) {
+    if (el._press3dBound) return;
+    el._press3dBound = true;
 
-    let rafId = null;
-    let targetRX = 0, targetRY = 0, targetScale = 1;
-    let curRX = 0, curRY = 0, curScale = 1;
+    const opts = options || {};
+    const hoverMax = opts.hoverMax !== undefined ? opts.hoverMax : HOVER_MAX_DEG;
+    const pressMax = opts.pressMax !== undefined ? opts.pressMax : PRESS_MAX_DEG;
+    const pressZ = opts.pressZ !== undefined ? opts.pressZ : PRESS_Z;
+    const hoverZ = opts.hoverZ !== undefined ? opts.hoverZ : HOVER_Z;
+    const perspective = opts.perspective !== undefined ? opts.perspective : 800;
+
+    // Current (rendered) values
+    let curRX = 0, curRY = 0, curZ = 0, curScale = 1;
+    // Target values
+    let tgtRX = 0, tgtRY = 0, tgtZ = 0, tgtScale = 1;
+
     let hovering = false;
-    let animating = false;
-
-    el.classList.add('tilt');
-
-    function tick() {
-      // lerp for smooth return
-      curRX += (targetRX - curRX) * 0.15;
-      curRY += (targetRY - curRY) * 0.15;
-      curScale += (targetScale - curScale) * 0.15;
-
-      el.style.transform = `perspective(900px) rotateX(${curRX.toFixed(2)}deg) rotateY(${curRY.toFixed(2)}deg) scale(${curScale.toFixed(3)})`;
-
-      const stillMoving =
-        Math.abs(targetRX - curRX) > 0.02 ||
-        Math.abs(targetRY - curRY) > 0.02 ||
-        Math.abs(targetScale - curScale) > 0.002;
-
-      if (stillMoving || hovering) {
-        rafId = requestAnimationFrame(tick);
-      } else {
-        // snap and stop
-        curRX = targetRX; curRY = targetRY; curScale = targetScale;
-        el.style.transform = '';
-        animating = false;
-        rafId = null;
-      }
-    }
-
-    function start() {
-      if (animating) return;
-      animating = true;
-      rafId = requestAnimationFrame(tick);
-    }
-
-    el.addEventListener('pointerenter', (e) => {
-      if (e.pointerType !== 'mouse') return;
-      hovering = true;
-      start();
-    });
-
-    el.addEventListener('pointermove', (e) => {
-      if (e.pointerType !== 'mouse' || !hovering) return;
-      const r = el.getBoundingClientRect();
-      const x = e.clientX - r.left;
-      const y = e.clientY - r.top;
-      const nx = (x / r.width) * 2 - 1;   // -1 .. 1
-      const ny = (y / r.height) * 2 - 1;  // -1 .. 1
-
-      targetRY = nx * max;
-      targetRX = -ny * max;
-      targetScale = scale;
-
-      // Update cursor highlight CSS vars
-      el.style.setProperty('--mx', x + 'px');
-      el.style.setProperty('--my', y + 'px');
-    });
-
-    el.addEventListener('pointerleave', (e) => {
-      if (e.pointerType !== 'mouse') return;
-      hovering = false;
-      targetRX = 0; targetRY = 0; targetScale = 1;
-      // keep rAF alive to return smoothly
-      start();
-    });
-
-    el.addEventListener('pointercancel', () => {
-      hovering = false;
-      targetRX = 0; targetRY = 0; targetScale = 1;
-      start();
-    });
-  }
-
-  /* ================= TACTILE PRESS ENGINE ================= */
-  // Applies scale-down + shadow reduce on press, restores on release.
-  // Combined with tilt via separate class so tilt transform remains untouched.
-  function attachPress(el, opts) {
-    const options = opts || {};
-    const scaleDown = options.scale !== undefined ? options.scale : 0.96;
-
-    // We temporarily override the transform via a wrapper approach:
-    // Save current transform, apply combined transform on press.
-    // Simpler approach: use CSS class + a special transform var.
-
-    // Use a shadow element structure so tilt transform on `el` stays intact.
-    // Instead, we multiply scale into the transform string.
-
-    let pressRaf = null;
-    let targetPressScale = 1;
-    let curPressScale = 1;
     let pressing = false;
-    let running = false;
-
-    // Cache base transform values set by tilt engine (we read via getComputedStyle).
-    // Simpler: apply a scale on the element's inner children instead.
-    // But we don't always have children. So we use a JS-composed transform string.
-
-    // Save any existing inline transform produced by tilt.
-    // We'll re-apply it on each frame plus our press scale.
-
-    // To avoid conflicts with tilt engine which sets style.transform directly,
-    // we let tilt engine also know about press scale via a shared object.
-    if (el._pressState) return;
-    el._pressState = { scale: 1 };
-
-    function tickPress() {
-      curPressScale += (targetPressScale - curPressScale) * 0.35;
-      el._pressState.scale = curPressScale;
-
-      // If tilt engine not active (touch device), apply transform ourselves
-      if (!el._tiltActive) {
-        el.style.transform = `scale(${curPressScale.toFixed(3)})`;
-      } else {
-        // Tilt engine will read el._pressState.scale next frame.
-        // We just ensure rAF is running.
-        if (!el._tiltRunning) {
-          // Force tilt to re-render
-          el.dispatchEvent(new Event('pointermove'));
-        }
-      }
-
-      const still = Math.abs(targetPressScale - curPressScale) > 0.002;
-      if (still || pressing) {
-        pressRaf = requestAnimationFrame(tickPress);
-      } else {
-        curPressScale = targetPressScale;
-        el._pressState.scale = curPressScale;
-        if (!el._tiltActive) {
-          el.style.transform = '';
-        }
-        running = false;
-      }
-    }
-
-    function startPress() {
-      if (running) return;
-      running = true;
-      pressRaf = requestAnimationFrame(tickPress);
-    }
-
-    el.addEventListener('pointerdown', (e) => {
-      // Ignore on right-click
-      if (e.button !== undefined && e.button !== 0) return;
-      pressing = true;
-      targetPressScale = scaleDown;
-      el.classList.add('pressing');
-      startPress();
-    });
-
-    const release = () => {
-      if (!pressing) return;
-      pressing = false;
-      targetPressScale = 1;
-      el.classList.remove('pressing');
-      startPress();
-    };
-
-    el.addEventListener('pointerup', release);
-    el.addEventListener('pointerleave', release);
-    el.addEventListener('pointercancel', release);
-    el.addEventListener('blur', release);
-  }
-
-  /* ================= COMBINED TILT + PRESS ================= */
-  // We unify them into one transform to avoid conflicts.
-  function attachTiltAndPress(el, tiltOpts, pressOpts) {
-    if (el._tiltBound) return;
-    el._tiltBound = true;
-
-    const MAX = (tiltOpts && tiltOpts.max) || MAX_TILT;
-    const HOVER_SCALE = (tiltOpts && tiltOpts.scale !== undefined) ? tiltOpts.scale : 1.0;
-    const PRESS_SCALE = (pressOpts && pressOpts.scale !== undefined) ? pressOpts.scale : 0.96;
-
-    let targetRX = 0, targetRY = 0, targetHoverScale = 1, targetPressScale = 1;
-    let curRX = 0, curRY = 0, curHoverScale = 1, curPressScale = 1;
-    let hovering = false, pressing = false;
     let rafId = null;
-    let active = false;
 
-    el._tiltActive = REDUCED || !HAS_HOVER ? false : true;
-    el._tiltRunning = false;
+    el.style.transformStyle = 'preserve-3d';
 
-    function compose() {
-      const scale = curHoverScale * curPressScale;
-      const rx = curRX.toFixed(2);
-      const ry = curRY.toFixed(2);
-      const sc = scale.toFixed(3);
-      if (REDUCED) {
-        el.style.transform = '';
-        return;
-      }
+    function render() {
+      const rx = curRX.toFixed(3);
+      const ry = curRY.toFixed(3);
+      const z  = curZ.toFixed(2);
+      const sc = curScale.toFixed(4);
       el.style.transform =
-        `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) scale(${sc})`;
+        `perspective(${perspective}px) translateZ(${z}px) rotateX(${rx}deg) rotateY(${ry}deg) scale(${sc})`;
     }
 
     function tick() {
-      // lerp
-      curRX += (targetRX - curRX) * 0.16;
-      curRY += (targetRY - curRY) * 0.16;
-      curHoverScale += (targetHoverScale - curHoverScale) * 0.16;
-      curPressScale += (targetPressScale - curPressScale) * 0.28;
+      const LERP = pressing ? 0.42 : 0.14; // faster snap on press, softer return
+      curRX    += (tgtRX    - curRX)    * LERP;
+      curRY    += (tgtRY    - curRY)    * LERP;
+      curZ     += (tgtZ     - curZ)     * LERP;
+      curScale += (tgtScale - curScale) * LERP;
 
-      compose();
+      render();
 
-      const moving =
-        Math.abs(targetRX - curRX) > 0.02 ||
-        Math.abs(targetRY - curRY) > 0.02 ||
-        Math.abs(targetHoverScale - curHoverScale) > 0.002 ||
-        Math.abs(targetPressScale - curPressScale) > 0.002;
+      const settled =
+        Math.abs(tgtRX    - curRX)    < 0.03 &&
+        Math.abs(tgtRY    - curRY)    < 0.03 &&
+        Math.abs(tgtZ     - curZ)     < 0.08 &&
+        Math.abs(tgtScale - curScale) < 0.0015;
 
-      if (moving || hovering || pressing) {
+      if (!settled || hovering || pressing) {
         rafId = requestAnimationFrame(tick);
       } else {
-        curRX = targetRX; curRY = targetRY;
-        curHoverScale = targetHoverScale; curPressScale = targetPressScale;
-        compose();
+        curRX = tgtRX; curRY = tgtRY; curZ = tgtZ; curScale = tgtScale;
+        render();
         rafId = null;
-        el._tiltRunning = false;
       }
     }
 
-    function start() {
-      if (rafId === null) {
-        el._tiltRunning = true;
-        rafId = requestAnimationFrame(tick);
-      } else {
-        el._tiltRunning = true;
-      }
+    function kick() { if (rafId === null) rafId = requestAnimationFrame(tick); }
+
+    function resetTargets() {
+      tgtRX = 0; tgtRY = 0; tgtZ = 0; tgtScale = 1;
     }
 
-    // Tilt handling only for hover-capable devices
+    /* -------- HOVER (desktop only) -------- */
     if (HAS_HOVER && !REDUCED) {
       el.addEventListener('pointerenter', (e) => {
         if (e.pointerType !== 'mouse') return;
         hovering = true;
-        targetHoverScale = HOVER_SCALE;
-        start();
+        tgtZ = hoverZ;
+        kick();
       });
 
       el.addEventListener('pointermove', (e) => {
-        if (e.pointerType !== 'mouse' || !hovering) return;
+        if (e.pointerType !== 'mouse' || !hovering || pressing) return;
         const r = el.getBoundingClientRect();
         const x = e.clientX - r.left;
         const y = e.clientY - r.top;
-        const nx = (x / r.width) * 2 - 1;
-        const ny = (y / r.height) * 2 - 1;
+        const nx = (x / r.width) * 2 - 1;   // -1..1
+        const ny = (y / r.height) * 2 - 1;  // -1..1
 
-        targetRY = nx * MAX;
-        targetRX = -ny * MAX;
-        targetHoverScale = HOVER_SCALE;
+        tgtRY = nx * hoverMax;
+        tgtRX = -ny * hoverMax;
+        tgtZ = hoverZ;
 
+        // Directional highlight follows cursor
         el.style.setProperty('--mx', x + 'px');
         el.style.setProperty('--my', y + 'px');
-        start();
+
+        kick();
       });
 
       el.addEventListener('pointerleave', (e) => {
         if (e.pointerType !== 'mouse') return;
         hovering = false;
-        targetRX = 0; targetRY = 0; targetHoverScale = 1;
-        start();
+        if (!pressing) resetTargets();
+        kick();
       });
     }
 
-    // Press handling for all devices
+    /* -------- PRESS (all devices) -------- */
     el.addEventListener('pointerdown', (e) => {
       if (e.button !== undefined && e.button !== 0) return;
+      if (REDUCED) return;
+
       pressing = true;
-      targetPressScale = PRESS_SCALE;
       el.classList.add('pressing');
-      if (!el._tiltActive) {
-        // touch device: still animate scale via compose()
-        start();
-      } else {
-        start();
-      }
+
+      // Compute click position relative to element
+      const r = el.getBoundingClientRect();
+      const x = e.clientX - r.left;
+      const y = e.clientY - r.top;
+      const nx = (x / r.width) * 2 - 1;   // -1 (left) .. 1 (right)
+      const ny = (y / r.height) * 2 - 1;  // -1 (top)  .. 1 (bottom)
+
+      // Directional tilt: point of press pushes the element "down and away"
+      // Click left (nx<0)   → rotateY negative (left edge down) → element tips LEFT
+      // Click right (nx>0)  → rotateY positive (right edge down) → element tips RIGHT
+      // Click top (ny<0)    → rotateX positive (top edge down) → element tips toward TOP
+      // Click bottom (ny>0) → rotateX negative (bottom edge down) → element tips toward BOTTOM
+      tgtRY = -nx * pressMax;
+      tgtRX = -ny * pressMax;
+      tgtZ = pressZ;
+      tgtScale = 0.985;
+
+      // Directional highlight anchored at press point
+      el.style.setProperty('--mx', x + 'px');
+      el.style.setProperty('--my', y + 'px');
+
+      kick();
     });
 
     const release = () => {
       if (!pressing) return;
       pressing = false;
-      targetPressScale = 1;
       el.classList.remove('pressing');
-      start();
+
+      // Spring back to hover state if still hovering (desktop), else neutral
+      if (hovering && HAS_HOVER && !REDUCED) {
+        tgtZ = hoverZ;
+        tgtScale = 1;
+        // keep last hover rx/ry — they will be updated on next pointermove
+      } else {
+        resetTargets();
+      }
+      kick();
     };
 
     el.addEventListener('pointerup', release);
     el.addEventListener('pointercancel', release);
-    el.addEventListener('blur', release);
     el.addEventListener('pointerleave', (e) => {
-      // pointerleave during press on touch → release
       if (e.pointerType !== 'mouse' && pressing) release();
     });
+    el.addEventListener('blur', release);
   }
 
-  /* ================= Click glow for panels ================= */
+  /* ================= Panel click glow (kept for accent flash) ================= */
   function attachPanelClickEffect(panel) {
     panel.addEventListener('pointerdown', function (e) {
       if (e.target.closest('.copy-icon-btn')) return;
@@ -1324,13 +1113,9 @@
       glow.className = 'click-glow';
       glow.style.left = x + 'px';
       glow.style.top = y + 'px';
+      glow.style.setProperty('--accent', getComputedStyle(this).getPropertyValue('--accent') || '#a0b8ff');
       this.appendChild(glow);
       setTimeout(() => glow.remove(), 600);
-
-      const border = document.createElement('span');
-      border.className = 'click-border';
-      this.appendChild(border);
-      setTimeout(() => border.remove(), 600);
     });
   }
 
@@ -1375,7 +1160,6 @@
     const el = document.createElement('div');
     el.className = 'panel ' + d.key;
 
-    // Cursor highlight layer
     const hl = document.createElement('div');
     hl.className = 'cursor-highlight';
     el.appendChild(hl);
@@ -1403,7 +1187,7 @@
       cbtn.type = 'button';
       cbtn.className = 'copy-icon-btn';
       cbtn.innerHTML = `<span class="copy-label">${t.copy}</span>`;
-      attachTiltAndPress(cbtn, { max: 4, scale: 1.0 }, { scale: 0.94 });
+      attach3DPress(cbtn, { hoverMax: 3, pressMax: 8, pressZ: -4, hoverZ: 2, perspective: 500 });
       cbtn.addEventListener('click', (e) => {
         e.stopPropagation();
         copyToClipboard(d.copyValue, cbtn);
@@ -1419,7 +1203,7 @@
     el.appendChild(body);
     observePanel(el);
     attachPanelClickEffect(el);
-    attachTiltAndPress(el, { max: 6, scale: 1.005 }, { scale: 0.98 });
+    attach3DPress(el, { hoverMax: 5, pressMax: 13, pressZ: -12, hoverZ: 6, perspective: 900 });
     return el;
   }
 
@@ -1453,7 +1237,7 @@
     cbtn.type = 'button';
     cbtn.className = 'copy-icon-btn';
     cbtn.innerHTML = `<span class="copy-label">${t.copy}</span>`;
-    attachTiltAndPress(cbtn, { max: 4, scale: 1.0 }, { scale: 0.94 });
+    attach3DPress(cbtn, { hoverMax: 3, pressMax: 8, pressZ: -4, hoverZ: 2, perspective: 500 });
     cbtn.addEventListener('click', (e) => {
       e.stopPropagation();
       copyToClipboard(d.copyValue, cbtn);
@@ -1468,7 +1252,7 @@
     el.appendChild(body);
     observePanel(el);
     attachPanelClickEffect(el);
-    attachTiltAndPress(el, { max: 6, scale: 1.005 }, { scale: 0.98 });
+    attach3DPress(el, { hoverMax: 5, pressMax: 13, pressZ: -12, hoverZ: 6, perspective: 900 });
     return el;
   }
 
@@ -1500,8 +1284,7 @@
       openModal(d);
     });
 
-    // subtle tilt on QR (max 4deg) but no press scale (avoid jitter when opening modal)
-    attachTiltAndPress(qrBlock, { max: 4, scale: 1.01 }, { scale: 0.99 });
+    attach3DPress(qrBlock, { hoverMax: 4, pressMax: 10, pressZ: -8, hoverZ: 4, perspective: 700 });
     return qrBlock;
   }
 
@@ -1527,8 +1310,6 @@
     void heroView.offsetWidth;
     heroView.classList.add('animate-in');
     window.scrollTo({ top: 0, behavior: 'auto' });
-    // rebind tilt/press for hero button (it persists but ensure bound)
-    attachTiltAndPress(viewDonateBtn, { max: 5, scale: 1.02 }, { scale: 0.96 });
   }
 
   function showDonate() {
@@ -1539,11 +1320,8 @@
     donateView.classList.add('animate-in');
     window.scrollTo({ top: 0, behavior: 'auto' });
     renderPanels();
-    // rebind back button
-    attachTiltAndPress(backBtn, { max: 5, scale: 1.02 }, { scale: 0.96 });
   }
 
-  /* ===== Modal ===== */
   function openModal(d) {
     currentQr = d;
     const preload = new Image();
@@ -1633,16 +1411,14 @@
   });
   saveQrBtn.addEventListener('click', saveQr);
 
-  // Bind tilt + press to static interactive elements
-  attachTiltAndPress(viewDonateBtn, { max: 5, scale: 1.02 }, { scale: 0.96 });
-  attachTiltAndPress(backBtn, { max: 5, scale: 1.02 }, { scale: 0.96 });
-  attachTiltAndPress(modalClose, { max: 4, scale: 1.0 }, { scale: 0.92 });
-  attachTiltAndPress(closeModalBtn, { max: 4, scale: 1.0 }, { scale: 0.95 });
-  attachTiltAndPress(saveQrBtn, { max: 4, scale: 1.0 }, { scale: 0.95 });
-
-  // Also give the lang switcher buttons a light press
-  attachTiltAndPress(langViBtn, { max: 3, scale: 1.0 }, { scale: 0.94 });
-  attachTiltAndPress(langEnBtn, { max: 3, scale: 1.0 }, { scale: 0.94 });
+  // Bind 3D press to static buttons
+  attach3DPress(viewDonateBtn, { hoverMax: 5, pressMax: 12, pressZ: -8, hoverZ: 4, perspective: 700 });
+  attach3DPress(backBtn,       { hoverMax: 4, pressMax: 10, pressZ: -5, hoverZ: 3, perspective: 600 });
+  attach3DPress(modalClose,    { hoverMax: 3, pressMax: 8,  pressZ: -4, hoverZ: 2, perspective: 500 });
+  attach3DPress(closeModalBtn, { hoverMax: 3, pressMax: 9,  pressZ: -5, hoverZ: 3, perspective: 600 });
+  attach3DPress(saveQrBtn,     { hoverMax: 3, pressMax: 9,  pressZ: -5, hoverZ: 3, perspective: 600 });
+  attach3DPress(langViBtn,     { hoverMax: 2, pressMax: 6,  pressZ: -3, hoverZ: 1, perspective: 400 });
+  attach3DPress(langEnBtn,     { hoverMax: 2, pressMax: 6,  pressZ: -3, hoverZ: 1, perspective: 400 });
 
   function init() {
     applyLang(currentLang);
