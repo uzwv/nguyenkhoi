@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-<title>NGUYEN MINH KHOI — Support</title>
+<title>NGUYEN MINH KHOI</title>
 <meta name="theme-color" content="#050505">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -207,7 +207,7 @@
     .lang button { font-size: 0.68rem; padding: 6px 12px; }
   }
 
-  /* ================= VIEWS (hero vs donate) ================= */
+  /* ================= VIEWS ================= */
   .view { display: none; }
   .view.active { display: block; }
 
@@ -386,16 +386,19 @@
   }
   .btn-ghost:hover { color: var(--text); }
 
+  /* ===== Ripple — follows exact click point ===== */
   .ripple {
     position: absolute;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.28);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.15) 45%, transparent 70%);
     transform: scale(0);
-    animation: rippleAnim 0.7s var(--ease-soft);
+    animation: rippleAnim 0.75s cubic-bezier(0.2, 0.9, 0.3, 1);
     pointer-events: none;
+    z-index: 0;
   }
   @keyframes rippleAnim {
-    to { transform: scale(4); opacity: 0; }
+    0%   { transform: scale(0); opacity: 0.9; }
+    100% { transform: scale(4); opacity: 0; }
   }
 
   /* ================= DONATE ================= */
@@ -503,6 +506,8 @@
     overflow: hidden;
     opacity: 0;
     transform: translateY(30px);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .panel.in-view {
@@ -517,6 +522,7 @@
   .panel.vietcombank { --accent: var(--c-vcb); }
   .panel.usdt        { --accent: var(--c-usdt); }
 
+  /* Soft pastel radial glow in corner */
   .panel::after {
     content: "";
     position: absolute;
@@ -532,6 +538,7 @@
     z-index: 0;
   }
 
+  /* Gradient border */
   .panel::before {
     content: "";
     position: absolute;
@@ -557,6 +564,61 @@
 
   .panel:hover::before { opacity: 0.7; }
   .panel:hover::after  { opacity: 0.28; }
+
+  /* ===== Panel click glow — bright like copied state ===== */
+  .panel.clicked {
+    transform: translateY(-4px) scale(1.008);
+    box-shadow:
+      0 50px 100px -35px rgba(0, 0, 0, 0.95),
+      0 0 90px -15px var(--accent),
+      0 0 40px -5px var(--accent);
+    transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  }
+  .panel.clicked::before { opacity: 1; }
+  .panel.clicked::after  { opacity: 0.5; }
+
+  /* ===== Click pulse ring following click point ===== */
+  .click-ring {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--accent, rgba(180, 200, 255, 0.9));
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.4);
+    opacity: 1;
+    animation: ringPulse 0.75s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+    z-index: 4;
+    box-shadow: 0 0 20px 4px var(--accent, rgba(180, 200, 255, 0.55));
+  }
+  @keyframes ringPulse {
+    0%   { transform: translate(-50%, -50%) scale(0.4); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(18); opacity: 0; }
+  }
+
+  /* ===== Click spotlight — radial light at exact click point ===== */
+  .click-spot {
+    position: absolute;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+      color-mix(in srgb, var(--accent, #a0b8ff) 65%, transparent) 0%,
+      color-mix(in srgb, var(--accent, #a0b8ff) 25%, transparent) 35%,
+      transparent 70%);
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.4);
+    opacity: 0.9;
+    mix-blend-mode: screen;
+    animation: spotFade 0.9s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+    z-index: 3;
+    filter: blur(6px);
+  }
+  @keyframes spotFade {
+    0%   { transform: translate(-50%, -50%) scale(0.4); opacity: 0.9; }
+    55%  { opacity: 0.55; }
+    100% { transform: translate(-50%, -50%) scale(1.15); opacity: 0; }
+  }
 
   .panel-head {
     position: relative;
@@ -653,6 +715,7 @@
     overflow: hidden;
     -webkit-tap-highlight-color: transparent;
     white-space: nowrap;
+    z-index: 5;
   }
 
   .copy-icon-btn:hover {
@@ -680,11 +743,15 @@
     background: #04060a;
     border: 1px solid rgba(255, 255, 255, 0.09);
     cursor: pointer;
-    transition: transform 0.45s var(--ease), border-color 0.4s var(--ease),
-                box-shadow 0.45s var(--ease);
+    transition: transform 0.4s var(--ease), border-color 0.35s var(--ease),
+                box-shadow 0.4s var(--ease);
     display: flex;
     align-items: center;
     justify-content: center;
+    /* smooth rendering for zoom */
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   @media (min-width: 900px) {
@@ -692,7 +759,7 @@
   }
 
   .qr-block:hover {
-    transform: scale(1.025);
+    transform: scale(1.025) translateZ(0);
     border-color: var(--accent);
     box-shadow: 0 0 60px -12px var(--accent);
   }
@@ -703,10 +770,13 @@
     object-fit: contain;
     display: block;
     padding: 12px;
-    transition: transform 0.5s var(--ease);
+    /* smoother transition */
+    transition: transform 0.4s var(--ease);
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
-  .qr-block:hover img { transform: scale(1.04); }
+  .qr-block:hover img { transform: scale(1.04) translateZ(0); }
 
   .qr-hint {
     position: absolute;
@@ -741,7 +811,7 @@
   .panel.usdt { grid-column: 1 / -1; }
   .panel.usdt .qr-block { max-width: 300px; }
 
-  /* ================= MODAL ================= */
+  /* ================= MODAL — smoother & lag-free ================= */
   .modal {
     position: fixed;
     inset: 0;
@@ -750,19 +820,25 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background: rgba(2, 2, 4, 0.86);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    background: rgba(2, 2, 4, 0);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.4s var(--ease), visibility 0.4s var(--ease);
+    transition: opacity 0.35s var(--ease-soft),
+                visibility 0.35s var(--ease-soft),
+                background-color 0.35s var(--ease-soft),
+                backdrop-filter 0.35s var(--ease-soft);
   }
 
   .modal.active {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
+    background: rgba(2, 2, 4, 0.86);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
   }
 
   .modal-box {
@@ -778,15 +854,21 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(34px);
     -webkit-backdrop-filter: blur(34px);
-    transform: scale(0.86) translateY(20px);
-    transition: transform 0.55s var(--ease);
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.32s var(--ease-soft);
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    will-change: transform, opacity;
   }
 
-  .modal.active .modal-box { transform: scale(1) translateY(0); }
+  .modal.active .modal-box {
+    transform: scale(1);
+    opacity: 1;
+  }
 
   .modal-head {
     width: 100%;
@@ -824,6 +906,9 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
+    /* force GPU layer for smoothness */
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   .modal-img-wrap img {
@@ -832,6 +917,8 @@
     object-fit: contain;
     display: block;
     padding: 14px;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   .modal-owner {
@@ -880,6 +967,7 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     -webkit-tap-highlight-color: transparent;
+    z-index: 3;
   }
 
   .modal-close:hover {
@@ -992,7 +1080,7 @@
 <!-- ================= PAGE ================= -->
 <div class="page locked" id="page">
 
-  <!-- HERO VIEW -->
+  <!-- HERO -->
   <section class="view hero active animate-in" id="heroView">
     <h1 class="hero-title" id="heroTitle">Donate</h1>
     <div class="hero-name" id="heroName">NGUYEN MINH KHOI</div>
@@ -1009,7 +1097,7 @@
     </div>
   </section>
 
-  <!-- DONATE VIEW -->
+  <!-- DONATE -->
   <section class="view donate" id="donateView">
     <div class="back-wrap">
       <button class="back-btn" id="backBtn" type="button">
@@ -1025,7 +1113,6 @@
     <div class="panels" id="panels"></div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="footer" id="footer">© 2026 NGUYEN MINH KHOI</footer>
 </div>
 
@@ -1038,7 +1125,7 @@
       <div class="modal-sub" id="modalSub">QR Code</div>
     </div>
     <div class="modal-img-wrap">
-      <img id="modalImg" src="" alt="QR">
+      <img id="modalImg" src="" alt="QR" decoding="async">
     </div>
     <div class="modal-owner">NGUYEN MINH KHOI</div>
     <div class="modal-actions">
@@ -1061,7 +1148,6 @@
 
   const TURNSTILE_SITE_KEY = "0x4AAAAAAFGgEMGzD4teYa7L";
 
-  /* ========== DATA ========== */
   const DATA = {
     techcombank: {
       key: "techcombank",
@@ -1106,7 +1192,6 @@
     }
   };
 
-  /* ========== I18N ========== */
   const I18N = {
     vi: {
       heroTitle: "Donate",
@@ -1124,8 +1209,6 @@
       copied: "Copied",
       saveQr: "Save QR",
       close: "Close",
-      account: "Số tài khoản",
-      address: "Địa chỉ ví",
       qrCode: "QR Code",
       tapZoom: "Bấm để xem",
       toast: "Copied successfully",
@@ -1152,8 +1235,6 @@
       copied: "Copied",
       saveQr: "Save QR",
       close: "Close",
-      account: "Account Number",
-      address: "Wallet Address",
       qrCode: "QR Code",
       tapZoom: "Tap to zoom",
       toast: "Copied successfully",
@@ -1170,7 +1251,6 @@
   let captchaVerified = false;
   let currentQr = null;
 
-  /* ========== DOM ========== */
   const $ = (id) => document.getElementById(id);
   const page           = $('page');
   const heroView       = $('heroView');
@@ -1201,7 +1281,6 @@
   const saveQrBtn      = $('saveQrBtn');
 
   const toast          = $('toast');
-
   const langViBtn = $('langVi');
   const langEnBtn = $('langEn');
 
@@ -1215,11 +1294,12 @@
     toast._t = setTimeout(() => toast.classList.remove('show'), 1700);
   }
 
+  // Ripple at exact click point (used on .btn)
   function attachRipple(btn) {
     if (!btn) return;
     btn.addEventListener('click', function (e) {
       const rect = this.getBoundingClientRect();
-      const size = Math.max(rect.width, rect.height);
+      const size = Math.max(rect.width, rect.height) * 1.1;
       const x = (e.clientX || rect.left + rect.width / 2) - rect.left - size / 2;
       const y = (e.clientY || rect.top + rect.height / 2) - rect.top - size / 2;
       const r = document.createElement('span');
@@ -1228,7 +1308,40 @@
       r.style.left = x + 'px';
       r.style.top = y + 'px';
       this.appendChild(r);
-      setTimeout(() => r.remove(), 750);
+      setTimeout(() => r.remove(), 800);
+    });
+  }
+
+  // Panel click effect: glow + ring + spotlight at exact click point
+  function attachPanelClickEffect(panel) {
+    panel.addEventListener('pointerdown', function (e) {
+      // Ignore clicks originating from copy button (has its own ripple)
+      if (e.target.closest('.copy-icon-btn')) return;
+
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Ring
+      const ring = document.createElement('span');
+      ring.className = 'click-ring';
+      ring.style.left = x + 'px';
+      ring.style.top = y + 'px';
+      this.appendChild(ring);
+      setTimeout(() => ring.remove(), 800);
+
+      // Spotlight
+      const spot = document.createElement('span');
+      spot.className = 'click-spot';
+      spot.style.left = x + 'px';
+      spot.style.top = y + 'px';
+      this.appendChild(spot);
+      setTimeout(() => spot.remove(), 950);
+
+      // Glow state
+      this.classList.add('clicked');
+      clearTimeout(this._clickTimer);
+      this._clickTimer = setTimeout(() => this.classList.remove('clicked'), 700);
     });
   }
 
@@ -1304,7 +1417,6 @@
     ['techcombank', 'momo', 'vietcombank'].forEach(key => {
       panels.appendChild(buildBankPanel(DATA[key], t));
     });
-
     panels.appendChild(buildUsdtPanel(DATA.usdt, t));
   }
 
@@ -1351,6 +1463,7 @@
     el.appendChild(head);
     el.appendChild(body);
     observePanel(el);
+    attachPanelClickEffect(el);
     return el;
   }
 
@@ -1395,6 +1508,7 @@
     el.appendChild(head);
     el.appendChild(body);
     observePanel(el);
+    attachPanelClickEffect(el);
     return el;
   }
 
@@ -1405,6 +1519,7 @@
     img.src = d.qr;
     img.alt = d.name + ' QR';
     img.loading = 'lazy';
+    img.decoding = 'async';
     img.onerror = function () {
       this.style.display = 'none';
       const fb = document.createElement('span');
@@ -1420,7 +1535,10 @@
     hint.textContent = t.tapZoom;
     qrBlock.appendChild(hint);
 
-    qrBlock.addEventListener('click', () => openModal(d));
+    qrBlock.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openModal(d);
+    });
     return qrBlock;
   }
 
@@ -1444,7 +1562,6 @@
   function showHero() {
     donateView.classList.remove('active', 'animate-in');
     heroView.classList.add('active');
-    // reset animation
     heroView.classList.remove('animate-in');
     void heroView.offsetWidth;
     heroView.classList.add('animate-in');
@@ -1454,7 +1571,6 @@
   function showDonate() {
     heroView.classList.remove('active', 'animate-in');
     donateView.classList.add('active');
-    // reset animation
     donateView.classList.remove('animate-in');
     void donateView.offsetWidth;
     donateView.classList.add('animate-in');
@@ -1462,25 +1578,65 @@
     renderPanels();
   }
 
-  /* ========== MODAL ========== */
+  /* ========== MODAL — optimized for smoothness ========== */
+  let savedScrollY = 0;
+
   function openModal(d) {
     currentQr = d;
-    modalImg.src = d.qr;
-    modalImg.alt = d.name + ' QR';
-    modalName.textContent = d.name;
-    modalSub.textContent = d.type === 'crypto' ? d.network : I18N[currentLang].qrCode;
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    modalImg.onerror = function () {
-      this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%236a7280" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>';
+
+    // Preload image first, then open modal — avoids jank
+    const preload = new Image();
+    preload.decoding = 'async';
+    preload.onload = () => {
+      modalImg.src = d.qr;
+      modalImg.alt = d.name + ' QR';
+      modalName.textContent = d.name;
+      modalSub.textContent = d.type === 'crypto' ? d.network : I18N[currentLang].qrCode;
+
+      // Lock body scroll without jumping
+      savedScrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = '-' + savedScrollY + 'px';
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+
+      // Force reflow then activate for a smooth transition
+      requestAnimationFrame(() => {
+        modal.classList.add('active');
+      });
     };
+    preload.onerror = () => {
+      modalImg.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%236a7280" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>';
+      modalName.textContent = d.name;
+      modalSub.textContent = d.type === 'crypto' ? d.network : I18N[currentLang].qrCode;
+
+      savedScrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = '-' + savedScrollY + 'px';
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+
+      requestAnimationFrame(() => {
+        modal.classList.add('active');
+      });
+    };
+    preload.src = d.qr;
   }
 
   function closeModal() {
     modal.classList.remove('active');
-    document.body.style.overflow = '';
+    // Restore scroll position
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    window.scrollTo({ top: savedScrollY, behavior: 'auto' });
+    // Clear image after fade
     setTimeout(() => {
-      if (!modal.classList.contains('active')) modalImg.src = '';
+      if (!modal.classList.contains('active')) modalImg.removeAttribute('src');
     }, 400);
     currentQr = null;
   }
