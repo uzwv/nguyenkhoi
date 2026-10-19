@@ -222,12 +222,9 @@
   }
 
   /* ================= 3D PRESS BASE ================= */
-  /* Applied to all interactive elements that need 3D directional press */
   .tilt3d {
     transform-style: preserve-3d;
     will-change: transform;
-    /* The transform is set fully by JS — no CSS transitions on transform
-       so the press feels instant; JS lerp handles the smooth return. */
   }
 
   /* ================= BUTTONS ================= */
@@ -240,28 +237,17 @@
     cursor: pointer; border-radius: 100px;
     border: 1px solid var(--line-hi); background: var(--glass);
     backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-    transition: background 0.35s var(--ease),
-                border-color 0.35s var(--ease),
-                box-shadow 0.35s var(--ease);
+    transition: background 0.35s var(--ease), border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
     overflow: hidden;
     -webkit-tap-highlight-color: transparent;
     user-select: none; white-space: nowrap; text-transform: uppercase;
   }
 
-  /* Cursor-follow highlight (only visible on hover) */
   .btn::after {
     content: "";
-    position: absolute; inset: 0;
-    border-radius: inherit;
-    background: radial-gradient(
-      140px circle at var(--mx, 50%) var(--my, 50%),
-      rgba(255, 255, 255, 0.18),
-      transparent 60%
-    );
-    opacity: 0;
-    transition: opacity 0.35s var(--ease);
-    pointer-events: none;
-    z-index: 1;
+    position: absolute; inset: 0; border-radius: inherit;
+    background: radial-gradient(140px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.18), transparent 60%);
+    opacity: 0; transition: opacity 0.35s var(--ease); pointer-events: none; z-index: 1;
   }
   .btn:hover::after { opacity: 1; }
 
@@ -270,22 +256,18 @@
     background: linear-gradient(120deg, rgba(160, 190, 255, 0.6), rgba(200, 170, 255, 0.15) 40%, transparent 60%, rgba(160, 200, 255, 0.4));
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor; mask-composite: exclude;
-    opacity: 0; transition: opacity 0.35s var(--ease);
-    pointer-events: none; z-index: 2;
+    opacity: 0; transition: opacity 0.35s var(--ease); pointer-events: none; z-index: 2;
   }
   .btn:hover::before { opacity: 1; }
 
   .btn:hover {
-    background: var(--glass-hi);
-    border-color: transparent;
-    box-shadow: 0 24px 55px -22px rgba(160, 190, 255, 0.5),
-                0 0 50px -15px rgba(160, 190, 255, 0.22);
+    background: var(--glass-hi); border-color: transparent;
+    box-shadow: 0 24px 55px -22px rgba(160, 190, 255, 0.5), 0 0 50px -15px rgba(160, 190, 255, 0.22);
   }
 
   .btn-primary {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.04));
-    border-color: rgba(255, 255, 255, 0.2);
-    font-weight: 600;
+    border-color: rgba(255, 255, 255, 0.2); font-weight: 600;
   }
   .btn-primary .arrow { display: inline-block; transition: transform 0.35s var(--ease); font-size: 0.9rem; }
   .btn-primary:hover .arrow { transform: translateY(3px); }
@@ -314,32 +296,25 @@
     background: var(--glass); border: 1px solid var(--line);
     border-radius: 60px; cursor: pointer;
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-    transition: color 0.3s var(--ease), background 0.3s var(--ease),
-                border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
-    position: relative; overflow: hidden;
-    text-transform: uppercase;
+    transition: color 0.3s var(--ease), background 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+    position: relative; overflow: hidden; text-transform: uppercase;
     -webkit-tap-highlight-color: transparent;
   }
   .back-btn:hover {
-    color: var(--text); background: var(--glass-hi);
-    border-color: var(--line-hi);
+    color: var(--text); background: var(--glass-hi); border-color: var(--line-hi);
     box-shadow: 0 0 30px -10px rgba(160, 190, 255, 0.35);
   }
 
   .donate-head { text-align: center; margin-bottom: 64px; opacity: 0; }
   .donate-head h2 {
-    font-family: var(--serif);
-    font-size: clamp(2.2rem, 6.5vw, 3.2rem);
-    font-weight: 400; font-style: italic;
-    letter-spacing: -0.015em; margin-bottom: 14px;
+    font-family: var(--serif); font-size: clamp(2.2rem, 6.5vw, 3.2rem);
+    font-weight: 400; font-style: italic; letter-spacing: -0.015em; margin-bottom: 14px;
     background: linear-gradient(180deg, #ffffff 30%, #98a5bd 100%);
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
   }
   .donate-head p {
     color: var(--text-mute); font-size: 0.78rem; max-width: 520px;
-    margin: 0 auto; letter-spacing: 0.18em;
-    text-transform: uppercase; font-weight: 500;
+    margin: 0 auto; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 500;
   }
 
   /* ================= PANELS ================= */
@@ -352,22 +327,16 @@
     border-radius: 24px;
     background: linear-gradient(180deg, rgba(20, 22, 28, 0.55), rgba(10, 11, 14, 0.75));
     border: 1px solid var(--line);
-    box-shadow: 0 30px 70px -35px rgba(0, 0, 0, 0.9),
-                inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    box-shadow: 0 30px 70px -35px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
-    transition: border-color 0.4s var(--ease),
-                box-shadow 0.4s var(--ease);
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(30px);
+    transition: border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+    overflow: hidden; opacity: 0; transform: translateY(30px);
     -webkit-tap-highlight-color: transparent;
   }
 
   .panel.in-view {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.85s var(--ease), transform 0.85s var(--ease),
-                border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+    opacity: 1; transform: translateY(0);
+    transition: opacity 0.85s var(--ease), transform 0.85s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
   }
 
   .panel.techcombank { --accent: var(--c-tech); }
@@ -375,203 +344,145 @@
   .panel.vietcombank { --accent: var(--c-vcb); }
   .panel.usdt        { --accent: var(--c-usdt); }
 
-  /* Corner pastel glow — STATIC (only subtle ambient glow on card) */
+  /* XÓA DÒNG GRID-COLUMN ĐỂ USDT KO BỊ TO RA NỮA */
+  /* .panel.usdt { grid-column: 1 / -1; } */ 
+
   .panel::after {
-    content: ""; position: absolute; top: -45%; right: -45%;
-    width: 90%; height: 90%;
+    content: ""; position: absolute; top: -45%; right: -45%; width: 90%; height: 90%;
     background: radial-gradient(circle, var(--accent), transparent 65%);
     opacity: 0.14; filter: blur(50px); pointer-events: none;
     transition: opacity 0.4s var(--ease); z-index: 0;
   }
 
-  /* Gradient border — hidden by default, appears on hover/press */
   .panel::before {
     content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
     background: linear-gradient(140deg, var(--accent), transparent 42%, transparent 58%, var(--accent));
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor; mask-composite: exclude;
-    opacity: 0; transition: opacity 0.4s var(--ease);
-    pointer-events: none; z-index: 2;
+    opacity: 0; transition: opacity 0.4s var(--ease); pointer-events: none; z-index: 2;
   }
 
   .panel:hover {
     border-color: transparent;
-    box-shadow: 0 50px 90px -40px rgba(0, 0, 0, 0.95),
-                0 0 70px -25px var(--accent);
+    box-shadow: 0 50px 90px -40px rgba(0, 0, 0, 0.95), 0 0 70px -25px var(--accent);
   }
   .panel:hover::before { opacity: 0.7; }
   .panel:hover::after  { opacity: 0.28; }
 
-  /* Cursor-follow ambient highlight — ONLY when pressed or hovered */
   .panel > .cursor-highlight {
-    position: absolute; inset: 0;
-    border-radius: inherit;
-    background: radial-gradient(
-      220px circle at var(--mx, 50%) var(--my, 50%),
-      color-mix(in srgb, var(--accent) 22%, transparent),
-      transparent 65%
-    );
-    opacity: 0;
-    transition: opacity 0.35s var(--ease);
-    pointer-events: none;
-    z-index: 1;
+    position: absolute; inset: 0; border-radius: inherit;
+    background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--accent) 22%, transparent), transparent 65%);
+    opacity: 0; transition: opacity 0.35s var(--ease); pointer-events: none; z-index: 1;
   }
-  .panel:hover > .cursor-highlight,
-  .panel.pressing > .cursor-highlight {
-    opacity: 1;
-  }
+  .panel:hover > .cursor-highlight, .panel.pressing > .cursor-highlight { opacity: 1; }
 
   .panel-head { position: relative; z-index: 3; margin-bottom: 22px; }
 
   .panel-label {
-    font-size: 0.62rem; font-weight: 700;
-    letter-spacing: 0.3em; color: var(--accent);
+    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.3em; color: var(--accent);
     text-transform: uppercase; margin-bottom: 8px; opacity: 0.95;
   }
   .panel-name {
-    font-family: var(--serif);
-    font-size: 1.55rem; font-weight: 500; font-style: italic;
+    font-family: var(--serif); font-size: 1.55rem; font-weight: 500; font-style: italic;
     letter-spacing: 0.005em; color: var(--text); line-height: 1.15;
   }
   .panel-owner {
-    font-size: 0.72rem; color: var(--text-soft);
-    letter-spacing: 0.18em; margin-top: 8px;
+    font-size: 0.72rem; color: var(--text-soft); letter-spacing: 0.18em; margin-top: 8px;
     text-transform: uppercase; font-weight: 500;
   }
 
   .panel-body {
-    position: relative; z-index: 3;
-    display: flex; flex-direction: column; gap: 22px;
+    position: relative; z-index: 3; display: flex; flex-direction: column; gap: 22px;
   }
 
   .account-row {
     display: flex; align-items: center; gap: 10px;
     padding: 14px 16px;
-    background: rgba(0, 0, 0, 0.32);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 14px;
-    flex-wrap: wrap;
-    transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+    background: rgba(0, 0, 0, 0.32); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 14px;
+    flex-wrap: wrap; transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
   }
   .account-row:hover {
-    border-color: rgba(255, 255, 255, 0.14);
-    background: rgba(0, 0, 0, 0.42);
+    border-color: rgba(255, 255, 255, 0.14); background: rgba(0, 0, 0, 0.42);
   }
 
   .account-value {
-    font-family: var(--mono);
-    font-size: 0.98rem; letter-spacing: 0.05em;
-    color: var(--text); font-weight: 500;
-    flex: 1 1 auto; min-width: 0; word-break: break-all;
+    font-family: var(--mono); font-size: 0.98rem; letter-spacing: 0.05em;
+    color: var(--text); font-weight: 500; flex: 1 1 auto; min-width: 0; word-break: break-all;
   }
   .account-value.small { font-size: 0.78rem; letter-spacing: 0.01em; line-height: 1.5; }
 
   .copy-icon-btn {
-    flex: 0 0 auto;
-    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
     padding: 8px 14px;
-    font-family: var(--font); font-size: 0.62rem; font-weight: 700;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--text-soft);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--line);
-    border-radius: 60px; cursor: pointer;
-    transition: color 0.28s var(--ease), background 0.28s var(--ease),
-                border-color 0.28s var(--ease), box-shadow 0.28s var(--ease);
-    position: relative; overflow: hidden;
-    -webkit-tap-highlight-color: transparent;
-    white-space: nowrap; z-index: 5;
+    font-family: var(--font); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--text-soft);
+    background: rgba(255, 255, 255, 0.05); border: 1px solid var(--line); border-radius: 60px; cursor: pointer;
+    transition: color 0.28s var(--ease), background 0.28s var(--ease), border-color 0.28s var(--ease), box-shadow 0.28s var(--ease);
+    position: relative; overflow: hidden; -webkit-tap-highlight-color: transparent; white-space: nowrap; z-index: 5;
   }
   .copy-icon-btn:hover {
-    color: #fff; background: rgba(255, 255, 255, 0.12);
-    border-color: var(--accent);
+    color: #fff; background: rgba(255, 255, 255, 0.12); border-color: var(--accent);
     box-shadow: 0 0 22px -6px var(--accent);
   }
   .copy-icon-btn.copied {
-    color: #8ce0b0;
-    border-color: rgba(140, 224, 176, 0.55);
-    background: rgba(140, 224, 176, 0.1);
+    color: #8ce0b0; border-color: rgba(140, 224, 176, 0.55); background: rgba(140, 224, 176, 0.1);
     box-shadow: 0 0 26px -6px rgba(140, 224, 176, 0.6);
   }
 
+  /* QR BLOCK - ĐÃ ĐƯỢC CHỈNH CHO TO VÀ RÕ HƠN */
   .qr-block {
-    position: relative;
-    width: 100%; max-width: 260px;
-    aspect-ratio: 1 / 1;
-    margin: 4px auto 0;
-    border-radius: 20px; overflow: hidden;
-    background: #04060a;
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    cursor: pointer;
-    transition: border-color 0.3s var(--ease),
-                box-shadow 0.35s var(--ease);
+    position: relative; width: 100%; max-width: 280px; aspect-ratio: 1 / 1;
+    margin: 4px auto 0; border-radius: 20px; overflow: hidden; background: #04060a;
+    border: 1px solid rgba(255, 255, 255, 0.09); cursor: pointer;
+    transition: border-color 0.3s var(--ease), box-shadow 0.35s var(--ease);
     display: flex; align-items: center; justify-content: center;
   }
-  @media (min-width: 900px) { .qr-block { max-width: 280px; } }
+  @media (min-width: 900px) { .qr-block { max-width: 300px; } }
 
   .qr-block:hover {
-    border-color: var(--accent);
-    box-shadow: 0 0 60px -12px var(--accent);
+    border-color: var(--accent); box-shadow: 0 0 60px -12px var(--accent);
   }
 
   .qr-block img {
-    width: 100%; height: 100%;
-    object-fit: contain; display: block; padding: 12px;
+    width: 100%; height: 100%; object-fit: contain; display: block; padding: 4px; /* Giảm padding để ảnh to ra */
     transition: transform 0.35s var(--ease);
   }
   .qr-block:hover img { transform: scale(1.03); }
 
   .qr-hint {
-    position: absolute; bottom: 10px; left: 50%;
-    transform: translateX(-50%);
-    padding: 5px 12px;
-    font-size: 0.58rem; font-weight: 700;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.8);
-    background: rgba(8, 10, 14, 0.78);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 60px;
+    position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+    padding: 5px 12px; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8); background: rgba(8, 10, 14, 0.85); /* Tăng độ mờ nền để ko bị chìm */
+    border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 60px;
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    white-space: nowrap; pointer-events: none;
-    transition: all 0.3s var(--ease);
-    opacity: 0.85;
+    white-space: nowrap; pointer-events: none; transition: all 0.3s var(--ease); opacity: 0.95;
   }
   .qr-block:hover .qr-hint {
-    color: #fff;
-    background: rgba(20, 24, 32, 0.92);
-    border-color: var(--accent);
-    box-shadow: 0 0 20px -4px var(--accent);
-    opacity: 1;
+    color: #fff; background: rgba(20, 24, 32, 0.95); border-color: var(--accent);
+    box-shadow: 0 0 20px -4px var(--accent); opacity: 1;
   }
 
-  .panel.usdt { grid-column: 1 / -1; }
-  .panel.usdt .qr-block { max-width: 300px; }
+  /* Căn giữa QR bên trong card USDT giống hệt 3 card kia */
+  .panel.usdt .qr-block { max-width: 280px; }
 
   /* ================= MODAL ================= */
   .modal {
     position: fixed; inset: 0; z-index: 5000;
-    display: flex; align-items: center; justify-content: center;
-    padding: 20px;
-    background: rgba(2, 2, 4, 0.86);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    display: flex; align-items: center; justify-content: center; padding: 20px;
+    background: rgba(2, 2, 4, 0.86); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     opacity: 0; visibility: hidden; pointer-events: none;
     transition: opacity 0.28s ease-out, visibility 0.28s ease-out;
   }
   .modal.active { opacity: 1; visibility: visible; pointer-events: auto; }
 
   .modal-box {
-    width: 100%; max-width: 480px;
-    padding: 30px 28px 28px;
-    border-radius: 28px;
+    width: 100%; max-width: 480px; padding: 30px 28px 28px; border-radius: 28px;
     background: linear-gradient(180deg, rgba(22, 24, 30, 0.94), rgba(12, 13, 17, 0.96));
     border: 1px solid var(--line-hi);
-    box-shadow: 0 60px 130px -40px rgba(0, 0, 0, 0.98),
-                0 0 80px -30px rgba(160, 190, 255, 0.25),
-                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    box-shadow: 0 60px 130px -40px rgba(0, 0, 0, 0.98), 0 0 80px -30px rgba(160, 190, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.06);
     transform: scale(0.94); opacity: 0;
     transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.28s ease-out;
-    position: relative;
-    display: flex; flex-direction: column; align-items: center;
+    position: relative; display: flex; flex-direction: column; align-items: center;
   }
   .modal.active .modal-box { transform: scale(1); opacity: 1; }
 
@@ -586,16 +497,12 @@
   }
 
   .modal-img-wrap {
-    width: 100%; aspect-ratio: 1 / 1; max-height: 62vh;
-    border-radius: 20px; overflow: hidden;
-    background: #04060a;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 20px;
+    width: 100%; aspect-ratio: 1 / 1; max-height: 62vh; border-radius: 20px; overflow: hidden;
+    background: #04060a; border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
   }
   .modal-img-wrap img {
-    width: 100%; height: 100%;
-    object-fit: contain; display: block; padding: 14px;
+    width: 100%; height: 100%; object-fit: contain; display: block; padding: 14px;
   }
 
   .modal-owner {
@@ -603,61 +510,39 @@
     text-transform: uppercase; margin-bottom: 22px; font-weight: 600;
   }
 
-  .modal-actions {
-    display: flex; gap: 12px; flex-wrap: wrap;
-    width: 100%; justify-content: center;
-  }
+  .modal-actions { display: flex; gap: 12px; flex-wrap: wrap; width: 100%; justify-content: center; }
   .modal-actions .btn {
-    flex: 1 1 auto; min-width: 130px;
-    padding: 13px 22px; font-size: 0.7rem; letter-spacing: 0.16em;
+    flex: 1 1 auto; min-width: 130px; padding: 13px 22px; font-size: 0.7rem; letter-spacing: 0.16em;
   }
 
   .modal-close {
-    position: absolute; top: 14px; right: 14px;
-    width: 38px; height: 38px; border-radius: 50%;
+    position: absolute; top: 14px; right: 14px; width: 38px; height: 38px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    background: rgba(255, 255, 255, 0.055);
-    border: 1px solid var(--line);
-    color: var(--text-soft); font-size: 1rem; line-height: 1;
-    cursor: pointer;
-    transition: color 0.3s var(--ease), background 0.3s var(--ease),
-                border-color 0.3s var(--ease);
-    font-family: inherit;
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    -webkit-tap-highlight-color: transparent;
-    z-index: 3;
+    background: rgba(255, 255, 255, 0.055); border: 1px solid var(--line);
+    color: var(--text-soft); font-size: 1rem; line-height: 1; cursor: pointer;
+    transition: color 0.3s var(--ease), background 0.3s var(--ease), border-color 0.3s var(--ease);
+    font-family: inherit; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    -webkit-tap-highlight-color: transparent; z-index: 3;
   }
-  .modal-close:hover {
-    background: rgba(255, 255, 255, 0.14);
-    color: #fff;
-  }
+  .modal-close:hover { background: rgba(255, 255, 255, 0.14); color: #fff; }
 
   /* ================= TOAST ================= */
   .toast {
-    position: fixed; bottom: 30px; left: 50%;
-    transform: translate(-50%, 40px);
-    padding: 12px 24px; border-radius: 60px;
-    background: rgba(20, 22, 28, 0.9);
-    border: 1px solid rgba(140, 224, 176, 0.35);
-    color: #8ce0b0;
-    font-family: var(--font); font-size: 0.7rem; font-weight: 700;
-    letter-spacing: 0.16em;
+    position: fixed; bottom: 30px; left: 50%; transform: translate(-50%, 40px);
+    padding: 12px 24px; border-radius: 60px; background: rgba(20, 22, 28, 0.9);
+    border: 1px solid rgba(140, 224, 176, 0.35); color: #8ce0b0;
+    font-family: var(--font); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em;
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.9),
-                0 0 40px -10px rgba(140, 224, 176, 0.35);
-    opacity: 0;
-    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
-    pointer-events: none; z-index: 6000;
-    white-space: nowrap; text-transform: uppercase;
+    box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.9), 0 0 40px -10px rgba(140, 224, 176, 0.35);
+    opacity: 0; transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+    pointer-events: none; z-index: 6000; white-space: nowrap; text-transform: uppercase;
   }
   .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
   /* ================= FOOTER ================= */
   .footer {
-    text-align: center; padding: 40px 24px 40px;
-    color: var(--text-mute); font-size: 0.66rem;
-    letter-spacing: 0.32em; text-transform: uppercase;
-    position: relative; z-index: 1; font-weight: 500;
+    text-align: center; padding: 40px 24px 40px; color: var(--text-mute); font-size: 0.66rem;
+    letter-spacing: 0.32em; text-transform: uppercase; position: relative; z-index: 1; font-weight: 500;
   }
 
   /* ================= RESPONSIVE ================= */
@@ -670,7 +555,7 @@
     .donate { padding: 90px 20px 80px; }
     .panel { padding: 24px 20px; border-radius: 20px; }
     .panel-name { font-size: 1.35rem; }
-    .qr-block { max-width: 240px; }
+    .qr-block { max-width: 260px; }
     .account-value { font-size: 0.9rem; }
     .account-value.small { font-size: 0.72rem; }
     .modal-box { padding: 26px 18px 24px; border-radius: 24px; }
@@ -781,7 +666,6 @@
   const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const HAS_HOVER = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  /* ========== DATA ========== */
   const DATA = {
     techcombank: {
       key: "techcombank", label: "TECHCOMBANK", name: "Techcombank",
@@ -931,20 +815,10 @@
     }
   }
 
-  /* ==========================================================
-     DIRECTIONAL 3D PRESS ENGINE
-     ----------------------------------------------------------
-     - Hover (desktop only): subtle tilt toward cursor (max 5deg)
-     - Press (all devices): strong directional tilt toward press point
-       based on click location within element.
-     - translateZ negative on press for "pushed down" feel.
-     - Spring-back via lerp on release.
-     - Directional light: radial highlight offset toward click point.
-     ========================================================== */
-  const HOVER_MAX_DEG = 5;    // subtle hover tilt
-  const PRESS_MAX_DEG = 14;   // strong directional press tilt (10-15 range)
-  const PRESS_Z = -14;        // px translateZ on press (pushed down)
-  const HOVER_Z = 6;          // px translateZ on hover (lifted)
+  const HOVER_MAX_DEG = 5;
+  const PRESS_MAX_DEG = 14;
+  const PRESS_Z = -14;
+  const HOVER_Z = 6;
 
   function attach3DPress(el, options) {
     if (el._press3dBound) return;
@@ -957,9 +831,7 @@
     const hoverZ = opts.hoverZ !== undefined ? opts.hoverZ : HOVER_Z;
     const perspective = opts.perspective !== undefined ? opts.perspective : 800;
 
-    // Current (rendered) values
     let curRX = 0, curRY = 0, curZ = 0, curScale = 1;
-    // Target values
     let tgtRX = 0, tgtRY = 0, tgtZ = 0, tgtScale = 1;
 
     let hovering = false;
@@ -969,28 +841,18 @@
     el.style.transformStyle = 'preserve-3d';
 
     function render() {
-      const rx = curRX.toFixed(3);
-      const ry = curRY.toFixed(3);
-      const z  = curZ.toFixed(2);
-      const sc = curScale.toFixed(4);
-      el.style.transform =
-        `perspective(${perspective}px) translateZ(${z}px) rotateX(${rx}deg) rotateY(${ry}deg) scale(${sc})`;
+      el.style.transform = `perspective(${perspective}px) translateZ(${curZ.toFixed(2)}px) rotateX(${curRX.toFixed(3)}deg) rotateY(${curRY.toFixed(3)}deg) scale(${curScale.toFixed(4)})`;
     }
 
     function tick() {
-      const LERP = pressing ? 0.42 : 0.14; // faster snap on press, softer return
+      const LERP = pressing ? 0.42 : 0.14;
       curRX    += (tgtRX    - curRX)    * LERP;
       curRY    += (tgtRY    - curRY)    * LERP;
       curZ     += (tgtZ     - curZ)     * LERP;
       curScale += (tgtScale - curScale) * LERP;
-
       render();
 
-      const settled =
-        Math.abs(tgtRX    - curRX)    < 0.03 &&
-        Math.abs(tgtRY    - curRY)    < 0.03 &&
-        Math.abs(tgtZ     - curZ)     < 0.08 &&
-        Math.abs(tgtScale - curScale) < 0.0015;
+      const settled = Math.abs(tgtRX - curRX) < 0.03 && Math.abs(tgtRY - curRY) < 0.03 && Math.abs(tgtZ - curZ) < 0.08 && Math.abs(tgtScale - curScale) < 0.0015;
 
       if (!settled || hovering || pressing) {
         rafId = requestAnimationFrame(tick);
@@ -1002,18 +864,12 @@
     }
 
     function kick() { if (rafId === null) rafId = requestAnimationFrame(tick); }
+    function resetTargets() { tgtRX = 0; tgtRY = 0; tgtZ = 0; tgtScale = 1; }
 
-    function resetTargets() {
-      tgtRX = 0; tgtRY = 0; tgtZ = 0; tgtScale = 1;
-    }
-
-    /* -------- HOVER (desktop only) -------- */
     if (HAS_HOVER && !REDUCED) {
       el.addEventListener('pointerenter', (e) => {
         if (e.pointerType !== 'mouse') return;
-        hovering = true;
-        tgtZ = hoverZ;
-        kick();
+        hovering = true; tgtZ = hoverZ; kick();
       });
 
       el.addEventListener('pointermove', (e) => {
@@ -1021,98 +877,59 @@
         const r = el.getBoundingClientRect();
         const x = e.clientX - r.left;
         const y = e.clientY - r.top;
-        const nx = (x / r.width) * 2 - 1;   // -1..1
-        const ny = (y / r.height) * 2 - 1;  // -1..1
-
-        tgtRY = nx * hoverMax;
-        tgtRX = -ny * hoverMax;
-        tgtZ = hoverZ;
-
-        // Directional highlight follows cursor
-        el.style.setProperty('--mx', x + 'px');
-        el.style.setProperty('--my', y + 'px');
-
+        const nx = (x / r.width) * 2 - 1;
+        const ny = (y / r.height) * 2 - 1;
+        tgtRY = nx * hoverMax; tgtRX = -ny * hoverMax; tgtZ = hoverZ;
+        el.style.setProperty('--mx', x + 'px'); el.style.setProperty('--my', y + 'px');
         kick();
       });
 
       el.addEventListener('pointerleave', (e) => {
         if (e.pointerType !== 'mouse') return;
-        hovering = false;
-        if (!pressing) resetTargets();
-        kick();
+        hovering = false; if (!pressing) resetTargets(); kick();
       });
     }
 
-    /* -------- PRESS (all devices) -------- */
     el.addEventListener('pointerdown', (e) => {
       if (e.button !== undefined && e.button !== 0) return;
       if (REDUCED) return;
-
-      pressing = true;
-      el.classList.add('pressing');
-
-      // Compute click position relative to element
+      pressing = true; el.classList.add('pressing');
       const r = el.getBoundingClientRect();
       const x = e.clientX - r.left;
       const y = e.clientY - r.top;
-      const nx = (x / r.width) * 2 - 1;   // -1 (left) .. 1 (right)
-      const ny = (y / r.height) * 2 - 1;  // -1 (top)  .. 1 (bottom)
+      const nx = (x / r.width) * 2 - 1;
+      const ny = (y / r.height) * 2 - 1;
 
-      // Directional tilt: point of press pushes the element "down and away"
-      // Click left (nx<0)   → rotateY negative (left edge down) → element tips LEFT
-      // Click right (nx>0)  → rotateY positive (right edge down) → element tips RIGHT
-      // Click top (ny<0)    → rotateX positive (top edge down) → element tips toward TOP
-      // Click bottom (ny>0) → rotateX negative (bottom edge down) → element tips toward BOTTOM
-      tgtRY = -nx * pressMax;
-      tgtRX = -ny * pressMax;
-      tgtZ = pressZ;
-      tgtScale = 0.985;
-
-      // Directional highlight anchored at press point
-      el.style.setProperty('--mx', x + 'px');
-      el.style.setProperty('--my', y + 'px');
-
+      tgtRY = -nx * pressMax; tgtRX = -ny * pressMax;
+      tgtZ = pressZ; tgtScale = 0.985;
+      el.style.setProperty('--mx', x + 'px'); el.style.setProperty('--my', y + 'px');
       kick();
     });
 
     const release = () => {
       if (!pressing) return;
-      pressing = false;
-      el.classList.remove('pressing');
-
-      // Spring back to hover state if still hovering (desktop), else neutral
-      if (hovering && HAS_HOVER && !REDUCED) {
-        tgtZ = hoverZ;
-        tgtScale = 1;
-        // keep last hover rx/ry — they will be updated on next pointermove
-      } else {
-        resetTargets();
-      }
+      pressing = false; el.classList.remove('pressing');
+      if (hovering && HAS_HOVER && !REDUCED) { tgtZ = hoverZ; tgtScale = 1; }
+      else { resetTargets(); }
       kick();
     };
 
     el.addEventListener('pointerup', release);
     el.addEventListener('pointercancel', release);
-    el.addEventListener('pointerleave', (e) => {
-      if (e.pointerType !== 'mouse' && pressing) release();
-    });
+    el.addEventListener('pointerleave', (e) => { if (e.pointerType !== 'mouse' && pressing) release(); });
     el.addEventListener('blur', release);
   }
 
-  /* ================= Panel click glow (kept for accent flash) ================= */
   function attachPanelClickEffect(panel) {
     panel.addEventListener('pointerdown', function (e) {
       if (e.target.closest('.copy-icon-btn')) return;
       if (REDUCED) return;
-
       const rect = this.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-
       const glow = document.createElement('span');
       glow.className = 'click-glow';
-      glow.style.left = x + 'px';
-      glow.style.top = y + 'px';
+      glow.style.left = x + 'px'; glow.style.top = y + 'px';
       glow.style.setProperty('--accent', getComputedStyle(this).getPropertyValue('--accent') || '#a0b8ff');
       this.appendChild(glow);
       setTimeout(() => glow.remove(), 600);
@@ -1369,7 +1186,6 @@
       });
   }
 
-  /* ========== CAPTCHA ========== */
   turnstileWidget.setAttribute('data-sitekey', TURNSTILE_SITE_KEY);
 
   window.onTurnstileSuccess = function () {
@@ -1397,7 +1213,6 @@
     captchaStatus.textContent = I18N[currentLang].captchaErr;
   };
 
-  /* ========== EVENTS ========== */
   viewDonateBtn.addEventListener('click', showDonate);
   backBtn.addEventListener('click', showHero);
   langViBtn.addEventListener('click', () => applyLang('vi'));
@@ -1411,7 +1226,6 @@
   });
   saveQrBtn.addEventListener('click', saveQr);
 
-  // Bind 3D press to static buttons
   attach3DPress(viewDonateBtn, { hoverMax: 5, pressMax: 12, pressZ: -8, hoverZ: 4, perspective: 700 });
   attach3DPress(backBtn,       { hoverMax: 4, pressMax: 10, pressZ: -5, hoverZ: 3, perspective: 600 });
   attach3DPress(modalClose,    { hoverMax: 3, pressMax: 8,  pressZ: -4, hoverZ: 2, perspective: 500 });
